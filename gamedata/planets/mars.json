@@ -1,0 +1,52 @@
+{
+    "data": {
+        "name": "mars",
+
+        "x": 0,
+        "y": -21000,
+
+        "xVel": 0.48804,
+        "yVel": 0,
+
+        "mass": 70000,
+        
+        "radius": 300,
+        "referenceBodyNames": ["sun"]
+    },
+    "land": {
+        "colour": {"r": 200, "g": 100, "b": 100}, 
+        "outlineColour": {"r": 150, "g": 100, "b": 50},
+        "innerColour": {"r": 75, "g": 50, "b": 25}, 
+        "mantleColour": {"r": 150, "g": 50, "b": 20},
+        "outerCoreColour": {"r": 175, "g": 75, "b": 50},
+        "innerCoreColour": {"r": 220, "g": 160, "b": 120},
+        "mountainColour": {"r": 150, "g": 100, "b": 100},
+        "snowColour": {"r": 100, "g": 75, "b": 75},
+        "mountainOutlineColour": {"r": 50, "g": 30, "b": 30},
+        "mountains": [
+            {"rad": 0.2, "width": 150, "height": 5},
+            {"rad": 0.5, "width": 150, "height": 10},
+            {"rad": 1, "width": 150, "height": 10},
+            {"rad": 1.5, "width": 150, "height": 10},
+            {"rad": 2, "width": 150, "height": 5},
+            {"rad": 2.3, "width": 150, "height": 3},
+            {"rad": 3, "width": 150, "height": 10},
+            {"rad": 3.5, "width": 150, "height": 10},
+            {"rad": 3.8, "width": 150, "height": 12},
+            {"rad": 4.0, "width": 150, "height": 10},
+            {"rad": 5, "width": 150, "height": 5},
+            {"rad": 5.2, "width": 150, "height": 10},
+            {"rad": 6.3, "width": 150, "height": 8},
+            {"rad": 6.5, "width": 150, "height": 10}
+        ]
+    },
+    "atmosphere": {
+        "seaLvlRadius": 300,
+        "atmoRadius": 475,
+        "density": 0.1,
+        "atmoColourLow": {"r": 200, "g": 150, "b": 150}, 
+        "atmoColourMid": {"r": 150, "g": 120, "b": 80}
+    }
+    
+    
+}

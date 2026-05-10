@@ -1,0 +1,34 @@
+{
+    "planets": [
+        "mercury.json",
+        "venus.json",
+        
+        "earth/earth.json",
+        "earth/moon.json",
+
+        "mars.json",
+        
+
+        "jupiter/jupiter.json",
+        "jupiter/io.json",
+        "jupiter/europa.json",
+        "jupiter/ganymede.json",
+        "jupiter/callisto.json",
+
+
+        "pluto.json",
+        "saturn/saturn.json",
+        
+
+        "asteroids/asteroid_1.json",
+        "asteroids/asteroid_2.json",
+        "asteroids/asteroid_3.json",
+        "asteroids/asteroid_4.json",
+        "asteroids/asteroid_5.json",
+        "asteroids/ceres.json",
+
+        
+        "sun.json"
+    ],
+    "starting_body": "earth"
+}

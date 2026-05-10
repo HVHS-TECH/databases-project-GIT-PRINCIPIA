@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Astro Explorer - End Screen</title>
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="icon" type="image/png" href="../gamedata/images/favicon.png">
+    </head>
+    <body>
+        <div class="column center">
+            <h1>Game Over!</h1>
+            <h3 id="death_reason"></h3>
+            <h2 id="score"></h2>
+            <h3 id="high_score"></h3>
+            <button onclick="window.location.href = './game.html'">--- TRY AGAIN ---</button>
+            <button onclick="window.location.href = './start.html'">--- QUIT TO MAIN MENU ---</button>
+        </div>
+        
+        <script type="module" src='../scripts/core/main.mjs'></script>
+    </body>
+</html>

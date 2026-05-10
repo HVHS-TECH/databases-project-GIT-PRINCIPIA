@@ -1,0 +1,42 @@
+{
+    "data": {
+        "name": "asteroid_3",
+
+        "x": 0,
+        "y": 24000,
+
+        "xVel": -0.45644,
+        "yVel": 0,
+
+        "mass": 60,
+        "radius": 15,
+        "referenceBodyNames": ["sun"]
+    },
+    "land": {
+        "colour": {"r": 200, "g": 180, "b": 180}, 
+        "outlineColour": {"r": 120, "g": 110, "b": 110},
+        "innerColour": {"r": 100, "g": 90, "b": 90}, 
+        "mantleColour": {"r": 20, "g": 10, "b": 10},
+        "outerCoreColour": {"r": 0, "g": 0, "b": 0},
+        "innerCoreColour": {"r": 0, "g": 0, "b": 0},
+        "mountainColour": {"r": 100, "g": 90, "b": 90},
+        "snowColour": {"r": 100, "g": 90, "b": 90},
+        "mountainOutlineColour": {"r": 80, "g": 70, "b": 70},
+        "mountains": [
+            {"rad": 0.2, "width": 150, "height": 5},
+            {"rad": 0.5, "width": 150, "height": 10},
+            {"rad": 1, "width": 150, "height": 10},
+            {"rad": 1.5, "width": 150, "height": 10},
+            {"rad": 2, "width": 150, "height": 5},
+            {"rad": 2.3, "width": 150, "height": 3},
+            {"rad": 3, "width": 150, "height": 10},
+            {"rad": 3.5, "width": 150, "height": 10},
+            {"rad": 3.8, "width": 150, "height": 12},
+            {"rad": 4.0, "width": 150, "height": 10},
+            {"rad": 5, "width": 150, "height": 5},
+            {"rad": 5.2, "width": 150, "height": 10},
+            {"rad": 6.3, "width": 150, "height": 8},
+            {"rad": 6.5, "width": 150, "height": 10}
+        ]
+    }
+}

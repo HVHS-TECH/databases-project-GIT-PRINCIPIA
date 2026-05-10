@@ -1,0 +1,76 @@
+{
+    "data": {
+        "name": "earth",
+
+        "x": 0,
+        "y": 15000,
+
+        "xVel": -0.57735,
+        "yVel": 0,
+        
+        "mass": 200000,
+        "radius": 500,
+        "referenceBodyNames": ["sun"]
+    },
+
+    "land": {
+
+        "colour": {"r": 150, "g": 200, "b": 50}, 
+        "outlineColour": {"r": 50, "g": 75, "b": 25},
+        "innerColour": {"r": 150, "g": 75, "b": 10}, 
+        "mantleColour": {"r": 50, "g": 20, "b": 0},
+        "outerCoreColour": {"r": 150, "g": 50, "b": 0},
+        "innerCoreColour": {"r": 255, "g": 220, "b": 0},
+        "mountainColour": {"r": 85, "g": 66, "b": 55},
+        "snowColour": {"r": 220, "g": 200, "b": 200},
+        "mountainOutlineColour": {"r": 30, "g": 30, "b": 30},
+
+        "mountains": [
+            {"rad": 0, "width": 200, "height": 100},
+            {"rad": 0.2, "width": 100, "height": 50},
+            {"rad": 0.8, "width": 300, "height": 130},
+            {"rad": 2, "width": 150, "height": 100},
+            {"rad": 2.2, "width": 200, "height": 150},
+            {"rad": 2.4, "width": 200, "height": 50},
+            {"rad": 4, "width": 50, "height": 50},
+            {"rad": 4.6, "width": 200, "height": 100},
+            {"rad": 4.8, "width": 100, "height": 50},
+            {"rad": 5.4, "width": 150, "height": 50},
+            {"rad": 6.6, "width": 250, "height": 100}
+            
+        ]
+    },
+    "ocean": {
+        "oceanColourShallow": {"r": 150, "g": 240, "b": 255},
+        "oceanColourDeep": {"r": 20, "g": 80, "b": 120},
+        "oceans": [
+            {"chunk": 0, "depth": 20},
+            {"chunk": 1, "depth": 40},
+            {"chunk": 2, "depth": 60},
+            {"chunk": 3, "depth": 50},
+            {"chunk": 4, "depth": 20},
+            {"chunk": 6, "depth": 20},
+            {"chunk": 7, "depth": 30},
+            {"chunk": 8, "depth": 40},
+            {"chunk": 10, "depth": 20},
+            {"chunk": 11, "depth": 10},
+            {"chunk": 12, "depth": 30},
+            {"chunk": 15, "depth": 20},
+            {"chunk": 16, "depth": 10},
+            {"chunk": 17, "depth": 40},
+            {"chunk": 19, "depth": 20},
+            {"chunk": 20, "depth": 20},
+            {"chunk": 21, "depth": 30},
+            {"chunk": 22, "depth": 10}
+        ]
+    },
+    "atmosphere": {
+        "seaLvlRadius": 500,
+        "atmoRadius": 750,
+        "density": 0.3,
+        "atmoColourLow": {"r": 200, "g": 245, "b": 235}, 
+        "atmoColourMid": {"r": 91, "g": 118, "b": 158}
+    }
+    
+    
+}

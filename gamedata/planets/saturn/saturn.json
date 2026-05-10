@@ -1,0 +1,81 @@
+{
+    "data": {
+        "name": "saturn",
+
+        "x": -90000,
+        "y": 0,
+
+        "xVel": 0,
+        "yVel": -0.23570,
+        
+        "mass": 300000,
+        "radius": 1500,
+        "referenceBodyNames": ["sun"]
+    },
+    
+    "atmosphere": {
+        "seaLvlRadius": 400,
+        "atmoRadius": 1300,
+        "density" : 0.7,
+        "atmoColourLow": {"r": 190, "g": 160, "b": 150}, 
+        "atmoColourMid": {"r": 130, "g": 90, "b": 80}
+    },
+    "ring": {
+        "rings": [
+            {
+                "startRad": 1500,
+                "endRad": 1550,
+                "density": 0.2,
+                "colour": {"r": 190, "g": 160, "b": 150}
+            },
+            {
+                "startRad": 1600,
+                "endRad": 1700,
+                "density": 0.5,
+                "colour": {"r": 190, "g": 160, "b": 150}
+            },
+            {
+                "startRad": 1800,
+                "endRad": 1950,
+                "density": 0.4,
+                "colour": {"r": 190, "g": 160, "b": 150}
+            },
+            {
+                "startRad": 2000,
+                "endRad": 2100,
+                "density": 0.3,
+                "colour": {"r": 190, "g": 160, "b": 150}
+            },
+            {
+                "startRad": 2150,
+                "endRad": 2250,
+                "density": 0.3,
+                "colour": {"r": 190, "g": 160, "b": 150}
+            },
+            {
+                "startRad": 2300,
+                "endRad": 2500,
+                "density": 0.7,
+                "colour": {"r": 190, "g": 160, "b": 150}
+            },
+            {
+                "startRad": 2700,
+                "endRad": 2750,
+                "density": 0.2,
+                "colour": {"r": 190, "g": 160, "b": 150}
+            },
+            {
+                "startRad": 2900,
+                "endRad": 2920,
+                "density": 0.3,
+                "colour": {"r": 190, "g": 160, "b": 150}
+            },
+            {
+                "startRad": 3000,
+                "endRad": 3120,
+                "density": 0.1,
+                "colour": {"r": 190, "g": 160, "b": 150}
+            }
+        ]
+    }
+}

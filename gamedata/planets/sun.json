@@ -1,0 +1,20 @@
+{
+    "data": {
+        "name": "sun",
+        "x": 0,
+        "y": 0,
+        "xVel": 0,
+        "yVel": 0,
+        "mass": 1000000,
+        "radius": 1500, 
+        
+        "referenceBodyNames": ["none"]
+    },
+    "atmosphere": {
+        "seaLvlRadius": 1500,
+        "atmoRadius": 2000,
+        "density": 2,
+        "atmoColourLow": {"r": 253, "g": 253, "b": 253}, 
+        "atmoColourMid": {"r": 100, "g": 100, "b": 100}
+    }
+}
