@@ -135,7 +135,7 @@ export class Player {
 
         
 
-        Player.Integrate(dt);
+        Player.(dt);
         Player.updateThruster(dt);
         Player.applyGravity(dt);
         Player.applyAtmosphericEffects(dt);
@@ -201,7 +201,7 @@ export class Player {
 
 
             if (inputForward > 0) {
-                //Integrate velocity based on input and delta time
+                // velocity based on input and delta time
                 Player.vel.x += Math.sin(Player.dir) * inputForward;
                 Player.vel.y += Math.cos(Player.dir) * inputForward;
 
@@ -889,7 +889,7 @@ export class Player {
         //Integrate zoom based on input and delta time
         const ZOOM_SPEED = 0.05 / Game.smoothTimeWarp;
         Player.zoom *= ((Input.KeyDown("ArrowUp") * ZOOM_SPEED * dt + 1) / (Input.KeyDown("ArrowDown") * ZOOM_SPEED * dt + 1));
-        Player.zoom = clamp(Player.zoom, 0.015, 50); //Restrict player zoom
+        Player.zoom = clamp(Player.zoom, 0.006, 50); //Restrict player zoom
         
         //----------------------------------------//
 
