@@ -135,7 +135,7 @@ export class Player {
 
         
 
-        Player.(dt);
+        Player.Integrate(dt);
         Player.updateThruster(dt);
         Player.applyGravity(dt);
         Player.applyAtmosphericEffects(dt);
