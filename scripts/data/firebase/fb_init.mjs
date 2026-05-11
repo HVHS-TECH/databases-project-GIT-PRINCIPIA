@@ -37,6 +37,7 @@ export class FB_Init {
         FB_Data.app = initializeApp(FB_Data.cfg);
         FB_Data.db = getDatabase();
         FB_IO.write('/asdf/', 'asdf', 0);
+        FB_IO.read('/asdf/');
     }
     //----------------------------------------------------------------------//
 }

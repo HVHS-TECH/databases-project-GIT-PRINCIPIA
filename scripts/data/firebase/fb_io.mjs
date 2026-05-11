@@ -5,7 +5,7 @@
 //----------------------------------------------------------------------//
 
 import {initializeApp} from 'https://cdn.skypack.dev/@firebase/app';
-import {getDatabase, ref, set, onValue} from 'https://cdn.skypack.dev/@firebase/database';
+import {getDatabase, ref, get, set, onValue} from 'https://cdn.skypack.dev/@firebase/database';
 import { FB_Data } from './fb_init.mjs';
 
 //----------------------------------------------------------------------//
@@ -53,22 +53,22 @@ export class FB_IO {
     //------------------------------------------------------------------------------//
     //fb_read(path, cb)
     static async read(path, cb = ()=>{}) {
-        console.log("fb_read(path, cb)\npath = '" + path + "'");
+        console.log("read(path, cb)\npath = '" + path + "'");
 
-        if (!canRead.includes(path)) {
-            canRead[path] = true
+        if (!FB_IO.canRead.includes(path)) {
+            FB_IO.canRead[path] = true
         };
-        if (!canRead[path]) console.log("fb_read(path, cb) :: waiting for read access");
-        while (!canRead[path]){}
-        console.log("fb_read(path, cb) :: read access gained");
-        canRead[path] = false;
+        if (!FB_IO.canRead[path]) console.log("read(path, cb) :: waiting for read access");
+        while (!FB_IO.canRead[path]){}
+        console.log("read(path, cb) :: read access gained");
+        FB_IO.canRead[path] = false;
         if (cb.toString() != (()=>{}).toString()) {
             //The user is handling the data
-            onValue(ref(FB_Data.db, path), (val)=>{canRead[path] = true; cb(val);});
+            get(ref(FB_Data.db, path)).then((val)=>{FB_IO.canRead[path] = true; cb(val);});
         } else {
             //We must handle (return) the data
-            canRead[path] = true;
-            return (await firebase.database().ref(path).get()).val(); //DOES NOT WORK. NEEDS TO BE CONVERTED TO MODULES API
+            FB_IO.canRead[path] = true;
+            return (await get(ref(FB_Data.db, path))).val(); 
         }
     }
     //------------------------------------------------------------------------------//
@@ -102,7 +102,7 @@ export class FB_IO {
             return;
         }
         
-        firebase.database().ref(path).on('value', cb);
+        onValue(ref(FB_Data.db, path), cb);
     }
     //------------------------------------------------------------------------------//
 }

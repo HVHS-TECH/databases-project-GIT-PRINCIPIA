@@ -1349,7 +1349,7 @@ export class Player {
         //========================================//
         for (var i = 0; i < DEPTH; i++) {
             //----------------------------------------//
-            //PHASE 1: APPLY PLANETARY GRAVITY TO PLANETS
+            //APPLY PLANETARY GRAVITY TO PLANETS
             //Each planet orbits its reference bodies (moons orbit planets, planets orbit sun)
             //Calculate acceleration, then apply to velocity
             //Inlined for performance
@@ -1375,7 +1375,7 @@ export class Player {
             }
             
             //----------------------------------------//
-            //PHASE 1B: INTEGRATE PLANET POSITIONS
+            //INTEGRATE PLANET POSITIONS
             //Updated planets now move to new positions (velocity → position)
             //----------------------------------------//
             for (var p = 0; p < PLANET_COUNT; p++) {
@@ -1384,7 +1384,7 @@ export class Player {
             }
 
             //----------------------------------------//
-            //PHASE 1C: APPLY PLANETARY GRAVITY TO PLANETS (second half)
+            //APPLY PLANETARY GRAVITY TO PLANETS (second half)
             //Complete the velocity Verlet integration with second gravity pass
             //----------------------------------------//
             for (var p = 0; p < PLANET_COUNT; p++) {
@@ -1494,7 +1494,7 @@ export class Player {
             velY += DRAG_Y * DT;
             
             //========================================//
-            //PHASE 5: DRAWING / RENDERING PHASE
+            //CACHE FOR RENDERING
             //Draw trajectory segments and markers for current simulation step
             //========================================//
             
