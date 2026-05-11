@@ -7,6 +7,8 @@
 //player's spaceship is to impacts.                                     //
 //----------------------------------------------------------------------//
 
+//----------------------------------------------------------------------//
+//Difficulty class - handles constants relating to difficulty
 export class Difficulty {
     static Player = {
         //Impacts
@@ -22,3 +24,5 @@ export class Difficulty {
         THRUSTER_FORCE: 0.0045
     };
 }
+//END OF Difficulty
+//----------------------------------------------------------------------//

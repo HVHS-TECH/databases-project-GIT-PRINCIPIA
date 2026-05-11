@@ -13,10 +13,11 @@ import { FB_Data } from './fb_init.mjs';
 //all code is my own                                                    //
 //----------------------------------------------------------------------//
 
-
+//------------------------------------------------------------------------------//
+//FB_IO class - handles reads, writes and listeners to the firebase database
 export class FB_IO {
     //------------------------------------------------------------------------------//
-    //fb_write(path, msg)
+    //write(path, msg)
     //path: the path to write to
     //key: the key to the message
     //msg: the message to write
@@ -51,7 +52,7 @@ export class FB_IO {
     static canRead = [];
 
     //------------------------------------------------------------------------------//
-    //fb_read(path, cb)
+    //read(path, cb)
     static async read(path, cb = ()=>{}) {
         console.log("read(path, cb)\npath = '" + path + "'");
 
@@ -78,21 +79,21 @@ export class FB_IO {
     static listenerCBs = [];
 
     //------------------------------------------------------------------------------//
-    //fb_addWriteListener(path, cb)
-    static fb_addWriteListener(path, cb) {
+    //addWriteListener(path, cb)
+    static addWriteListener(path, cb) {
         console.log("fb_addWriteListener(path, cb)\npath = '" + path + "'");
 
         var isNewPath = false;
         var isNewCb = false;
 
-        if (!listenerPaths.includes(path)) {
-            listenerPaths.push(path);
+        if (!FB_IO.listenerPaths.includes(path)) {
+            FB_IO.listenerPaths.push(path);
             isNewPath = true;
         }
 
         //We must use toString to allow for different COPIES (not references) of the same callback code
-        if (!listenerCBs.includes(cb.toString())) {
-            listenerCBs.push(cb.toString());
+        if (!FB_IO.listenerCBs.includes(cb.toString())) {
+            FB_IO.listenerCBs.push(cb.toString());
             isNewCb = true;
         }
         if (!isNewPath && !isNewCb) {
@@ -106,5 +107,6 @@ export class FB_IO {
     }
     //------------------------------------------------------------------------------//
 }
-
+//END OF FB_IO
+//------------------------------------------------------------------------------//
 

@@ -6,6 +6,9 @@
 //Manages timers, deltaTime, fps and other time related things          //
 //----------------------------------------------------------------------//
 import { clamp } from "./miscellaneous.mjs";
+
+//----------------------------------------------------------------------//
+//Time class - handles delta time and elapsed time
 export class Time {
     static deltaTime = 1; //Time since last frame in seconds
     static scaleDeltaTime = 1; //DeltaTime x 60 - e.g 1 when fps == 60, 0.5 when fps == 120, 2 when fps == 30
@@ -43,3 +46,5 @@ export class Time {
     }
     //----------------------------------------------------------------------//
 }
+//END OF Time
+//----------------------------------------------------------------------//

@@ -12,8 +12,9 @@ import { Game } from "../core/game.mjs";
 import { Renderer } from "../core/renderer.mjs";
 import { Time } from "./time.mjs";
 
-
-
+//----------------------------------------------------------------------//
+//Particle class - handles movement and rendering
+//update logic is defined by the user
 export class Particle {
     constructor(pos, rot, vel, angVel, width, startColour, midColour, endColour, lifetime, update, onDeath) {
         this.pos = pos;
@@ -119,7 +120,8 @@ export class Particle {
     }
     //----------------------------------------------------------------------//
 }
-
+//END OF Particle
+//----------------------------------------------------------------------//
 
 //----------------------------------------------------------------------//
 //spawnExplosion()
@@ -173,3 +175,4 @@ export function spawnExplosion(pos, vel, innerVel, outerVel, numParticles, rando
     }
     //----------------------------------------//
 }
+//----------------------------------------------------------------------//

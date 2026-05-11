@@ -8,7 +8,9 @@
 import { Planet, Mountain, Ocean, PlanetData, PlanetSurface, PlanetOceans, PlanetAtmosphere, Ring, PlanetRings } from "../core/planet.mjs"
 import { Player } from "../core/player.mjs";
 import { Vec2, Colour } from "../utility/miscellaneous.mjs";
-//Loader class, 
+
+//----------------------------------------------------------------------//
+//Loader class - handles loading planets and parsing planet JSON files
 export class Loader {
 
     //----------------------------------------------------------------------//
@@ -187,4 +189,6 @@ export class Loader {
     }
     //----------------------------------------------------------------------//
 }
+//END OF Loader
+//----------------------------------------------------------------------//
 

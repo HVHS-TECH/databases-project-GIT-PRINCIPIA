@@ -16,6 +16,8 @@ import { lerp, clamp, normalizeAngle } from "../utility/miscellaneous.mjs";
 import { State } from "../data/state.mjs";
 import { Difficulty } from "../data/difficulty.mjs";
 
+//----------------------------------------------------------------------//
+//Player class - handles player movement, rendering and logic
 export class Player {
     static pos = new Vec2(0, 0);
     static vel = new Vec2(0, 0);
@@ -1662,3 +1664,5 @@ export class Player {
     }
     //----------------------------------------------------------------------//
 }
+//END OF Player
+//----------------------------------------------------------------------//

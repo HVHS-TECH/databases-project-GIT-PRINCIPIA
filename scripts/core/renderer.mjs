@@ -9,6 +9,9 @@ import { Player } from './player.mjs';
 import { Vec2, Colour } from '../utility/miscellaneous.mjs';
 import { Game } from './game.mjs';
 import { State } from '../data/state.mjs';
+
+//----------------------------------------------------------------------//
+//Renderer class - handles render operations, logic and math
 export class Renderer {
     constructor() {
         //----------------------------------------//
@@ -500,3 +503,5 @@ export class Renderer {
     //----------------------------------------------------------------------//
     
 }
+//END OF Renderer
+//----------------------------------------------------------------------//

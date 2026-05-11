@@ -16,6 +16,9 @@ import { Player } from "../../core/player.mjs";
 import { Time } from "../../utility/time.mjs";
 import { Input } from "../../interface/input.mjs";
 
+
+//----------------------------------------------------------------------//
+//UIelement class - base class for all UI elements, handles basic variables and logic
 export class UIelement {
     constructor(pos, align, width, height) {
         this.pos = pos;
@@ -103,6 +106,8 @@ export class UIelement {
     }
     //----------------------------------------------------------------------//
 }
+//END OF UIelement
+//----------------------------------------------------------------------//
 
 
 //----------------------------------------------------------------------//

@@ -30,6 +30,9 @@ import { State } from "../data/state.mjs";
 
 import { Difficulty } from "../data/difficulty.mjs";
 import { Button } from "../interface/ui/button.mjs";
+
+//----------------------------------------------------------------------//
+//Game class - handles game loop and core logic
 export class Game {
 
     static INDEX_TITLE = "Astro Explorer - Index";
@@ -793,6 +796,8 @@ export class Game {
     //----------------------------------------------------------------------//
     
 }
+//END OF Game
+//----------------------------------------------------------------------//
 
 
 

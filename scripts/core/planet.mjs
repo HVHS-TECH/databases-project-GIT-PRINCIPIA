@@ -26,6 +26,7 @@ export class Ring {
         this.colour = Colour.rgba(colour.r, colour.g, colour.b, density);
     }
 }
+//END OF Ring
 //----------------------------------------------------------------------//
 
 
@@ -39,6 +40,7 @@ export class Mountain {
         this.height = height;
     }
 }
+//END OF Mountain
 //----------------------------------------------------------------------//
 
 
@@ -51,11 +53,12 @@ export class Ocean {
         this.depth = depth;
     }
 }
+//END OF Ocean
 //----------------------------------------------------------------------//
 
 
 //----------------------------------------------------------------------//
-//Planet land class
+//Planet surface class
 //Land colours
 //Land data
 //Land features
@@ -79,6 +82,7 @@ export class PlanetSurface {
         this.mountains = mountains;
     }   
 }
+//END OF PlanetSurface
 //----------------------------------------------------------------------//
 
 
@@ -94,6 +98,7 @@ export class PlanetOceans {
         this.oceans = oceans;
     }
 }
+//END OF PlanetOceans
 //----------------------------------------------------------------------//
 
 
@@ -123,6 +128,7 @@ export class PlanetData {
         this.discovered = false;
     }
 }
+//END OF PlanetData
 //----------------------------------------------------------------------//
 
 
@@ -142,6 +148,7 @@ export class PlanetAtmosphere {
         this.atmoColourMid = atmoColourMid;
     }
 }
+//END OF PlanetAtmosphere
 //----------------------------------------------------------------------//
 
 
@@ -154,6 +161,7 @@ export class PlanetRings {
         this.rings = rings;
     }
 }
+//END OF PlanetRings
 //----------------------------------------------------------------------//
 
 
@@ -445,3 +453,5 @@ export class Planet {
     }
     //----------------------------------------------------------------------//
 }
+//END OF Planet
+//----------------------------------------------------------------------//
