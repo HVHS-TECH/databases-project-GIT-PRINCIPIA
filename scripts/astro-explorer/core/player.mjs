@@ -13,8 +13,10 @@ import { Time } from "../utility/time.mjs";
 import { Particle, spawnExplosion } from "../utility/particle.mjs";
 import { lerp, clamp, normalizeAngle } from "../utility/miscellaneous.mjs";
 
-import { State } from "../data/state.mjs";
-import { Difficulty } from "../data/difficulty.mjs";
+import { State } from "../../data/state.mjs";
+import { Difficulty } from "../../data/difficulty.mjs";
+
+import { HighScoreManager } from "../../data/high_score_manager.mjs";
 
 //----------------------------------------------------------------------//
 //Player class - handles player movement, rendering and logic

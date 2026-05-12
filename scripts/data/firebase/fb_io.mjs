@@ -6,7 +6,7 @@
 
 import {initializeApp} from 'https://cdn.skypack.dev/@firebase/app';
 import {getDatabase, ref, get, set, onValue} from 'https://cdn.skypack.dev/@firebase/database';
-import { FB_Data } from './fb_init.mjs';
+import { FB_Data } from './fb_data.mjs';
 
 //----------------------------------------------------------------------//
 //functions adapted from my firebase skills repository                  //

@@ -20,16 +20,18 @@ import { Text } from "../interface/ui/text.mjs";
 import { Container } from "../interface/ui/container.mjs";
 import { Dropdown } from "../interface/ui/dropdown.mjs";
 
-import { Loader } from '../data/loader.mjs'
+import { Loader } from '../../data/loader.mjs'
 
 import { Particle } from "../utility/particle.mjs";
 
 import { Time } from "../utility/time.mjs";
 
-import { State } from "../data/state.mjs";
+import { State } from "../../data/state.mjs";
 
-import { Difficulty } from "../data/difficulty.mjs";
+import { Difficulty } from "../../data/difficulty.mjs";
 import { Button } from "../interface/ui/button.mjs";
+
+import { HighScoreManager } from "../../data/high_score_manager.mjs";
 
 //----------------------------------------------------------------------//
 //Game class - handles game loop and core logic
@@ -62,60 +64,72 @@ export class Game {
         ),
 
 
-        new Page(Game.HOME_TITLE, "/html/start.html", false,
+        new Page(Game.HOME_TITLE, "/html/astro-explorer/start.html", false,
             function () {
-                const HIGH_SCORE_STATE = State.getState(Game.HIGH_SCORE_ID);
-                var highScoreElem = document.getElementById("high_score");
-                highScoreElem.innerText = "High Score: " + Math.round(HIGH_SCORE_STATE);
+                HighScoreManager.getHighScore(
+                    (value)=>{
+                        if (value == null) value = 0;
+                        var highScoreElem = document.getElementById("high_score");
+                        highScoreElem.innerText = "High Score: " + Math.round(value);
+                    },
+                    'astro-explorer'
+                );
+                
             }
         ),
 
 
-        new Page(Game.GAME_TITLE, "/html/game.html", true,
+        new Page(Game.GAME_TITLE, "/html/astro-explorer/game.html", true,
             function () {
 
             }
         ),
 
 
-        new Page(Game.END_TITLE, "/html/end.html", false,
+        new Page(Game.END_TITLE, "/html/astro-explorer/end.html", false,
             function () {
                 //OnLoad
                 //called on page load
 
                 const DEATH_STATE = State.getState(Game.DEATH_STATE_ID);
                 const SCORE_STATE = State.getState(Game.SCORE_STATE_ID);
-                var highScoreState = State.getState(Game.HIGH_SCORE_ID);
-                var isHighScoreNew = false;
-                //manage high score
-                if (highScoreState == null) {
-                    //no high score
-                    highScoreState = SCORE_STATE;
-                    isHighScoreNew = true;
-                    //Apply changes to high score
-                    State.setState(Game.HIGH_SCORE_ID, highScoreState);
-                } else {
-                    //there is a high score
-                    if (Number(SCORE_STATE) > Number(highScoreState)) {
-                        highScoreState = SCORE_STATE;
-                        isHighScoreNew = true;
-                        //Apply changes to high score
-                        State.setState(Game.HIGH_SCORE_ID, highScoreState);
-                    }
-                }
+                var highScoreState = HighScoreManager.getHighScore(
+                    (value)=>{
+                        var highScoreState = value;
+                        var isHighScoreNew = false;
+                        //manage high score
+                        if (highScoreState == null) {
+                            //no high score
+                            highScoreState = SCORE_STATE;
+                            isHighScoreNew = true;
+                            //Apply changes to high score
+                            HighScoreManager.setHighScore(highScoreState, 'astro-explorer');
+                        } else {
+                            //there is a high score
+                            if (Number(SCORE_STATE) > Number(highScoreState)) {
+                                highScoreState = SCORE_STATE;
+                                isHighScoreNew = true;
+                                //Apply changes to high score
+                                HighScoreManager.setHighScore(highScoreState, 'astro-explorer');
+                            }
+                        }
+                        
+
+                        var deathReasonElem = document.getElementById("death_reason");
+                        var scoreElem = document.getElementById("score");
+                        var highScoreElem = document.getElementById("high_score");
+
+                        deathReasonElem.textContent = "You " + DEATH_STATE + "!";
+                        scoreElem.textContent = "Score: " + Math.round(SCORE_STATE);
+                        var highScoreMessage = "Previous High Score: " + Math.round(highScoreState);
+                        if (isHighScoreNew) {
+                            highScoreMessage = "High Score: " + Math.round(highScoreState) + " (NEW!)";
+                        }
+                        highScoreElem.textContent = highScoreMessage;
+                    },
+                    'astro-explorer'
+                );
                 
-
-                var deathReasonElem = document.getElementById("death_reason");
-                var scoreElem = document.getElementById("score");
-                var highScoreElem = document.getElementById("high_score");
-
-                deathReasonElem.textContent = "You " + DEATH_STATE + "!";
-                scoreElem.textContent = "Score: " + Math.round(SCORE_STATE);
-                var highScoreMessage = "Previous High Score: " + Math.round(highScoreState);
-                if (isHighScoreNew) {
-                    highScoreMessage = "High Score: " + Math.round(highScoreState) + " (NEW!)";
-                }
-                highScoreElem.textContent = highScoreMessage;
             }
         )
 

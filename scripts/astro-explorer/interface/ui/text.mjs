@@ -14,7 +14,7 @@ import { Vec2, clamp, lerp, Colour} from "../../utility/miscellaneous.mjs";
 import { Player } from "../../core/player.mjs";
 import { Time } from "../../utility/time.mjs";
 import { Input } from "../../interface/input.mjs";
-import { State } from "../../data/state.mjs";
+import { State } from "../../../data/state.mjs";
 
 
 //----------------------------------------------------------------------//

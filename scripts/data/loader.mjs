@@ -5,9 +5,9 @@
 //Loader class                                                          //
 //Manages loading planets, etc                                          //
 //----------------------------------------------------------------------//
-import { Planet, Mountain, Ocean, PlanetData, PlanetSurface, PlanetOceans, PlanetAtmosphere, Ring, PlanetRings } from "../core/planet.mjs"
-import { Player } from "../core/player.mjs";
-import { Vec2, Colour } from "../utility/miscellaneous.mjs";
+import { Planet, Mountain, Ocean, PlanetData, PlanetSurface, PlanetOceans, PlanetAtmosphere, Ring, PlanetRings } from "../astro-explorer/core/planet.mjs"
+import { Player } from "../astro-explorer/core/player.mjs";
+import { Vec2, Colour } from "../astro-explorer/utility/miscellaneous.mjs";
 
 //----------------------------------------------------------------------//
 //Loader class - handles loading planets and parsing planet JSON files
@@ -18,7 +18,7 @@ export class Loader {
     //Returns a list of planet objects
     static LoadPlanets() {
         //Since js cannot list the files in a directory, we must store the paths in one file
-        const PLANET_REFERENCES_JSON = Loader.GetJSONobject('../gamedata/planets/references.json'); 
+        const PLANET_REFERENCES_JSON = Loader.GetJSONobject('../../gamedata/planets/references.json'); 
         const PLANET_REFERENCES_JSON_LIST = PLANET_REFERENCES_JSON.planets;
         const STARTING_PLANET_NAME = PLANET_REFERENCES_JSON.starting_body;
 
@@ -27,7 +27,7 @@ export class Loader {
         var ret = [];
         //Load all the planets from the planets list 'PLANET_REFERENCES_JSON_LIST'
         for (var i = 0; i < PLANET_REFERENCES_JSON_LIST.length; i++) {
-            const PATH = "../gamedata/planets/" + PLANET_REFERENCES_JSON_LIST[i];
+            const PATH = "../../gamedata/planets/" + PLANET_REFERENCES_JSON_LIST[i];
             const JSON_OBJECT = Loader.GetJSONobject(PATH);
             const PLANET = Loader.JSONobjectToPlanet(JSON_OBJECT);
             if (PLANET == null) {
