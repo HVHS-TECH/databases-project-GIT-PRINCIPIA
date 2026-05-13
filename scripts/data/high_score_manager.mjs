@@ -44,7 +44,7 @@ export class HighScoreManager {
     static setHighScore(score, game) {
         //----------------------------------------//
         //Ensure the user is logged in
-        if (!FB_Data.loggedIn) {
+        if (!FB_User.loggedIn) {
             console.warn("setHighScore(): user is not logged in!");
             return;
         }
