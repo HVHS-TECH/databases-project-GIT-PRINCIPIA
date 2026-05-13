@@ -8,10 +8,10 @@
 import { Planet, PlanetAtmosphere, PlanetData, PlanetOceans, PlanetSurface } from "./planet.mjs";
 import { Game } from "./game.mjs";
 import { Input } from "../interface/input.mjs";
-import { Vec2, Colour } from "../utility/miscellaneous.mjs";
-import { Time } from "../utility/time.mjs";
-import { Particle, spawnExplosion } from "../utility/particle.mjs";
-import { lerp, clamp, normalizeAngle } from "../utility/miscellaneous.mjs";
+import { Vec2, Colour } from "../../utility/miscellaneous.mjs";
+import { Time } from "../../utility/time.mjs";
+import { Particle, spawnExplosion } from "../interface/ui/particle.mjs";
+import { lerp, clamp, normalizeAngle } from "../../utility/miscellaneous.mjs";
 
 import { State } from "../../data/state.mjs";
 import { Difficulty } from "../../data/difficulty.mjs";
@@ -1642,7 +1642,7 @@ export class Player {
     //kill the player!
     static die() {
         Player.deathCounter = 1;
-        State.setState(Game.SCORE_STATE_ID, Player.score);
+        State.setState(Game.SCORE_STATE_ID, Player.score); //So that the game page knows what score the player got
         Player.smoothScore = Player.score; //Don't confuse the player by showing the wrong score!
         Player.zoom = 5;
     }

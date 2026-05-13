@@ -7,10 +7,10 @@
 //----------------------------------------------------------------------//
 
 
-import { Vec2, Colour, lerp } from "./miscellaneous.mjs"
-import { Game } from "../core/game.mjs";
-import { Renderer } from "../core/renderer.mjs";
-import { Time } from "./time.mjs";
+import { Vec2, Colour, lerp } from "../../../utility/miscellaneous.mjs"
+import { Game } from "../../core/game.mjs";
+import { Renderer } from "../../core/renderer.mjs";
+import { Time } from "../../../utility/time.mjs";
 
 //----------------------------------------------------------------------//
 //Particle class - handles movement and rendering

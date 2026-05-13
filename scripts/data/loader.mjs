@@ -7,7 +7,7 @@
 //----------------------------------------------------------------------//
 import { Planet, Mountain, Ocean, PlanetData, PlanetSurface, PlanetOceans, PlanetAtmosphere, Ring, PlanetRings } from "../astro-explorer/core/planet.mjs"
 import { Player } from "../astro-explorer/core/player.mjs";
-import { Vec2, Colour } from "../astro-explorer/utility/miscellaneous.mjs";
+import { Vec2, Colour } from "../utility/miscellaneous.mjs";
 
 //----------------------------------------------------------------------//
 //Loader class - handles loading planets and parsing planet JSON files

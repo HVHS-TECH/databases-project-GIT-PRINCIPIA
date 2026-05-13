@@ -15,8 +15,8 @@ import { FB_IO } from './fb_io.mjs';
 export class FB_Login {
     //----------------------------------------------------------------------//
     //login()
-    static login() {
-        signInWithPopup(getAuth(), new GoogleAuthProvider()).then((result)=>{parseLoginData(result);});
+    static async login() {
+        await signInWithPopup(getAuth(), new GoogleAuthProvider()).then((result)=>{parseLoginData(result);});
     }
     //----------------------------------------------------------------------//
 
@@ -41,6 +41,7 @@ export class FB_Login {
 async function parseLoginData(result) {
     FB_User.accountName = result.user.displayName;
     FB_User.uid = result.user.uid;
+    FB_User.loggedIn = true;
 
     if (!(await FB_Login.userExists(FB_User.uid))) {
         //User does not exist

@@ -41,6 +41,18 @@ canvas {
         margin: 15px; /*Stops the item above moving downward due to the button shrinking*/
         font-size: 23px;
     }
+    button:disabled {
+        min-width: 25vw;
+        width: fit-content;
+        padding: 10px;
+        color: rgb(56, 56, 56);
+        background-color: rgb(100, 95, 82);
+        border-color: rgb(126, 126, 126);
+        border-radius: 5px;
+        border-width: 5px;
+        font-size: 30px;
+        margin: 10px;
+    }
     h1 {
         text-align: center;
         font-size: 100px;
@@ -85,5 +97,9 @@ canvas {
 .bottom {
     display: flex;
     justify-self: flex-end;
+}
+
+.span-height {
+    height: 90vh;
 }
 

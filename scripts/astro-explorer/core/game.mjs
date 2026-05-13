@@ -10,7 +10,7 @@
 
 import { Renderer } from "./renderer.mjs";
 import { Planet } from "./planet.mjs";
-import { Page, Vec2, RefVar, Colour, lerp } from "../utility/miscellaneous.mjs";
+import { Page, Vec2, RefVar, Colour, lerp } from "../../utility/miscellaneous.mjs";
 import { Player } from "./player.mjs";
 import { Input } from "../interface/input.mjs";
 import { UIelement } from "../interface/ui/ui_element.mjs";
@@ -22,9 +22,9 @@ import { Dropdown } from "../interface/ui/dropdown.mjs";
 
 import { Loader } from '../../data/loader.mjs'
 
-import { Particle } from "../utility/particle.mjs";
+import { Particle } from "../interface/ui/particle.mjs";
 
-import { Time } from "../utility/time.mjs";
+import { Time } from "../../utility/time.mjs";
 
 import { State } from "../../data/state.mjs";
 
