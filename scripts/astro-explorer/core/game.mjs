@@ -38,7 +38,6 @@ import { FB_User } from "../../data/firebase/fb_data.mjs";
 //Game class - handles game loop and core logic
 export class Game {
 
-    static INDEX_TITLE = "Astro Explorer - Index";
     static HOME_TITLE = "Astro Explorer - Title Screen";
     static GAME_TITLE = "Astro Explorer";
     static END_TITLE = "Astro Explorer - End Screen";
@@ -57,26 +56,19 @@ export class Game {
     //A list of the pages that make up the game. Each one has a title, a href, a 'hasCnv' boolean, and an onLoad() function
     //HREF is from root directory
     static PAGES = [
-        new Page(Game.INDEX_TITLE, "/index.html", false,
-            function () {
-                //Immediately redirect to the home page
-                Game.setPage(Game.HOME_TITLE);
-            }
-        ),
-
-
         new Page(Game.HOME_TITLE, "/html/astro-explorer/start.html", false,
-            function () {
+            async function () {
                 console.log("home page load");
                 console.dir(FB_User);
-                HighScoreManager.getHighScore(
-                    (value)=>{
-                        if (value == null) value = 0;
-                        var highScoreElem = document.getElementById("high_score");
-                        highScoreElem.innerText = "High Score: " + Math.round(value);
-                    },
+
+                var value = (await HighScoreManager.getHighScore(
+                    ()=>{},
                     'astro-explorer'
-                );
+                ));
+
+                if (value == null) value = 0;
+                var highScoreElem = document.getElementById("high_score");
+                highScoreElem.innerText = "High Score: " + Math.round(Number(value));
                 
             }
         ),

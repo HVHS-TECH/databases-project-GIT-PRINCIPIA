@@ -21,7 +21,7 @@ export class HighScoreManager {
         console.log("getHighScore()");
         //----------------------------------------//
         //Ensure the user is logged in
-        if (!FB_Data.loggedIn) {
+        if (!FB_User.loggedIn) {
             console.warn("getHighScore(cb): user is not logged in!");
             cb(null);
             return;
@@ -30,9 +30,11 @@ export class HighScoreManager {
 
         const READ = await FB_IO.read('/game-site/users/' + FB_User.uid + '/');
         
-        const USER_DATA = READ.val();
+        const USER_DATA = READ;
         const HIGH_SCORE = USER_DATA[game + "-high-score"]; //e.g 'astro-exporer' + '-high-score'
         cb(HIGH_SCORE);
+        console.log(HIGH_SCORE);
+        return HIGH_SCORE;
     }
     //----------------------------------------------------------------------//
 
