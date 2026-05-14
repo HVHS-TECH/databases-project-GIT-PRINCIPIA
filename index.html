@@ -5,7 +5,8 @@
         <link rel="stylesheet" href="./css/styles.css">
     </head>
     <body>
-        <div class="column center span-height">
+        <div class="column center span-screen-height">
+            <h1>Alex Curwen's Game Site</h1>
             <a href="./html/astro-explorer/start.html"><button disabled id="astro-explorer">ASTRO EXPLORER</button></a>
             <button disabled id="other-game">OTHER GAME</button>
             <br>
@@ -15,7 +16,17 @@
             <br>
             <br>
             <br>
-            <button onclick="login()">Login</button>
+            <div class="center column" id="i-login">
+                <div class="row center span-width">
+                    <label for="age">Please input your age: </label>
+                    <input id="i-age" name="age" type="number">
+                    <p id="i-age-error"></p>
+                </div>
+                <button onclick="login()">Login</button>
+            </div>
+            <button onclick="logInDiffAccount()" style="display: none;" id="i-login-diff-account">Login with a different account</button>
+            
+            
         </div>
         
         <script type="module" src='../../scripts/game-site/game_site.mjs'></script>

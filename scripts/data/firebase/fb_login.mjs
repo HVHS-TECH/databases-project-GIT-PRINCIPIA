@@ -6,7 +6,7 @@
 
 import {initializeApp} from 'https://cdn.skypack.dev/@firebase/app';
 import {getDatabase, ref, set} from 'https://cdn.skypack.dev/@firebase/database';
-import {getAuth, GoogleAuthProvider, signInWithPopup} from 'https://cdn.skypack.dev/@firebase/auth';
+import {getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut, setPersistence, browserSessionPersistence} from 'https://cdn.skypack.dev/@firebase/auth';
 import { FB_User } from './fb_data.mjs';
 import { FB_IO } from './fb_io.mjs';
 
@@ -17,8 +17,25 @@ export class FB_Login {
     //login()
     static async login() {
         console.log("login");
-        parseLoginData(await signInWithPopup(getAuth(), new GoogleAuthProvider()));
+        if (FB_Login.loggedIn()) return; //Already logged in
+        onAuthStateChanged(getAuth(), async (user)=>{
+            if (user) {
+                FB_Login.parseLoginData(user);
+            } else {
+                user = (await signInWithPopup(getAuth(), new GoogleAuthProvider()));
+                FB_Login.parseLoginData(user);
+            }
+        });
+        //needs to wait for the login to finish...
         console.log("login done");
+    }
+    //----------------------------------------------------------------------//
+
+    //----------------------------------------------------------------------//
+    //logout()
+    static logout() {
+        console.log("logout");
+        signOut(getAuth());
     }
     //----------------------------------------------------------------------//
 
@@ -31,6 +48,15 @@ export class FB_Login {
     }
     //----------------------------------------------------------------------//
 
+    //----------------------------------------------------------------------//
+    //loggedIn()
+    //PERSISTS ACROSS PAGES
+    static loggedIn() {
+        const USER = getAuth().currentUser;
+        if (USER) return true;
+        return false;
+    }
+    //----------------------------------------------------------------------//
 
 }
 //END OF FB_Login
@@ -41,14 +67,15 @@ export class FB_Login {
 //parseLoginData(result)
 //result: the result of the login popup
 async function parseLoginData(result) {
-    FB_User.accountName = result.user.displayName;
-    FB_User.uid = result.user.uid;
+    FB_User.accountName = result.displayName;
+    FB_User.uid = result.uid;
     FB_User.loggedIn = true;
 
     if (!(await FB_Login.userExists(FB_User.uid))) {
         //User does not exist
         //Create a user
         FB_IO.write('game-site/users/' + FB_User.uid + '/accountName/', '', FB_User.accountName);
+        FB_IO.write('game-site/users/' + FB_User.uid + '/age/', '', FB_User.age);
     }
 }
 //----------------------------------------------------------------------//

@@ -12,79 +12,93 @@ canvas {
     margin: 0px;
     padding: 0px;
 }
+.row {
+    display: flex;
+    flex-direction: row;
+}
 
 .column {
     display: flex;
     width: 70%;
     height: fit-content;
     flex-direction: column;
-    button {
-        min-width: 25vw;
-        width: fit-content;
-        padding: 10px;
-        color: black;
-        background-color: rgb(248, 229, 155);
-        border-color: white;
-        border-radius: 5px;
-        border-width: 5px;
-        font-size: 30px;
-        margin: 10px;
-    }
-    button:hover {
-        background-color: rgb(165, 149, 85);
-        border-color: black;
-        
-    }
-    button:active {
-        width: 20vw;
-        padding: 10px;
-        margin: 15px; /*Stops the item above moving downward due to the button shrinking*/
-        font-size: 23px;
-    }
-    button:disabled {
-        min-width: 25vw;
-        width: fit-content;
-        padding: 10px;
-        color: rgb(56, 56, 56);
-        background-color: rgb(100, 95, 82);
-        border-color: rgb(126, 126, 126);
-        border-radius: 5px;
-        border-width: 5px;
-        font-size: 30px;
-        margin: 10px;
-    }
-    h1 {
-        text-align: center;
-        font-size: 100px;
-        color: rgb(255, 237, 163);
-        text-shadow: 0px 6px 1px black;
-        margin: 5px;
-        padding: 0px;
-    }
-    h2 {
-        text-align: center;
-        font-size: 80px;
-        color: rgb(237, 220, 152);
-        text-shadow: 0px 6px 1px black;
-        margin: 5px;
-        padding: 0px;
-    }
-    h3 {
-        text-align: center;
-        font-size: 40px;
-        color: rgb(203, 189, 131);
-        text-shadow: 0px 6px 1px black;
-        margin: 5px;
-        padding: 0px;
-    }
-    p {
-        text-align: center;
-        font-size: 20px;
-        color: rgb(171, 156, 97);
-        text-shadow: 0px 6px 1px black;
-        margin: 5px;
-        padding: 0px;
-    }
+    
+}
+button {
+    min-width: 25vw;
+    width: fit-content;
+    padding: 10px;
+    color: black;
+    background-color: rgb(248, 229, 155);
+    border-color: white;
+    border-radius: 5px;
+    border-width: 5px;
+    font-size: 30px;
+    margin: 10px;
+}
+button:hover {
+    background-color: rgb(165, 149, 85);
+    border-color: black;
+    
+}
+button:active {
+    width: 20vw;
+    padding: 10px;
+    margin: 15px; /*Stops the item above moving downward due to the button shrinking*/
+    font-size: 23px;
+}
+button:disabled {
+    min-width: 25vw;
+    width: fit-content;
+    padding: 10px;
+    color: rgb(56, 56, 56);
+    background-color: rgb(100, 95, 82);
+    border-color: rgb(126, 126, 126);
+    border-radius: 5px;
+    border-width: 5px;
+    font-size: 30px;
+    margin: 10px;
+}
+h1 {
+    text-align: center;
+    font-size: 100px;
+    color: rgb(255, 237, 163);
+    text-shadow: 0px 6px 1px black;
+    margin: 5px;
+    padding: 0px;
+}
+h2 {
+    text-align: center;
+    font-size: 80px;
+    color: rgb(237, 220, 152);
+    text-shadow: 0px 6px 1px black;
+    margin: 5px;
+    padding: 0px;
+}
+h3 {
+    text-align: center;
+    font-size: 40px;
+    color: rgb(203, 189, 131);
+    text-shadow: 0px 6px 1px black;
+    margin: 5px;
+    padding: 0px;
+}
+p, label {
+    text-align: center;
+    font-size: 20px;
+    color: rgb(171, 156, 97);
+    text-shadow: 0px 6px 1px black;
+    margin: 5px;
+    padding: 0px;
+}
+
+input {
+    display: flex;
+    width: 20%;
+    height: 30px;
+    background-color: rgb(9, 80, 68);
+    color: rgb(203, 189, 131);
+    font-size: 30px;
 }
 
 .center {
@@ -99,7 +113,25 @@ canvas {
     justify-self: flex-end;
 }
 
-.span-height {
+.span-screen-height {
     height: 90vh;
+}
+.span-height {
+    height: 90%;
+}
+
+.span-screen-width {
+    width: 90vw;
+}
+.span-width {
+    width: 90%;
+}
+
+.blank {
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    margin: 0px;
+    padding: 0px;
 }
 

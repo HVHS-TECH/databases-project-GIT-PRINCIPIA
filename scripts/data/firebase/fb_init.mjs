@@ -6,6 +6,7 @@
 
 import {initializeApp} from 'https://cdn.skypack.dev/@firebase/app';
 import {getDatabase, ref, set} from 'https://cdn.skypack.dev/@firebase/database';
+import {getAuth, setPersistence, browserSessionPersistence} from 'https://cdn.skypack.dev/@firebase/auth';
 import {FB_IO} from './fb_io.mjs';
 import { FB_Data } from './fb_data.mjs';
 
