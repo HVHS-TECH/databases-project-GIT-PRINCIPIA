@@ -16,7 +16,9 @@ export class FB_Login {
     //----------------------------------------------------------------------//
     //login()
     static async login() {
-        await signInWithPopup(getAuth(), new GoogleAuthProvider()).then((result)=>{parseLoginData(result);});
+        console.log("login");
+        parseLoginData(await signInWithPopup(getAuth(), new GoogleAuthProvider()));
+        console.log("login done");
     }
     //----------------------------------------------------------------------//
 

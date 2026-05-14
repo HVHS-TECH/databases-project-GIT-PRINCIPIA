@@ -32,6 +32,7 @@ import { Difficulty } from "../../data/difficulty.mjs";
 import { Button } from "../interface/ui/button.mjs";
 
 import { HighScoreManager } from "../../data/high_score_manager.mjs";
+import { FB_User } from "../../data/firebase/fb_data.mjs";
 
 //----------------------------------------------------------------------//
 //Game class - handles game loop and core logic
@@ -66,6 +67,8 @@ export class Game {
 
         new Page(Game.HOME_TITLE, "/html/astro-explorer/start.html", false,
             function () {
+                console.log("home page load");
+                console.dir(FB_User);
                 HighScoreManager.getHighScore(
                     (value)=>{
                         if (value == null) value = 0;

@@ -18,6 +18,7 @@ export class HighScoreManager {
     //cb: the callback to run once the high score has been retrieved
     //game: the name of the game to get the high score from
     static async getHighScore(cb, game) {
+        console.log("getHighScore()");
         //----------------------------------------//
         //Ensure the user is logged in
         if (!FB_Data.loggedIn) {
@@ -42,6 +43,7 @@ export class HighScoreManager {
     //score: the score value to set the high score to
     //game: the name of the game to set the high score for
     static setHighScore(score, game) {
+        console.log("setHighScore()");
         //----------------------------------------//
         //Ensure the user is logged in
         if (!FB_User.loggedIn) {
