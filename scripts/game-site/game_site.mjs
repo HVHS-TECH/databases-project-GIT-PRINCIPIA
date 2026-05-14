@@ -40,8 +40,8 @@ export class GameSite {
             console.warn("GameSite::unlockGames() called on a user who is not logged in");
             return;
         }
-        var html_astro_explorer_play = document.getElementById("astro-explorer.play");
-        var html_other_game_play = document.getElementById("other-game.play");
+        var html_astro_explorer_play = document.getElementById("astro-explorer");
+        var html_other_game_play = document.getElementById("other-game");
 
         html_astro_explorer_play.disabled = false;
         html_other_game_play.disabled = false;
