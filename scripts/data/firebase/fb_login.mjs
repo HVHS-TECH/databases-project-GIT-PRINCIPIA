@@ -74,12 +74,14 @@ async function parseLoginData(result) {
     FB_User.accountName = result.displayName;
     FB_User.uid = result.uid;
     FB_User.loggedIn = true;
+    FB_User.email = result.email;
 
     if (!(await FB_Login.userExists(FB_User.uid))) {
         //User does not exist
         //Create a user
         FB_IO.write('game-site/users/' + FB_User.uid + '/accountName/', '', FB_User.accountName);
         FB_IO.write('game-site/users/' + FB_User.uid + '/age/', '', FB_User.age);
+        FB_IO.write('game-site/users/' + FB_User.uid + '/email/', '', FB_User.email);
     }
 }
 //----------------------------------------------------------------------//

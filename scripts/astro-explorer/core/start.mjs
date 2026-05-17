@@ -12,9 +12,10 @@ import { FB_Login } from '../../data/firebase/fb_login.mjs';
 //Initialize firebase
 FB_Init.init();
 
-//Start the game once the user logs in
-FB_Login.login(ON_LOGIN);
-
 const ON_LOGIN = ()=> {
     Game.Start();
 }
+
+//Start the game once the user logs in
+FB_Login.login(ON_LOGIN);
+

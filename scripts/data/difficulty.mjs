@@ -20,8 +20,8 @@ export class Difficulty {
 
         //Fuel
         MAX_FUEL: 320,
-        FUEL_USED_PER_FRAME: 0.08,
-        THRUSTER_FORCE: 0.0045
+        FUEL_USED_PER_FRAME: 0.1,
+        THRUSTER_FORCE: 0.005
     };
 }
 //END OF Difficulty

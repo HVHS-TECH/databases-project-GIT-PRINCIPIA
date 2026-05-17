@@ -21,6 +21,7 @@ export class GameSite {
     static htmlIageError = null;
     static htmlIlogin = null;
     static htmlIloginWithDiffAccount = null;
+    static htmlOinformEmail = null;
 
     //----------------------------------------//
     //Prevent incorrect ages
@@ -44,6 +45,7 @@ export class GameSite {
         GameSite.htmlIageError = document.getElementById("i-age-error");
         GameSite.htmlIlogin = document.getElementById("i-login");
         GameSite.htmlIloginWithDiffAccount = document.getElementById("i-login-diff-account");
+        GameSite.htmlOinformEmail = document.getElementById("o-inform-email");
     }
     //----------------------------------------------------------------------//
 
@@ -52,7 +54,7 @@ export class GameSite {
     static async login() {
         if (GameSite.validateAge()) {
             
-            FB_Login.login(GameSite.unlockGames);
+            FB_Login.login(GameSite.handleLogin);
             
         } else {
             FB_Login.logout();
@@ -96,6 +98,17 @@ export class GameSite {
         return true;
     }
     //----------------------------------------------------------------------//
+
+
+    //----------------------------------------------------------------------//
+    //handleLogin()
+    static handleLogin() {
+        //Inform user of which account they are logged in with
+        GameSite.htmlOinformEmail.innerText = "Logged in with email: '" + FB_User.email + "'";
+        GameSite.unlockGames();
+    }
+    //----------------------------------------------------------------------//
+
 
     //----------------------------------------------------------------------//
     //unlockGames()

@@ -513,7 +513,7 @@ export class Game {
 
      
     //----------------------------------------------------------------------//
-    static G = 0.005; //Universal gravitational constant (lowered for slower orbital pacing)
+    static G = 0.005; //Universal gravitational constant
 
     static timewarp = 1;
     static smoothTimeWarp = 1;
