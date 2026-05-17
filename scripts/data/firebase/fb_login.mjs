@@ -15,19 +15,23 @@ import { FB_IO } from './fb_io.mjs';
 export class FB_Login {
     //----------------------------------------------------------------------//
     //login()
-    static async login() {
+    static login(cb = ()=>{}) {
         console.log("login");
         if (FB_Login.loggedIn()) return; //Already logged in
+
+        
         onAuthStateChanged(getAuth(), async (user)=>{
             if (user) {
-                FB_Login.parseLoginData(user);
+                parseLoginData(user);
             } else {
                 user = (await signInWithPopup(getAuth(), new GoogleAuthProvider()));
-                FB_Login.parseLoginData(user);
+                
+                parseLoginData(user);
             }
+            console.log("login done");
+            cb(); //Call the callback once the user is logged in
         });
-        //needs to wait for the login to finish...
-        console.log("login done");
+        
     }
     //----------------------------------------------------------------------//
 
@@ -53,7 +57,7 @@ export class FB_Login {
     //PERSISTS ACROSS PAGES
     static loggedIn() {
         const USER = getAuth().currentUser;
-        if (USER) return true;
+        if (USER) return true; //The user exists (not null)
         return false;
     }
     //----------------------------------------------------------------------//

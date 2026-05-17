@@ -51,8 +51,11 @@ export class GameSite {
     //login()
     static async login() {
         if (GameSite.validateAge()) {
-            await FB_Login.login();
-            GameSite.unlockGames();
+            
+            FB_Login.login(GameSite.unlockGames);
+            
+        } else {
+            FB_Login.logout();
         }
         
     }
