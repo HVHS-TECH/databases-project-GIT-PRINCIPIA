@@ -170,7 +170,7 @@ export class PlanetRings {
 export class Planet {
     static GROUND_STROKE_WIDTH = 2; //Width of ground outline
     static MOUNTAIN_STROKE_WIDTH = 3; //Width of mountain outline
-    static LOCATOR_RADIUS_RAD_MUL = 6; //Locator radius = <LOCATOR_RADIUS_RAD_MUL> * this.data.radius
+    static LOCATOR_RADIUS_RAD_MUL = 12; //Locator radius = <LOCATOR_RADIUS_RAD_MUL> * this.data.radius
 
     constructor(data, land, ocean, atmosphere, rings) {
         this.data = data;

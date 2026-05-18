@@ -2,11 +2,11 @@
     "data": {
         "name": "asteroid_1",
 
-        "x": 24000,
+        "x": 48000,
         "y": 0,
 
         "xVel": 0,
-        "yVel": 0.45644,
+        "yVel": 0.32371,
         
         "mass": 50,
         "radius": 10,
