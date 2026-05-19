@@ -53,7 +53,7 @@ export class Player {
     static trajectorySegments = []; //Array of {pos: Vec2, time: number} for clickable trajectory points
     static targetWarpTime = 0; //Target time to warp to on click
     static KEY_TIMEWARP = 8; //Maximum timewarp reached with keyboard input (e.g pressing space)
-    static MAX_TIMEWARP_MULTIPLIER = 50; //Maximum timewarp multiplier for click-to-timewarp
+    static MAX_TIMEWARP_MULTIPLIER = 150; //Maximum timewarp multiplier for click-to-timewarp
     static TRAJECTORY_DT = 3; //How much time between each trajectory point (in scaledDeltaTime-s)
     static timewarpedTime = 0; //A time measure that includes timewarps
     static warpDuration = 0; //Duration of current warp in seconds (used for smoothing the timewarp transition)
