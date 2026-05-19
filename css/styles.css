@@ -1,7 +1,13 @@
+html {
+    height: 100%;
+}
 body {
     background-color: rgb(3, 45, 38);
     margin: 0px;
     padding: 0px;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 canvas {
@@ -104,6 +110,7 @@ input {
 .center {
     display: flex;
     justify-self: center;
+    align-self: center;
     justify-content: center; 
     align-items: center;
 }
@@ -111,6 +118,7 @@ input {
 .bottom {
     display: flex;
     justify-self: flex-end;
+    flex-grow: 1;
 }
 
 .span-screen-height {

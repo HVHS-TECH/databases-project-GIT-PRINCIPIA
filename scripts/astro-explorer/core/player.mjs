@@ -118,11 +118,13 @@ export class Player {
         Player.timewarpedTime += dt;
         if (Player.targetWarpTime > Player.timewarpedTime) {
             console.log(Player.targetWarpTime - Player.timewarpedTime);
+            const MIN_TIMEWARP = 15;
             //When warp starts, game.timewarp will be Player.MAX_TIMEWARP_MULTIPLIER
-            //When warp ends, game.timewarp will be 1
+            //When warp ends, game.timewarp will be 1 + MIN_TIMEWARP
             const TIMEWARP_PROGRESS = 1 - (Player.targetWarpTime - Player.timewarpedTime) / Player.warpDuration;
-            Game.timewarp = lerp(Player.MAX_TIMEWARP_MULTIPLIER, 1, TIMEWARP_PROGRESS ** 0.5);
-            Game.smoothTimeWarp = lerp(Player.MAX_TIMEWARP_MULTIPLIER, 1, TIMEWARP_PROGRESS ** 0.5);
+            const TIMEWARP = lerp(Player.MAX_TIMEWARP_MULTIPLIER, 1, TIMEWARP_PROGRESS ** 0.5) + 5
+            Game.timewarp = TIMEWARP;
+            Game.smoothTimeWarp = TIMEWARP;
         } else if (Player.mightExplodeOnReentry) {
             //speed up time to cross large distances
             Game.timewarp = 0.3; //Slow down time to let the player see themself explode!
