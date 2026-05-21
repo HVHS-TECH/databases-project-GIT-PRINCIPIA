@@ -33,7 +33,7 @@ class HighScoreDisplay {
             
         }
 
-        namesAndScores.sort((a, b) => {return a.score - b.score;});
+        namesAndScores.sort((a, b) => {return b.score - a.score;});
 
         element.innerHTML = "<tr><th>Name</th><th>Score</th></tr>"; //Start of the table
 
