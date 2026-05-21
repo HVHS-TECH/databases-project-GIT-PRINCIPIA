@@ -1,6 +1,6 @@
 html {
     height: 100%;
-    background-color: rgb(3, 26, 45);
+    /*background-color: rgb(3, 26, 45);*/
 }
 body {
     background-color: rgb(3, 45, 38);
@@ -9,8 +9,8 @@ body {
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    border-left: solid black 5px;
-    border-right: solid black 5px;
+    /*border-left: solid black 5px;
+    border-right: solid black 5px;*/
     
 }
 
