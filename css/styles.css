@@ -154,3 +154,15 @@ input {
     padding: 0px;
 }
 
+td {
+    color: rgb(203, 189, 131);
+    border: solid black 2px;
+    font-size: 15px;
+}
+th {
+    color: rgb(203, 189, 131);
+    border: solid black 2px;
+    font-size: 25px;
+}
+
+

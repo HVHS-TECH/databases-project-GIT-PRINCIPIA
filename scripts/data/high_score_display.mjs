@@ -1,10 +1,17 @@
+//----------------------------------------------------------------------//
+//Written by Alex Curwen                                                //
+//high_score_display.mjs                                                //
+//handles displaying high scores to a table                             //
+//----------------------------------------------------------------------//
+
+
 import { FB_IO } from "./firebase/fb_io.mjs";
 import { FB_Init } from "./firebase/fb_init.mjs";
 
 
 //----------------------------------------------------------------------//
 //HighScoreDisplay class - handles displaying high score lists
-class HighScoreDisplay {
+export class HighScoreDisplay {
     //----------------------------------------------------------------------//
     //displayHighScores(game)
     //game: which game to get high scores from
@@ -51,4 +58,4 @@ class HighScoreDisplay {
 //----------------------------------------------------------------------//
 
 FB_Init.init();
-addEventListener("load", ()=>{window.displayHighScores = (game)=>{return HighScoreDisplay.displayHighScores(game);}});
+addEventListener("load", ()=>{window.displayHighScores = (game)=>{return HighScoreDisplay.displayHighScores(game);};});
