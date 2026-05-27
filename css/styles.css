@@ -124,7 +124,7 @@ input {
     justify-self: flex-end;
     flex-grow: 1;
 }
-#thin {
+.thin {
     display: flex;
     align-self: center;
     width: 50%;
@@ -158,11 +158,17 @@ td {
     color: rgb(203, 189, 131);
     border: solid black 2px;
     font-size: 15px;
+    background-color: rgb(7, 44, 61);
+    margin: 0px;
+    padding: 5px;
 }
 th {
     color: rgb(203, 189, 131);
     border: solid black 2px;
     font-size: 25px;
+    background-color: rgb(7, 44, 61);
+    margin: 0px;
+    padding: 5px;
 }
 
 

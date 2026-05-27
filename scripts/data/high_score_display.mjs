@@ -16,7 +16,7 @@ export class HighScoreDisplay {
     //displayHighScores(game)
     //game: which game to get high scores from
     static async displayHighScores(game) {
-        const ID = "o-atro-explorer-high-score-list";
+        const ID = "o-" + game + "-high-score-list";
         
         var element = document.getElementById(ID);
 
@@ -58,4 +58,10 @@ export class HighScoreDisplay {
 //----------------------------------------------------------------------//
 
 FB_Init.init();
-addEventListener("load", ()=>{window.displayHighScores = (game)=>{return HighScoreDisplay.displayHighScores(game);};});
+const ASTRO_EXPLORER = document.getElementById('o-astro-explorer-high-score-list');
+const OTHER_GAME = document.getElementById('o-other-game-high-score-list');
+
+addEventListener("load", ()=>{
+    if (ASTRO_EXPLORER) {HighScoreDisplay.displayHighScores("astro-explorer");} 
+    if (OTHER_GAME) {HighScoreDisplay.displayHighScores("other-game");}
+});
