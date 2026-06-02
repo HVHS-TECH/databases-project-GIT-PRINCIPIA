@@ -45,10 +45,10 @@ export class FB_Login {
 
     //----------------------------------------------------------------------//
     //logout()
-    static logout() {
+    static async logout() {
         console.log("logout");
         FB_User.loggedIn = false;
-        signOut(getAuth());
+        await signOut(getAuth());
     }
     //----------------------------------------------------------------------//
 

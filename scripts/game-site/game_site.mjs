@@ -72,7 +72,7 @@ export class GameSite {
         console.log(USERNAME);
         if (GameSite.validateAge()) {
             
-            GameSite.logInDiffAccount(GameSite.handleLogin);
+            await GameSite.logInDiffAccount(GameSite.handleLogin);
 
         }
     }
@@ -81,14 +81,14 @@ export class GameSite {
 
     //----------------------------------------------------------------------//
     //validateAge()
-    static validateAge() {
+    static async validateAge() {
         //----------------------------------------//
         const AGE = GameSite.htmlIage.value;
         if (AGE <= GameSite.UNREASONABLE_SMALL_AGE) {
             //user has inputted an unreasonably small age
             console.warn("GameSite::unlockGames() user has inputted an unreasonably small age.")
             GameSite.htmlIageError.innerText = "Please input an age above " + GameSite.UNREASONABLE_SMALL_AGE + " and below " + GameSite.UNREASONABLE_LARGE_AGE;
-            FB_Login.logout();
+            await FB_Login.logout();
             return false;
         }
 
@@ -96,7 +96,7 @@ export class GameSite {
             //user has inputted an unreasonably large age
             console.warn("GameSite::unlockGames() user has inputted an unreasonably large age.")
             GameSite.htmlIageError.innerText = "Please input an age above " + GameSite.UNREASONABLE_SMALL_AGE + " and below " + GameSite.UNREASONABLE_LARGE_AGE;
-            FB_Login.logout();
+            await FB_Login.logout();
             return false;
         }
 
@@ -104,7 +104,7 @@ export class GameSite {
             //user is too young to play
             console.warn("GameSite::unlockGames() user is too young to play (age < " + GameSite.MIN_AGE + ")");
             GameSite.htmlIageError.innerText = "You must be older than " + GameSite.MIN_AGE + " to play";
-            FB_Login.logout();
+            await FB_Login.logout();
             return false;
         }
         //----------------------------------------//
@@ -151,8 +151,8 @@ export class GameSite {
     //----------------------------------------------------------------------//
     //logInDiffAccount()
     //Log in with a different account
-    static logInDiffAccount(cb = ()=>{}) {
-        FB_Login.logout();
+    static async logInDiffAccount(cb = ()=>{}) {
+        await FB_Login.logout();
         FB_Login.login(cb);
     }
     //----------------------------------------------------------------------//
