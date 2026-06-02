@@ -10,6 +10,8 @@ import { Exposure } from "../utility/exposure.mjs";
 import { FB_Login } from "../data/firebase/fb_login.mjs";
 import { FB_User } from "../data/firebase/fb_data.mjs";
 import { FB_Init } from "../data/firebase/fb_init.mjs";
+import { Game } from "../astro-explorer/core/game.mjs";
+import { FB_IO } from "../data/firebase/fb_io.mjs";
 
 
 //----------------------------------------------------------------------//
@@ -19,9 +21,9 @@ export class GameSite {
     static htmlOtherGamePlay = null;
     static htmlIage = null;
     static htmlIageError = null;
-    static htmlIlogin = null;
     static htmlIloginWithDiffAccount = null;
     static htmlOinformEmail = null;
+    static htmlIusename = null;
 
     //----------------------------------------//
     //Prevent incorrect ages
@@ -35,7 +37,7 @@ export class GameSite {
     //init()
     static init() {
         console.log("GameSite::init()");
-        Exposure.expose(GameSite.login, "login");
+        Exposure.expose(GameSite.signUp, "signUp");
         Exposure.expose(GameSite.logInDiffAccount, "logInDiffAccount");
         FB_Init.init();
 
@@ -43,23 +45,36 @@ export class GameSite {
         GameSite.htmlOtherGamePlay = document.getElementById("other-game");
         GameSite.htmlIage = document.getElementById("i-age");
         GameSite.htmlIageError = document.getElementById("i-age-error");
-        GameSite.htmlIlogin = document.getElementById("i-login");
         GameSite.htmlIloginWithDiffAccount = document.getElementById("i-login-diff-account");
         GameSite.htmlOinformEmail = document.getElementById("o-inform-email");
+        GameSite.htmlIusename = document.getElementById("i-name");
+
+
+        GameSite.login();
     }
     //----------------------------------------------------------------------//
 
     //----------------------------------------------------------------------//
     //login()
     static async login() {
+        FB_Login.login(GameSite.handleLogin);
+            
+        
+    }
+    //----------------------------------------------------------------------//
+
+
+    //----------------------------------------------------------------------//
+    //signUp()
+    static async signUp() {
+        const USERNAME = GameSite.htmlIusename.value;
+        FB_User.username = USERNAME;
+        console.log(USERNAME);
         if (GameSite.validateAge()) {
             
-            FB_Login.login(GameSite.handleLogin);
-            
-        } else {
-            FB_Login.logout();
+            GameSite.logInDiffAccount(GameSite.handleLogin);
+
         }
-        
     }
     //----------------------------------------------------------------------//
 
@@ -103,6 +118,7 @@ export class GameSite {
     //----------------------------------------------------------------------//
     //handleLogin()
     static handleLogin() {
+        console.log("GameSite::handleLogin()");
         //Inform user of which account they are logged in with
         GameSite.htmlOinformEmail.innerText = "Logged in with email: '" + FB_User.email + "'";
         GameSite.unlockGames();
@@ -113,7 +129,7 @@ export class GameSite {
     //----------------------------------------------------------------------//
     //unlockGames()
     static unlockGames() {
-
+        console.log("GameSite::unlockGames()");
         //----------------------------------------//
         if (!FB_User.loggedIn) {
             console.warn("GameSite::unlockGames() called on a user who is not logged in");
@@ -122,7 +138,6 @@ export class GameSite {
         //----------------------------------------//
 
 
-        GameSite.htmlIlogin.style.display = "none";
         GameSite.htmlIloginWithDiffAccount.style.display = "flex";
 
 
@@ -136,9 +151,9 @@ export class GameSite {
     //----------------------------------------------------------------------//
     //logInDiffAccount()
     //Log in with a different account
-    static logInDiffAccount() {
+    static logInDiffAccount(cb = ()=>{}) {
         FB_Login.logout();
-        FB_Login.login();
+        FB_Login.login(cb);
     }
     //----------------------------------------------------------------------//
 }

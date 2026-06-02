@@ -16,16 +16,28 @@
             <br>
             <br>
             <br>
-            <div class="center column" id="i-login">
+            <p id="o-inform-email"></p>
+            <button onclick="logInDiffAccount()" id="i-login-diff-account">Login with a different account</button>
+            <br>
+            
+            <p>OR</p>
+            <br>
+            <div class="center column" id="i-sign-up">
                 <div class="row center span-width">
-                    <label for="age">Please input your age: </label>
+                    <label for="age">Input your age: </label>
                     <input id="i-age" name="age" type="number">
                     <p id="i-age-error"></p>
                 </div>
-                <button onclick="login()">Login</button>
+                <div class="row center span-width">
+                    <label for="name">Input a username: </label>
+                    <input id="i-name" name="name" type="text">
+                    <p id="i-name-error"></p>
+                </div>
+                <button onclick="signUp()">Sign Up</button>
             </div>
-            <p id="o-inform-email"></p>
-            <button onclick="logInDiffAccount()" style="display: none;" id="i-login-diff-account">Login with a different account</button>
+            
+            
+            
             
             
         </div>

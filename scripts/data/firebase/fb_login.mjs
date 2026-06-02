@@ -15,23 +15,31 @@ import { FB_IO } from './fb_io.mjs';
 export class FB_Login {
     //----------------------------------------------------------------------//
     //login()
+    static unsubscribeAuthStateChanged = null;
     static login(cb = ()=>{}) {
         console.log("login");
         if (FB_Login.loggedIn()) return; //Already logged in
 
+        console.log("not logged in");
+        FB_Login.unsubscribeAuthStateChanged = onAuthStateChanged(getAuth(), (user) =>{FB_Login.authStateChangedCB(user, cb);});
         
-        onAuthStateChanged(getAuth(), async (user)=>{
-            if (user) {
-                parseLoginData(user);
-            } else {
-                user = (await signInWithPopup(getAuth(), new GoogleAuthProvider()));
-                
-                parseLoginData(user);
-            }
-            console.log("login done");
-            cb(); //Call the callback once the user is logged in
-        });
-        
+    }
+    static async authStateChangedCB(user, cb) {
+        console.log("onAuthStateChanged()");
+        FB_Login.unsubscribeAuthStateChanged();
+        if (user) {
+            console.log("already logged in");
+            await parseLoginData(user);
+            
+        } else {
+            console.log("new log in");
+            user = (await signInWithPopup(getAuth(), new GoogleAuthProvider())).user;
+            console.log("Logged in with ");
+            console.dir(user);
+            await parseLoginData(user);
+        }
+        console.log("login done");
+        cb(); //Call the callback once the user is logged in
     }
     //----------------------------------------------------------------------//
 
@@ -39,6 +47,7 @@ export class FB_Login {
     //logout()
     static logout() {
         console.log("logout");
+        FB_User.loggedIn = false;
         signOut(getAuth());
     }
     //----------------------------------------------------------------------//
@@ -82,6 +91,7 @@ async function parseLoginData(result) {
         FB_IO.write('game-site/users/' + FB_User.uid + '/accountName/', '', FB_User.accountName);
         FB_IO.write('game-site/users/' + FB_User.uid + '/age/', '', FB_User.age);
         FB_IO.write('game-site/users/' + FB_User.uid + '/email/', '', FB_User.email);
+        FB_IO.write('game-site/users/' + FB_User.uid + '/username', '', FB_User.username);
     }
 }
 //----------------------------------------------------------------------//
