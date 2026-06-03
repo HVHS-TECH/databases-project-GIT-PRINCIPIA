@@ -8,6 +8,7 @@
 //----------------------------------------------------------------------//
 //FB_Data class to hold firebase information
 export class FB_Data {
+    static PATH_TO_USER_LIST = "gameSite/users/";
     static cfg = {
         apiKey: "AIzaSyCg_wVQVx1Jr6JcXnxIjs58owZ9laB7Llo",
         authDomain: "alex-curwen-12comp.firebaseapp.com",

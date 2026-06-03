@@ -7,6 +7,7 @@
 
 import { FB_IO } from "./firebase/fb_io.mjs";
 import { FB_Init } from "./firebase/fb_init.mjs";
+import { FB_Data } from "./firebase/fb_data.mjs";
 
 
 //----------------------------------------------------------------------//
@@ -15,38 +16,23 @@ export class HighScoreDisplay {
     //----------------------------------------------------------------------//
     //displayHighScores(game)
     //game: which game to get high scores from
+    //CANT USE CLIENT SIDE SORT - MUST USE FIREBASE
     static async displayHighScores(game) {
         const ID = "o-" + game + "-high-score-list";
         
         var element = document.getElementById(ID);
 
-        const HIGH_SCORE_LIST_READ = await FB_IO.read('game-site/users/');
+        //Before we read, display a 'loading' message
+        element.innerHTML = "<p>Loading high scores...</p>";
 
-        const USER_LIST = Object.keys(HIGH_SCORE_LIST_READ);
-
-        var namesAndScores = [];
-
-        for (var i = 0; i < USER_LIST.length; i++) {
-            const NAME = HIGH_SCORE_LIST_READ[USER_LIST[i]]["accountName"];
-            
-            const SCORE = HIGH_SCORE_LIST_READ[USER_LIST[i]][game + '-high-score'];
-            const NUM_CAST = Number(SCORE);
-
-            if (NUM_CAST != undefined && NUM_CAST != null && NUM_CAST != NaN) {
-                namesAndScores.push({score: NUM_CAST, name: NAME});
-            } else {
-                console.warn("HighScoreManager::displayHighScores(game): found invalid high score: " + NUM_CAST + " (original: " + SCORE + ")");
-            }
-            
-        }
-
-        namesAndScores.sort((a, b) => {return b.score - a.score;});
+        const READ = FB_IO.readOrderedByValue('gameSite/' + game + "HighScores/");
+        //RESEARCH READORDEREDBYVALUE USING CHILDREN OF THE NODE AS THE SORTING VALUES
 
         element.innerHTML = "<tr><th>Name</th><th>Score</th></tr>"; //Start of the table
 
-        for (var i = 0; i < namesAndScores.length; i++) {
-            const NAME = namesAndScores[i].name;
-            const SCORE = namesAndScores[i].score;
+        for (var i = 0; i < READ.length; i++) {
+            const NAME = (await FB_IO.read(FB_Data.PATH_TO_USER_LIST + READ[i].key() + "/username"));
+            const SCORE = READ[i].val();
 
             element.innerHTML += "<tr><td>" + NAME + ":</td><td>" + SCORE + " points</td></tr>";
         }
@@ -62,6 +48,6 @@ const ASTRO_EXPLORER = document.getElementById('o-astro-explorer-high-score-list
 const OTHER_GAME = document.getElementById('o-other-game-high-score-list');
 
 addEventListener("load", ()=>{
-    if (ASTRO_EXPLORER) {HighScoreDisplay.displayHighScores("astro-explorer");} 
-    if (OTHER_GAME) {HighScoreDisplay.displayHighScores("other-game");}
+    if (ASTRO_EXPLORER) {HighScoreDisplay.displayHighScores("astroExplorer");} 
+    if (OTHER_GAME) {HighScoreDisplay.displayHighScores("otherGame");}
 });

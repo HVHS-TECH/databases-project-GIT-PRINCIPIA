@@ -5,7 +5,7 @@
 //----------------------------------------------------------------------//
 
 import {initializeApp} from 'https://cdn.skypack.dev/@firebase/app';
-import {getDatabase, ref, get, set, onValue} from 'https://cdn.skypack.dev/@firebase/database';
+import {getDatabase, ref, get, set, onValue, orderByValue, query} from 'https://cdn.skypack.dev/@firebase/database';
 import { FB_Data } from './fb_data.mjs';
 
 //----------------------------------------------------------------------//
@@ -98,12 +98,27 @@ export class FB_IO {
         }
         if (!isNewPath && !isNewCb) {
             //The exact same write listener (same path, same callback) already exists
-            console.error("fb_addWriteListener(path, cb) :: there is already a write listener at path '" + path + "' with the callback: " + cb.toString());
-            console.warn("fb_addWriteListener(path, cb) :: attempted to add a duplicate write listener, aborting.");
+            console.error("addWriteListener(path, cb) :: there is already a write listener at path '" + path + "' with the callback: " + cb.toString());
+            console.warn("addWriteListener(path, cb) :: attempted to add a duplicate write listener, aborting.");
             return;
         }
         
         onValue(ref(FB_Data.db, path), cb);
+    }
+    //------------------------------------------------------------------------------//
+
+
+
+    //------------------------------------------------------------------------------//
+    //readOrderedByValue()
+    static async readOrderedByValue(path, cb = ()=>{}) {
+        console.log("readOrderedByValue(path, cb): path = '" + path + "', asynchronous = '" + (cb == (()=>{})) + "'");
+        if (cb == (()=>{})) {
+            const READ = await (query(ref(FB_Data.db, path), orderByValue()));
+            return READ;
+        } else {
+            (query(ref(FB_Data.db, path), orderByValue())).once('value', cb);
+        }
     }
     //------------------------------------------------------------------------------//
 }

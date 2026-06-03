@@ -28,10 +28,9 @@ export class HighScoreManager {
         }
         //----------------------------------------//
 
-        const READ = await FB_IO.read('/game-site/users/' + FB_User.uid + '/');
+        const READ = await FB_IO.read("gameSite/" + game + "HighScores" + FB_User.uid + '/');
         
-        const USER_DATA = READ;
-        const HIGH_SCORE = USER_DATA[game + "-high-score"]; //e.g 'astro-exporer' + '-high-score'
+        const HIGH_SCORE = READ;
         cb(HIGH_SCORE);
         console.log(HIGH_SCORE);
         return HIGH_SCORE;
@@ -58,7 +57,7 @@ export class HighScoreManager {
         State.setState(Game.HIGH_SCORE_ID, score);
 
         //Write to the firebase
-        FB_IO.write('/game-site/users/' + FB_User.uid + "/" + game + '-high-score/', '', score);
+        FB_IO.write("gameSite/" + game + "HighScores" + FB_User.uid + '/', '', score);
     }
     //----------------------------------------------------------------------//
 

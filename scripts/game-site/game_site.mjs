@@ -22,7 +22,7 @@ export class GameSite {
     static htmlIage = null;
     static htmlIageError = null;
     static htmlIloginWithDiffAccount = null;
-    static htmlOinformEmail = null;
+    static htmlOloginResult = null;
     static htmlIusename = null;
 
     //----------------------------------------//
@@ -46,7 +46,7 @@ export class GameSite {
         GameSite.htmlIage = document.getElementById("i-age");
         GameSite.htmlIageError = document.getElementById("i-age-error");
         GameSite.htmlIloginWithDiffAccount = document.getElementById("i-login-diff-account");
-        GameSite.htmlOinformEmail = document.getElementById("o-inform-email");
+        GameSite.htmlOloginResult = document.getElementById("o-login-result");
         GameSite.htmlIusename = document.getElementById("i-name");
 
 
@@ -56,8 +56,8 @@ export class GameSite {
 
     //----------------------------------------------------------------------//
     //login()
-    static async login() {
-        FB_Login.login(GameSite.handleLogin);
+    static async login(extraCB = ()=>{}) {
+        FB_Login.login(()=>{GameSite.handleLogin(); extraCB();});
             
         
     }
@@ -73,6 +73,7 @@ export class GameSite {
         if (GameSite.validateAge()) {
             
             await GameSite.logInDiffAccount(GameSite.handleLogin);
+            FB_Login.createUser();
 
         }
     }
@@ -117,10 +118,17 @@ export class GameSite {
 
     //----------------------------------------------------------------------//
     //handleLogin()
-    static handleLogin() {
+    static async handleLogin() {
         console.log("GameSite::handleLogin()");
+        if (!(await FB_Login.userExists(FB_User.uid))) {
+            //User does not exist
+            console.log("User does not exist! They will need to register an account");
+            GameSite.htmlOloginResult.innerText = "There is no user registered under this Google Account. (email: " + FB_User.email + ")\nPlease use the 'Sign Up' button to create an account under this Google Account"
+            await FB_Login.logout();
+            return;
+        }
         //Inform user of which account they are logged in with
-        GameSite.htmlOinformEmail.innerText = "Logged in with email: '" + FB_User.email + "'";
+        GameSite.htmlOloginResult.innerText = "Logged in with email: '" + FB_User.email + "'";
         GameSite.unlockGames();
     }
     //----------------------------------------------------------------------//
@@ -153,7 +161,7 @@ export class GameSite {
     //Log in with a different account
     static async logInDiffAccount(cb = ()=>{}) {
         await FB_Login.logout();
-        FB_Login.login(cb);
+        GameSite.login(cb);
     }
     //----------------------------------------------------------------------//
 }

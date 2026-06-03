@@ -98,14 +98,14 @@ export class Game {
                             highScoreState = SCORE_STATE;
                             isHighScoreNew = true;
                             //Apply changes to high score
-                            HighScoreManager.setHighScore(highScoreState, 'astro-explorer');
+                            HighScoreManager.setHighScore(highScoreState, 'astroExplorer');
                         } else {
                             //there is a high score
                             if (Number(SCORE_STATE) > Number(highScoreState)) {
                                 highScoreState = SCORE_STATE;
                                 isHighScoreNew = true;
                                 //Apply changes to high score
-                                HighScoreManager.setHighScore(highScoreState, 'astro-explorer');
+                                HighScoreManager.setHighScore(highScoreState, 'astroExplorer');
                             }
                         }
                         
