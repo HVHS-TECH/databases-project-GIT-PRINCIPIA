@@ -25,17 +25,23 @@ export class HighScoreDisplay {
         //Before we read, display a 'loading' message
         element.innerHTML = "<p>Loading high scores...</p>";
 
-        const READ = FB_IO.readOrderedByValue('gameSite/' + game + "HighScores/");
-        //RESEARCH READORDEREDBYVALUE USING CHILDREN OF THE NODE AS THE SORTING VALUES
+        FB_IO.readOrderedByValue('gameSite/' + game + "HighScores/", async (READ)=>{
 
-        element.innerHTML = "<tr><th>Name</th><th>Score</th></tr>"; //Start of the table
-
-        for (var i = 0; i < READ.length; i++) {
-            const NAME = (await FB_IO.read(FB_Data.PATH_TO_USER_LIST + READ[i].key() + "/username"));
-            const SCORE = READ[i].val();
-
-            element.innerHTML += "<tr><td>" + NAME + ":</td><td>" + SCORE + " points</td></tr>";
-        }
+            //RESEARCH READORDEREDBYVALUE USING CHILDREN OF THE NODE AS THE SORTING VALUES
+            //USE THE ".onValue" VARIABLE?
+    
+            element.innerHTML = "<tr><th>Name</th><th>Score</th></tr>"; //Start of the table
+            
+            READ.forEach(async (USER) => {
+                //Read the name from the database using the UID
+                const NAME = (await FB_IO.read(FB_Data.PATH_TO_USER_LIST + USER.key + "/username"));
+                const SCORE = USER.val();
+    
+                element.innerHTML += "<tr><td>" + NAME + ":</td><td>" + SCORE + " points</td></tr>";
+            });
+                
+            
+        });
 
     }
     //----------------------------------------------------------------------//
@@ -44,8 +50,8 @@ export class HighScoreDisplay {
 //----------------------------------------------------------------------//
 
 FB_Init.init();
-const ASTRO_EXPLORER = document.getElementById('o-astro-explorer-high-score-list');
-const OTHER_GAME = document.getElementById('o-other-game-high-score-list');
+const ASTRO_EXPLORER = document.getElementById('o-astroExplorer-high-score-list');
+const OTHER_GAME = document.getElementById('o-otherGame-high-score-list');
 
 addEventListener("load", ()=>{
     if (ASTRO_EXPLORER) {HighScoreDisplay.displayHighScores("astroExplorer");} 

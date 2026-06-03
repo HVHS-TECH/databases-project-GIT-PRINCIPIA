@@ -111,14 +111,11 @@ export class FB_IO {
 
     //------------------------------------------------------------------------------//
     //readOrderedByValue()
-    static async readOrderedByValue(path, cb = ()=>{}) {
-        console.log("readOrderedByValue(path, cb): path = '" + path + "', asynchronous = '" + (cb == (()=>{})) + "'");
-        if (cb == (()=>{})) {
-            const READ = await (query(ref(FB_Data.db, path), orderByValue()));
-            return READ;
-        } else {
-            (query(ref(FB_Data.db, path), orderByValue())).once('value', cb);
-        }
+    static async readOrderedByValue(path, cb) {
+        console.log("readOrderedByValue(path, cb): path = '" + path + "'");
+        
+        (get(query(ref(FB_Data.db, path), orderByValue()))).then(cb);
+        
     }
     //------------------------------------------------------------------------------//
 }

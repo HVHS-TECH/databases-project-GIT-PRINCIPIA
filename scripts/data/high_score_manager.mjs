@@ -28,7 +28,7 @@ export class HighScoreManager {
         }
         //----------------------------------------//
 
-        const READ = await FB_IO.read("gameSite/" + game + "HighScores" + FB_User.uid + '/');
+        const READ = await FB_IO.read("gameSite/" + game + "HighScores/" + FB_User.uid + '/');
         
         const HIGH_SCORE = READ;
         cb(HIGH_SCORE);
@@ -57,7 +57,7 @@ export class HighScoreManager {
         State.setState(Game.HIGH_SCORE_ID, score);
 
         //Write to the firebase
-        FB_IO.write("gameSite/" + game + "HighScores" + FB_User.uid + '/', '', score);
+        FB_IO.write("gameSite/" + game + "HighScores/" + FB_User.uid + '/', '', score);
     }
     //----------------------------------------------------------------------//
 

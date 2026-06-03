@@ -63,7 +63,7 @@ export class Game {
 
                 var value = (await HighScoreManager.getHighScore(
                     ()=>{},
-                    'astro-explorer'
+                    'astroExplorer'
                 ));
 
                 if (value == null) value = 0;
@@ -122,7 +122,7 @@ export class Game {
                         }
                         highScoreElem.textContent = highScoreMessage;
                     },
-                    'astro-explorer'
+                    'astroExplorer'
                 );
                 
             }
