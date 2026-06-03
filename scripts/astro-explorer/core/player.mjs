@@ -985,6 +985,7 @@ export class Player {
 
         //----------------------------------------//
         if (closestDistSq < WARP_THRESH * WARP_THRESH && closestIdx !== -1) {
+            //time = 1250 * ((1 + Player.TRAJECTORY_DT_INCR) ^ NumIterations - 1)
             const TARGET_TIME = closestSegment.time;
             if (Input.mouseDown) {
                 Player.targetWarpTime = Player.timewarpedTime + TARGET_TIME;
