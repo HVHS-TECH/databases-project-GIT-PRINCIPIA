@@ -38,14 +38,14 @@ canvas {
 button {
     min-width: 40vh;
     width: fit-content;
-    padding: 0.5vh;
+    padding: 1vh;
     color: black;
     background-color: rgb(248, 229, 155);
     border-color: white;
     border-radius: 0.5vh;
     border-width: 0.5vh;
     font-size: 3vh;
-    margin: 10px;
+    margin: 0.75vh;
 }
 button:hover {
     background-color: rgb(165, 149, 85);
@@ -53,22 +53,22 @@ button:hover {
     
 }
 button:active {
-    width: 30vh;
-    padding: 10px;
-    margin: 15px; /*Stops the item above moving downward due to the button shrinking*/
-    font-size: 23px;
+    min-width: 30vh;
+    padding: 1vh;
+    margin: 1.1vh; /*Stops the item above moving downward due to the button shrinking*/
+    font-size: 2.5vh;
 }
 button:disabled {
     min-width: 40vh;
     width: fit-content;
-    padding: 10px;
+    padding: 1vh;
     color: rgb(56, 56, 56);
     background-color: rgb(100, 95, 82);
     border-color: rgb(126, 126, 126);
     border-radius: 5px;
     border-width: 5px;
-    font-size: 30px;
-    margin: 10px;
+    font-size: 3vh;
+    margin: 0.75vh;
 }
 h1 {
     text-align: center;

@@ -55,6 +55,7 @@ export class Player {
     static KEY_TIMEWARP = 8; //Maximum timewarp reached with keyboard input (e.g pressing space)
     static MAX_TIMEWARP_MULTIPLIER = 150; //Maximum timewarp multiplier for click-to-timewarp
     static TRAJECTORY_DT = 3; //How much time between each trajectory point (in scaledDeltaTime-s)
+    static TRAJECTORY_DT_INCR = 0.0008;
     static timewarpedTime = 0; //A time measure that includes timewarps
     static warpDuration = 0; //Duration of current warp in seconds (used for smoothing the timewarp transition)
     
@@ -1151,7 +1152,7 @@ export class Player {
         //Scales with camera zoom: zoomed out = longer prediction
         const MAX_DEPTH = 5000; 
         const DEPTH = MAX_DEPTH / clamp(Player.smoothZoom * 5, 1, 10);
-        const DT = Player.TRAJECTORY_DT; //Time step (1 = max precision; used for Euler integration)
+        var dt = Player.TRAJECTORY_DT; //Time step (1 = max precision; used for Euler integration)
         
         //Clear previous trajectory segments for click detection
         Player.trajectorySegments = [];
@@ -1168,7 +1169,7 @@ export class Player {
         //Performance optimization: calculate drag every N iterations instead of every frame
         //Drag calculation is expensive (atmosphere lookups), so we cache & interpolate
         const DRAG_CALC_INTERVAL = 10;
-        const G_DT = Game.G * DT; //Pre-multiply gravity constant with time step
+        var g_dt = Game.G * dt; //Pre-multiply gravity constant with time step
         
         //----------------------------------------//
         //LOCATE SUN (used as fallback trajectory target)
@@ -1374,7 +1375,7 @@ export class Player {
                     const DY = P_POS_Y[idx] - P_POS_Y[p];
                     const D_SQ = DX * DX + DY * DY;
                     const D = Math.sqrt(D_SQ);
-                    const ACCEL = G_DT * PLANET_MASS[idx] / D_SQ * 0.5; //Apply half to avoid double-counting
+                    const ACCEL = g_dt * PLANET_MASS[idx] / D_SQ * 0.5; //Apply half to avoid double-counting
                     P_VEL_X[p] += DX / D * ACCEL;
                     P_VEL_Y[p] += DY / D * ACCEL;
                 }
@@ -1385,8 +1386,8 @@ export class Player {
             //Updated planets now move to new positions (velocity → position)
             //----------------------------------------//
             for (var p = 0; p < PLANET_COUNT; p++) {
-                P_POS_X[p] += P_VEL_X[p] * DT;
-                P_POS_Y[p] += P_VEL_Y[p] * DT;
+                P_POS_X[p] += P_VEL_X[p] * dt;
+                P_POS_Y[p] += P_VEL_Y[p] * dt;
             }
 
             //----------------------------------------//
@@ -1407,7 +1408,7 @@ export class Player {
                     const DY = P_POS_Y[idx] - P_POS_Y[p];
                     const D_SQ = DX * DX + DY * DY;
                     const D = Math.sqrt(D_SQ);
-                    const ACCEL = G_DT * PLANET_MASS[idx] / D_SQ * 0.5;
+                    const ACCEL = g_dt * PLANET_MASS[idx] / D_SQ * 0.5;
                     P_VEL_X[p] += DX / D * ACCEL;
                     P_VEL_Y[p] += DY / D * ACCEL;
                 }
@@ -1423,7 +1424,7 @@ export class Player {
                 const DY = P_POS_Y[p] - posY;
                 const D_SQ = DX * DX + DY * DY;
                 const D = Math.sqrt(D_SQ);
-                const ACCEL = G_DT * PLANET_MASS[p] / D_SQ;
+                const ACCEL = g_dt * PLANET_MASS[p] / D_SQ;
                 velX += DX / D * ACCEL;
                 velY += DY / D * ACCEL;
                 
@@ -1450,8 +1451,8 @@ export class Player {
             //PHASE 3: INTEGRATE PLAYER POSITION
             //Player position updated based on current velocity
             //----------------------------------------//
-            posX += velX * DT;
-            posY += velY * DT;
+            posX += velX * dt;
+            posY += velY * dt;
             
             //----------------------------------------//
             //PHASE 4: APPLY ATMOSPHERIC DRAG
@@ -1496,8 +1497,8 @@ export class Player {
             const FRACT = (i % DRAG_CALC_INTERVAL) / DRAG_CALC_INTERVAL;
             const DRAG_X = lastDragX + (nextDragX - lastDragX) * FRACT;
             const DRAG_Y = lastDragY + (nextDragY - lastDragY) * FRACT;
-            velX += DRAG_X * DT;
-            velY += DRAG_Y * DT;
+            velX += DRAG_X * dt;
+            velY += DRAG_Y * dt;
             
             //========================================//
             //CACHE FOR RENDERING
@@ -1532,7 +1533,7 @@ export class Player {
                         y1: posY - PY + START_POS_Y[p],
                         x2: lastPosX - P_PREV_X[p] + START_POS_X[p],
                         y2: lastPosY - P_PREV_Y[p] + START_POS_Y[p],
-                        time: i * DT 
+                        time: i * dt 
                     });
                 } else {
                     IN_INTERCEPT[p] = 0; //Not in intercept zone
@@ -1574,7 +1575,7 @@ export class Player {
                     y1: posY - SUN_Y + START_POS_Y[startSunIdx],
                     x2: lastPosX - P_PREV_X[startSunIdx] + START_POS_X[startSunIdx],
                     y2: lastPosY - P_PREV_Y[startSunIdx] + START_POS_Y[startSunIdx],
-                    time: i * DT 
+                    time: i * dt 
                 });
             }
             
@@ -1615,6 +1616,15 @@ export class Player {
             }
             lastDrewIntercept = drewIntercept;
             drewIntercept = 0; //Reset for next iteration
+
+
+
+            //Increase dt so that we can predict further into the future with the same number
+            //of iterations.
+            //We will need to sacrifice some accuracy far into the future predictions though.
+            //const DT_INCREASE = Player.TRAJECTORY_DT_INCR;
+            //dt *= 1 + DT_INCREASE
+            //g_dt = Game.G * dt;
         }
         
         //Render final trajectory (if simulation completed without collision/reentry)
