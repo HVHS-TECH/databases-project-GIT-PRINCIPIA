@@ -44,6 +44,8 @@ export class GameSite {
     //init()
     static init() {
         console.log("GameSite::init()");
+        
+
         Exposure.expose(GameSite.signUp, "signUp");
         Exposure.expose(GameSite.logInDiffAccount, "logInDiffAccount");
         FB_Init.init();
@@ -57,8 +59,12 @@ export class GameSite {
         GameSite.htmlIusename = document.getElementById("i-name");
         GameSite.htmlOnameError = document.getElementById("o-name-error");
 
+        GameSite.htmlIloginWithDiffAccount.disabled = true;
+        GameSite.htmlOloginResult.innerHTML = "<i>Logging in...</i>"
 
-        GameSite.login();
+        GameSite.login(()=>{GameSite.htmlIloginWithDiffAccount.disabled = false;});
+
+        
     }
     //----------------------------------------------------------------------//
 
