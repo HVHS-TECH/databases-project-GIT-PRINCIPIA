@@ -115,7 +115,7 @@ export class FB_IO {
         console.log("readOrderedByValue(path, cb): path = '" + path + "'");
         
         (get(query(ref(FB_Data.db, path), orderByValue()))).then(cb);
-        
+        //USE ORDERBYCHILD
     }
     //------------------------------------------------------------------------------//
 }
