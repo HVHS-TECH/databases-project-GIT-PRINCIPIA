@@ -107,6 +107,7 @@ async function parseLoginData(result) {
     FB_User.uid = result.uid;
     FB_User.loggedIn = true;
     FB_User.email = result.email;
+    FB_User.username = await FB_IO.read(FB_Data.PATH_TO_USER_LIST + FB_User.uid + "/username");
 
 }
 //----------------------------------------------------------------------//
