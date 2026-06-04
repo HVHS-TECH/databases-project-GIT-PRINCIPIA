@@ -55,7 +55,7 @@ export class Player {
     static KEY_TIMEWARP = 8; //Maximum timewarp reached with keyboard input (e.g pressing space)
     static MAX_TIMEWARP_MULTIPLIER = 150; //Maximum timewarp multiplier for click-to-timewarp
     static TRAJECTORY_DT = 3; //How much time between each trajectory point (in scaledDeltaTime-s)
-    static TRAJECTORY_DT_INCR = 0.0008;
+    static TRAJECTORY_DT_INCR = 0.0005;
     static timewarpedTime = 0; //A time measure that includes timewarps
     static warpDuration = 0; //Duration of current warp in seconds (used for smoothing the timewarp transition)
     
@@ -985,7 +985,6 @@ export class Player {
 
         //----------------------------------------//
         if (closestDistSq < WARP_THRESH * WARP_THRESH && closestIdx !== -1) {
-            //time = 1250 * ((1 + Player.TRAJECTORY_DT_INCR) ^ NumIterations - 1)
             const TARGET_TIME = closestSegment.time;
             if (Input.mouseDown) {
                 Player.targetWarpTime = Player.timewarpedTime + TARGET_TIME;
@@ -1012,7 +1011,7 @@ export class Player {
                 const SEGMENTS = Player.trajectorySegments[i];
                 for (var j = 0; j < SEGMENTS.length; j++) {
                     const SEGMENT = SEGMENTS[j];
-                    if (SEGMENT.time + Player.timewarpedTime > Player.targetWarpTime && SEGMENT.time + Player.timewarpedTime - Player.targetWarpTime < Player.TRAJECTORY_DT * 2) {
+                    if (SEGMENT.time + Player.timewarpedTime > Player.targetWarpTime) {
                         const TARGET_POS = new Vec2(SEGMENT.x1, SEGMENT.y1);
                         const POS = Game.renderer.worldToCanvas(
                                         new Vec2(TARGET_POS.x, TARGET_POS.y), 
