@@ -111,12 +111,18 @@ export class FB_IO {
 
     //------------------------------------------------------------------------------//
     //readOrderedByValue()
-    static readOrderedByValue(path, childPath, cb) {
+    static readOrderedByValue(path, childPath, cb, isListener) {
         console.log("readOrderedByValue(path, cb): path = '" + path + "', child path = '" + childPath + "'");
         if (childPath == '') {
             (get(query(ref(FB_Data.db, path), orderByValue()))).then(cb); //Ordering by the literal value
         } else {
             (get(query(ref(FB_Data.db, path), orderByChild(childPath)))).then(cb); //Ordering by a value in the children
+        }
+
+        if (isListener) {
+            FB_IO.addWriteListener(path, ()=>{
+                FB_IO.readOrderedByValue(path, childPath, cb, false/*Use false because the listener is not deleted every time the callback is called - true would duplicate the listener*/);
+            });
         }
     }
     //------------------------------------------------------------------------------//

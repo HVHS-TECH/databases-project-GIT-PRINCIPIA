@@ -18,7 +18,7 @@ import { FB_IO } from "../data/firebase/fb_io.mjs";
 //GameSite class - handles registration and login, as well as unlocking games
 export class GameSite {
     static htmlAstroExplorerPlay = null;
-    static htmlOtherGamePlay = null;
+    static htmlGeoDashPlay = null;
     static htmlIage = null;
     static htmlOageError = null;
     static htmlIloginWithDiffAccount = null;
@@ -51,7 +51,7 @@ export class GameSite {
         FB_Init.init();
 
         GameSite.htmlAstroExplorerPlay = document.getElementById("astro-explorer");
-        GameSite.htmlOtherGamePlay = document.getElementById("other-game");
+        GameSite.htmlGeoDashPlay = document.getElementById("geo-dash");
         GameSite.htmlIage = document.getElementById("i-age");
         GameSite.htmlOageError = document.getElementById("o-age-error");
         GameSite.htmlIloginWithDiffAccount = document.getElementById("i-login-diff-account");
@@ -186,7 +186,7 @@ export class GameSite {
 
 
         GameSite.htmlAstroExplorerPlay.disabled = false;
-        GameSite.htmlOtherGamePlay.disabled = false;
+        GameSite.htmlGeoDashPlay.disabled = false;
     }
     //----------------------------------------------------------------------//
 

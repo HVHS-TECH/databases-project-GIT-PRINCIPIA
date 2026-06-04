@@ -18,6 +18,7 @@ export class HighScoreDisplay {
     //game: which game to get high scores from
     //CANT USE CLIENT SIDE SORT - MUST USE FIREBASE
     static async displayHighScores(game) {
+        console.log("HighScoreDisplay::displayHighScores(game): game = '" + game + "'");
         const ID = "o-" + game + "-high-score-list";
         
         var element = document.getElementById(ID);
@@ -27,9 +28,6 @@ export class HighScoreDisplay {
 
         FB_IO.readOrderedByValue('gameSite/' + game + "HighScores/", "score/", async (READ)=>{
 
-            //RESEARCH READORDEREDBYVALUE USING CHILDREN OF THE NODE AS THE SORTING VALUES
-            //USE THE ".onValue" VARIABLE?
-    
             element.innerHTML = "<tr><th>Name</th><th>Score</th></tr>"; //Start of the table
             
             READ.forEach(async (USER) => {
@@ -42,7 +40,7 @@ export class HighScoreDisplay {
             });
                 
             
-        });
+        }, true);
 
     }
     //----------------------------------------------------------------------//
@@ -51,10 +49,12 @@ export class HighScoreDisplay {
 //----------------------------------------------------------------------//
 
 FB_Init.init();
-const ASTRO_EXPLORER = document.getElementById('o-astroExplorer-high-score-list');
-const OTHER_GAME = document.getElementById('o-otherGame-high-score-list');
+
 
 addEventListener("load", ()=>{
+    console.log("HighScoreDisplay : page has loaded");
+    const ASTRO_EXPLORER = document.getElementById('o-astroExplorer-high-score-list');
+    const GEO_DASH = document.getElementById('o-geoDash-high-score-list');
     if (ASTRO_EXPLORER) {HighScoreDisplay.displayHighScores("astroExplorer");} 
-    if (OTHER_GAME) {HighScoreDisplay.displayHighScores("otherGame");}
+    if (GEO_DASH) {HighScoreDisplay.displayHighScores("geoDash");}
 });

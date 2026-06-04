@@ -20,7 +20,10 @@ export class FB_Login {
     static unsubscribeAuthStateChanged = null;
     static login(cb = ()=>{}) {
         console.log("login");
-        if (FB_Login.loggedIn()) return; //Already logged in
+        if (FB_Login.loggedIn()) {
+            cb();
+            return; //Already logged in
+        }
 
         console.log("not logged in");
         FB_Login.unsubscribeAuthStateChanged = onAuthStateChanged(getAuth(), (user) =>{FB_Login.authStateChangedCB(user, cb);});
