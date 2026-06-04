@@ -1355,7 +1355,9 @@ export class Player {
         //Integrates physics for future trajectory prediction
         //Each iteration advances simulation by DT seconds
         //========================================//
+        var elapsedTime = 0;
         for (var i = 0; i < DEPTH; i++) {
+            elapsedTime += dt;
             //----------------------------------------//
             //APPLY PLANETARY GRAVITY TO PLANETS
             //Each planet orbits its reference bodies (moons orbit planets, planets orbit sun)
@@ -1534,7 +1536,7 @@ export class Player {
                         y1: posY - PY + START_POS_Y[p],
                         x2: lastPosX - P_PREV_X[p] + START_POS_X[p],
                         y2: lastPosY - P_PREV_Y[p] + START_POS_Y[p],
-                        time: i * dt 
+                        time: elapsedTime
                     });
                 } else {
                     IN_INTERCEPT[p] = 0; //Not in intercept zone
@@ -1576,7 +1578,7 @@ export class Player {
                     y1: posY - SUN_Y + START_POS_Y[startSunIdx],
                     x2: lastPosX - P_PREV_X[startSunIdx] + START_POS_X[startSunIdx],
                     y2: lastPosY - P_PREV_Y[startSunIdx] + START_POS_Y[startSunIdx],
-                    time: i * dt 
+                    time: elapsedTime
                 });
             }
             
@@ -1623,9 +1625,9 @@ export class Player {
             //Increase dt so that we can predict further into the future with the same number
             //of iterations.
             //We will need to sacrifice some accuracy far into the future predictions though.
-            //const DT_INCREASE = Player.TRAJECTORY_DT_INCR;
-            //dt *= 1 + DT_INCREASE
-            //g_dt = Game.G * dt;
+            const DT_INCREASE = Player.TRAJECTORY_DT_INCR;
+            dt *= 1 + DT_INCREASE
+            g_dt = Game.G * dt;
         }
         
         //Render final trajectory (if simulation completed without collision/reentry)

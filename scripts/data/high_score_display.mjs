@@ -25,7 +25,7 @@ export class HighScoreDisplay {
         //Before we read, display a 'loading' message
         element.innerHTML = "<p>Loading high scores...</p>";
 
-        FB_IO.readOrderedByValue('gameSite/' + game + "HighScores/", async (READ)=>{
+        FB_IO.readOrderedByValue('gameSite/' + game + "HighScores/", "score/", async (READ)=>{
 
             //RESEARCH READORDEREDBYVALUE USING CHILDREN OF THE NODE AS THE SORTING VALUES
             //USE THE ".onValue" VARIABLE?
@@ -34,8 +34,9 @@ export class HighScoreDisplay {
             
             READ.forEach(async (USER) => {
                 //Read the name from the database using the UID
-                const NAME = (await FB_IO.read(FB_Data.PATH_TO_USER_LIST + USER.key + "/username"));
-                const SCORE = USER.val();
+                const VAL = USER.val();
+                const NAME = VAL.username;
+                const SCORE = VAL.score;
     
                 element.innerHTML += "<tr><td>" + NAME + ":</td><td>" + SCORE + " points</td></tr>";
             });

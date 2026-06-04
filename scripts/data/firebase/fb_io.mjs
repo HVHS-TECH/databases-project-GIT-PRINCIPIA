@@ -5,7 +5,7 @@
 //----------------------------------------------------------------------//
 
 import {initializeApp} from 'https://cdn.skypack.dev/@firebase/app';
-import {getDatabase, ref, get, set, onValue, orderByValue, query} from 'https://cdn.skypack.dev/@firebase/database';
+import {getDatabase, ref, get, set, onValue, orderByValue, orderByChild, query} from 'https://cdn.skypack.dev/@firebase/database';
 import { FB_Data } from './fb_data.mjs';
 
 //----------------------------------------------------------------------//
@@ -111,11 +111,13 @@ export class FB_IO {
 
     //------------------------------------------------------------------------------//
     //readOrderedByValue()
-    static async readOrderedByValue(path, cb) {
-        console.log("readOrderedByValue(path, cb): path = '" + path + "'");
-        
-        (get(query(ref(FB_Data.db, path), orderByValue()))).then(cb);
-        //USE ORDERBYCHILD
+    static readOrderedByValue(path, childPath, cb) {
+        console.log("readOrderedByValue(path, cb): path = '" + path + "', child path = '" + childPath + "'");
+        if (childPath == '') {
+            (get(query(ref(FB_Data.db, path), orderByValue()))).then(cb); //Ordering by the literal value
+        } else {
+            (get(query(ref(FB_Data.db, path), orderByChild(childPath)))).then(cb); //Ordering by a value in the children
+        }
     }
     //------------------------------------------------------------------------------//
 }
