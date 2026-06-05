@@ -7,7 +7,8 @@
 
 import { FB_IO } from "./firebase/fb_io.mjs";
 import { FB_Init } from "./firebase/fb_init.mjs";
-import { FB_Data } from "./firebase/fb_data.mjs";
+import { FB_Data, FB_User } from "./firebase/fb_data.mjs";
+import { FB_Login } from "./firebase/fb_login.mjs";
 
 
 //----------------------------------------------------------------------//
@@ -35,8 +36,11 @@ export class HighScoreDisplay {
                 const VAL = USER.val();
                 const NAME = VAL.username;
                 const SCORE = VAL.score;
-    
-                element.innerHTML += "<tr><td>" + NAME + ":</td><td>" + SCORE + " points</td></tr>";
+                console.log(USER.key);
+                console.log(USER.uid);
+                const IS_USERS_HIGH_SCORE = (USER.key == FB_User.uid);
+                const ID = IS_USERS_HIGH_SCORE ? " id='high-score-of-user'" : "";
+                element.innerHTML += "<tr><td" + ID + ">" + NAME + ":</td><td" + ID + ">" + SCORE + " points</td></tr>";
             });
                 
             
@@ -51,10 +55,13 @@ export class HighScoreDisplay {
 FB_Init.init();
 
 
-addEventListener("load", ()=>{
-    console.log("HighScoreDisplay : page has loaded");
-    const ASTRO_EXPLORER = document.getElementById('o-astroExplorer-high-score-list');
-    const GEO_DASH = document.getElementById('o-geoDash-high-score-list');
-    if (ASTRO_EXPLORER) {HighScoreDisplay.displayHighScores("astroExplorer");} 
-    if (GEO_DASH) {HighScoreDisplay.displayHighScores("geoDash");}
+addEventListener("load", async ()=>{
+    FB_Login.login(()=>{console.log("HighScoreDisplay : page has loaded");
+        const ASTRO_EXPLORER = document.getElementById('o-astroExplorer-high-score-list');
+        const GEO_DASH = document.getElementById('o-geoDash-high-score-list');
+
+        if (ASTRO_EXPLORER) {HighScoreDisplay.displayHighScores("astroExplorer");} 
+        if (GEO_DASH) {HighScoreDisplay.displayHighScores("geoDash");}
+    });
+    
 });
