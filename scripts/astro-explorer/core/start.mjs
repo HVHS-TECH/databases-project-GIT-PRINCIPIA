@@ -16,6 +16,12 @@ const ON_LOGIN = ()=> {
     Game.Start();
 }
 
+const INVALID_LOGIN = ()=> {
+    window.location.href = "../../index.html";
+}
+
 //Start the game once the user logs in
-FB_Login.login(ON_LOGIN);
+FB_Login.login(ON_LOGIN, INVALID_LOGIN);
+
+
 

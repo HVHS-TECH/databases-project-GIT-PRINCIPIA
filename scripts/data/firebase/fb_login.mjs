@@ -18,7 +18,7 @@ export class FB_Login {
     //----------------------------------------------------------------------//
     //login()
     static unsubscribeAuthStateChanged = null;
-    static login(cb = ()=>{}) {
+    static login(cb = ()=>{}, invalidLogin = ()=>{}) {
         console.log("login");
         if (FB_Login.loggedIn()) {
             cb();
@@ -26,10 +26,10 @@ export class FB_Login {
         }
 
         console.log("not logged in");
-        FB_Login.unsubscribeAuthStateChanged = onAuthStateChanged(getAuth(), (user) =>{FB_Login.authStateChangedCB(user, cb);});
+        FB_Login.unsubscribeAuthStateChanged = onAuthStateChanged(getAuth(), (user) =>{FB_Login.authStateChangedCB(user, cb, invalidLogin);});
         
     }
-    static async authStateChangedCB(user, cb) {
+    static async authStateChangedCB(user, cb, invalidLogin) {
         console.log("onAuthStateChanged()");
         FB_Login.unsubscribeAuthStateChanged();
         if (user) {
@@ -38,9 +38,31 @@ export class FB_Login {
             
         } else {
             console.log("new log in");
-            user = (await signInWithPopup(getAuth(), new GoogleAuthProvider())).user;
+            try {
+                console.log("opening popup");
+                user = (await signInWithPopup(getAuth(), new GoogleAuthProvider())).user;
+                console.log("popup ended");
+            }
+            catch (error) {
+                const CODE = error.code;
+                const MSG = error.message;
+
+                console.error("Error " + CODE + " in login::authStateChangedCB, message: \n'" + MSG + "'");
+
+                FB_Login.logout();
+                invalidLogin();
+                return;
+            }
+            
             console.log("Logged in");
             await parseLoginData(user);
+        }
+        if (!FB_Login.userExists(FB_User.uid)) {
+            //The login is invalid
+            console.log("Invalid login");
+            FB_Login.logout();
+            invalidLogin();
+            return;
         }
         console.log("login done");
         cb(); //Call the callback once the user is logged in

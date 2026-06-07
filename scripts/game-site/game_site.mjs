@@ -60,9 +60,9 @@ export class GameSite {
         GameSite.htmlOnameError = document.getElementById("o-name-error");
 
         GameSite.htmlIloginWithDiffAccount.disabled = true;
-        GameSite.htmlOloginResult.innerHTML = "<i>Logging in...</i>"
+        GameSite.htmlOloginResult.innerHTML = "<b><i>Logging in...</i></b>"
 
-        GameSite.login(()=>{GameSite.htmlIloginWithDiffAccount.disabled = false;});
+        GameSite.login(()=>{GameSite.htmlIloginWithDiffAccount.disabled = false;}, GameSite.handleLogin);
 
         
     }
@@ -70,8 +70,8 @@ export class GameSite {
 
     //----------------------------------------------------------------------//
     //login()
-    static async login(extraCB = ()=>{}) {
-        FB_Login.login(()=>{GameSite.handleLogin(); extraCB();});
+    static async login(extraCB = ()=>{}, invalidLogin = ()=>{}) {
+        FB_Login.login(()=>{GameSite.handleLogin(); extraCB();}, invalidLogin);
             
         
     }
@@ -99,7 +99,7 @@ export class GameSite {
         if (AGE <= GameSite.UNREASONABLE_SMALL_AGE) {
             //user has inputted an unreasonably small age
             console.warn("GameSite::validateAge() user has inputted an unreasonably small age.")
-            GameSite.htmlOageError.innerText = "Please input an age above " + GameSite.UNREASONABLE_SMALL_AGE + " and below " + GameSite.UNREASONABLE_LARGE_AGE;
+            GameSite.htmlOageError.innerHTML = "<b>Please input an age above " + GameSite.UNREASONABLE_SMALL_AGE + " and below " + GameSite.UNREASONABLE_LARGE_AGE + "</b>";
             await FB_Login.logout();
             return false;
         }
@@ -107,7 +107,7 @@ export class GameSite {
         if (AGE >= GameSite.UNREASONABLE_LARGE_AGE) {
             //user has inputted an unreasonably large age
             console.warn("GameSite::validateAge() user has inputted an unreasonably large age.")
-            GameSite.htmlOageError.innerText = "Please input an age above " + GameSite.UNREASONABLE_SMALL_AGE + " and below " + GameSite.UNREASONABLE_LARGE_AGE;
+            GameSite.htmlOageError.innerHTML = "<b>Please input an age above " + GameSite.UNREASONABLE_SMALL_AGE + " and below " + GameSite.UNREASONABLE_LARGE_AGE + "</b>";
             await FB_Login.logout();
             return false;
         }
@@ -115,7 +115,7 @@ export class GameSite {
         if (AGE < GameSite.MIN_AGE) {
             //user is too young to play
             console.warn("GameSite::validateAge() user is too young to play (age < " + GameSite.MIN_AGE + ")");
-            GameSite.htmlOageError.innerText = "You must be older than " + GameSite.MIN_AGE + " to play";
+            GameSite.htmlOageError.innerHTML = "<b>You must be older than " + GameSite.MIN_AGE + " to play</b>";
             await FB_Login.logout();
             return false;
         }
@@ -134,18 +134,18 @@ export class GameSite {
 
         if (NAME.length > GameSite.MAX_USERNAME_LENGTH) {
             console.warn("GameSite::validateName(): username is too long!");
-            GameSite.htmlOnameError.innerText = "Username must be within " + GameSite.MIN_USERNAME_LENGTH + " - " + GameSite.MAX_USERNAME_LENGTH + " characters";
+            GameSite.htmlOnameError.innerHTML = "<b>Username must be within " + GameSite.MIN_USERNAME_LENGTH + " - " + GameSite.MAX_USERNAME_LENGTH + " characters</b>";
             await FB_Login.logout();
             return false;
         }
 
         if (NAME.length < GameSite.MIN_USERNAME_LENGTH) {
             console.warn("GameSite::validateName(): username is too short!");
-            GameSite.htmlOnameError.innerText = "Username must be within " + GameSite.MIN_USERNAME_LENGTH + " - " + GameSite.MAX_USERNAME_LENGTH + " characters";
+            GameSite.htmlOnameError.innerHTML = "<b>Username must be within " + GameSite.MIN_USERNAME_LENGTH + " - " + GameSite.MAX_USERNAME_LENGTH + " characters</b>";
             await FB_Login.logout();
             return false;
         }
-        GameSite.htmlOnameError.innerText = "";
+        GameSite.htmlOnameError.innerHTML = "";
         FB_User.username = NAME;
         return true;
     }
@@ -155,15 +155,22 @@ export class GameSite {
     //handleLogin()
     static async handleLogin() {
         console.log("GameSite::handleLogin()");
+        GameSite.htmlIloginWithDiffAccount.disabled = false;
         if (!(await FB_Login.userExists(FB_User.uid))) {
             //User does not exist
             console.log("User does not exist! They will need to register an account");
-            GameSite.htmlOloginResult.innerText = "There is no user registered under this Google Account.\n (email: " + FB_User.email + ")\nPlease use the 'Sign Up' button to create an account under this Google Account"
+            if (FB_User.email != null) {
+
+                GameSite.htmlOloginResult.innerHTML = "<b>There is no user registered under this Google Account.\n (email: " + FB_User.email + ")\nPlease use the 'Sign Up' button to create an account under this Google Account</b>"
+            } else {
+                GameSite.htmlOloginResult.innerHTML = "<b>Please login using the button below</b>";
+
+            }
             await FB_Login.logout();
             return;
         }
         //Inform user of which account they are logged in with
-        GameSite.htmlOloginResult.innerText = "Logged in with email: '" + FB_User.email + "' \nUsername: '" + FB_User.username + "'";
+        GameSite.htmlOloginResult.innerHTML = "<b>Logged in with email: '" + FB_User.email + "' \nUsername: '" + FB_User.username + "'</b>";
         GameSite.unlockGames();
     }
     //----------------------------------------------------------------------//
@@ -181,7 +188,7 @@ export class GameSite {
         //----------------------------------------//
 
 
-        GameSite.htmlIloginWithDiffAccount.style.display = "flex";
+        
 
 
 
