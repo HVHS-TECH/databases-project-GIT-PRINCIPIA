@@ -39,8 +39,7 @@ export class FB_Login {
         } else {
             console.log("new log in");
             user = (await signInWithPopup(getAuth(), new GoogleAuthProvider())).user;
-            console.log("Logged in with ");
-            console.dir(user);
+            console.log("Logged in");
             await parseLoginData(user);
         }
         console.log("login done");

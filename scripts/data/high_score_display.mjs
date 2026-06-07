@@ -29,22 +29,22 @@ export class HighScoreDisplay {
 
         FB_IO.readOrderedByValue('gameSite/' + game + "HighScores/", "score/", async (READ)=>{
 
-            element.innerHTML = "<tr><th>Name</th><th>Score</th></tr>"; //Start of the table
-            
-            READ.forEach(async (USER) => {
-                //Read the name from the database using the UID
-                const VAL = USER.val();
-                const NAME = VAL.username;
-                const SCORE = VAL.score;
-                console.log(USER.key);
-                console.log(USER.uid);
-                const IS_USERS_HIGH_SCORE = (USER.key == FB_User.uid);
-                const ID = IS_USERS_HIGH_SCORE ? " id='high-score-of-user'" : "";
-                element.innerHTML += "<tr><td" + ID + ">" + NAME + ":</td><td" + ID + ">" + SCORE + " points</td></tr>";
-            });
+                element.innerHTML = "<tr><th>Name</th><th>Score</th></tr>"; //Start of the table
                 
-            
-        }, true);
+                READ.forEach(async (USER) => {
+                    //Read the name from the database using the UID
+                    const VAL = USER.val();
+                    const NAME = VAL.username;
+                    const SCORE = VAL.score;
+                    const IS_USERS_HIGH_SCORE = (USER.key == FB_User.uid); //The key is the id of the user owning the high score
+                    const ID = IS_USERS_HIGH_SCORE ? " id='high-score-highlighted'" : ""; //If it is the user's high score, add the correct id tag to highlight it
+                    element.innerHTML += "<tr><td" + ID + ">" + NAME + ":</td><td" + ID + ">" + SCORE + " points</td></tr>";
+                });
+                    
+                
+            },  
+            true //Add this function as a listener
+        );
 
     }
     //----------------------------------------------------------------------//
@@ -59,7 +59,8 @@ addEventListener("load", async ()=>{
     FB_Login.login(()=>{console.log("HighScoreDisplay : page has loaded");
         const ASTRO_EXPLORER = document.getElementById('o-astroExplorer-high-score-list');
         const GEO_DASH = document.getElementById('o-geoDash-high-score-list');
-
+        
+        //Display relevant high score tables
         if (ASTRO_EXPLORER) {HighScoreDisplay.displayHighScores("astroExplorer");} 
         if (GEO_DASH) {HighScoreDisplay.displayHighScores("geoDash");}
     });
