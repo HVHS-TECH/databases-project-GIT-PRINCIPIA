@@ -132,7 +132,7 @@ function draw() {
 function newObstacle(){
     var obstacle = new Sprite((SCREEN_WIDTH + 75),  SCREEN_HEIGHT - OBSTACLE_HEIGHT/2, OBSTACLE_WIDTH, OBSTACLE_HEIGHT, 'k');
     obstacle.color = color("yellow");
-    obstacle.vel.x = -30;
+    obstacle.vel.x = -10;
     
     obstacles.add(obstacle);
 }
