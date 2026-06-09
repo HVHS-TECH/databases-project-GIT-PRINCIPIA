@@ -170,7 +170,9 @@ export class GameSite {
             return;
         }
         //Inform user of which account they are logged in with
-        GameSite.htmlOloginResult.innerHTML = "<b>Logged in with email: '" + FB_User.email + "' \nUsername: '" + FB_User.username + "'</b>";
+        //                                                                                  <br> acts as \n for html
+        //                                                                                           \/
+        GameSite.htmlOloginResult.innerHTML = "<b>Logged in with email: '" + FB_User.email + "' </b><br><b>Username: '" + FB_User.username + "'</b>";
         GameSite.unlockGames();
     }
     //----------------------------------------------------------------------//

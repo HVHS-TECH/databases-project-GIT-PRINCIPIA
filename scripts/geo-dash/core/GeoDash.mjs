@@ -69,8 +69,8 @@ function checkHighScore(HIGH_SCORE) {
 
 
 
-const SCREEN_WIDTH = 400;
-const SCREEN_HEIGHT = 200;
+const SCREEN_WIDTH = 600;
+const SCREEN_HEIGHT = 300;
 const PLAYER_HEIGHT = 25;
 const PLAYER_WIDTH = 25;
 
@@ -92,7 +92,7 @@ var obstacles;
 /*******************************************************/
 function setup() {
     var cnv= new Canvas(SCREEN_WIDTH, SCREEN_HEIGHT);
-    
+    document.getElementById("q5Canvas0").classList.add("has-border");
     obstacles = new Group();
 
     var floor =  new Sprite(SCREEN_WIDTH/2,  SCREEN_HEIGHT, SCREEN_WIDTH, 4, 's');
@@ -105,7 +105,7 @@ function setup() {
                 screenSelector = "game"
                 resetGame();
             }else{
-                if(player.y > 184 ){// 184 - found from testing - floor level
+                if(player.y > 175 * 3/2 ){// 184 - found from testing - floor level
                     player.vel.y = -20;
                 }
             }
@@ -124,15 +124,15 @@ function draw() {
     }else if(screenSelector=="start"){
         startScreen();
     }else{
-        text("wrong screen - you shouldnt get here", 50, 50);
+        text("wrong screen - you shouldnt get here", 75, 75);
         console.log("wrong screen - you shouldnt get here")
     }
 }
 
 function newObstacle(){
-    var obstacle = new Sprite((SCREEN_WIDTH + 50),  SCREEN_HEIGHT - OBSTACLE_HEIGHT/2, OBSTACLE_WIDTH, OBSTACLE_HEIGHT, 'k');
+    var obstacle = new Sprite((SCREEN_WIDTH + 75),  SCREEN_HEIGHT - OBSTACLE_HEIGHT/2, OBSTACLE_WIDTH, OBSTACLE_HEIGHT, 'k');
     obstacle.color = color("yellow");
-    obstacle.vel.x = -10;
+    obstacle.vel.x = -30;
     
     obstacles.add(obstacle);
 }
@@ -140,17 +140,17 @@ function newObstacle(){
 // Main screen functions
 
 function startScreen(){
-    background("white");
+    background(3, 45, 38);
 
     allSprites.visible = false;
-    textSize(32);
-    fill(255);
+    textSize(48);
+    fill(255, 237, 163);
     stroke(0);
     strokeWeight(4);
-    text("Welcome to the game", 50, 50);
-    textSize(24);
-    text("Press any key to start", 50, 110);    textSize(24);
-    text("Press space to jump", 50, 150);
+    text("Welcome to the game", 75, 75);
+    textSize(36);
+    text("Press any key to start", 75, 165);    textSize(36);
+    text("Press space to jump", 75, 225);
 }
 
 function gameScreen(){
@@ -162,18 +162,18 @@ function gameScreen(){
         nextSpawn = frameCount + random(10,100);
     }
     textSize(32);
-    fill(255);
+    fill(255, 237, 163);
     stroke(0);
     strokeWeight(4);
     text(score, 50, 50);
 }
 
 function endScreen(){
-    background("white");
+    background(3, 45, 38);
 
     allSprites.visible = false;
     textSize(32);
-    fill(255);
+    fill(255, 237, 163);
     stroke(0);
     strokeWeight(4);
     text("You died! Too bad :-(", 50, 50);

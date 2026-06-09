@@ -154,6 +154,9 @@ input {
     margin: 0px;
     padding: 0px;
 }
+table {
+    width: 30vh;
+}
 
 td {
     color: rgb(203, 189, 131);
@@ -191,4 +194,18 @@ th {
     justify-content: flex-start;
 }
 
-
+#q5Canvas0 {
+    display: flex;
+}
+.q5Canvas {
+    display: flex;
+    position: relative;
+}
+.q5-normal {
+    display: flex;
+    width: 10vh;
+    height: 10vh;
+}
+.has-border {
+    border: solid black 5px;
+}
