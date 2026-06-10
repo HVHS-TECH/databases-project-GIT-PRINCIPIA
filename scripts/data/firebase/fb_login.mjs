@@ -18,21 +18,22 @@ export class FB_Login {
     //----------------------------------------------------------------------//
     //login()
     static unsubscribeAuthStateChanged = null;
-    static login(cb = ()=>{}, invalidLogin = ()=>{}) {
+    static async login(cb = ()=>{}, invalidLogin = ()=>{}) {
         console.log("login");
-        if (FB_Login.loggedIn()) {
+        const USER_EXISTS = await FB_Login.userExists(FB_User.uid);
+        if (FB_Login.loggedIn() && USER_EXISTS) {
             cb();
             return; //Already logged in
         }
 
         console.log("not logged in");
-        FB_Login.unsubscribeAuthStateChanged = onAuthStateChanged(getAuth(), (user) =>{FB_Login.authStateChangedCB(user, cb, invalidLogin);});
+        FB_Login.unsubscribeAuthStateChanged = onAuthStateChanged(getAuth(), (user) =>{FB_Login.authStateChangedCB(user, USER_EXISTS, cb, invalidLogin);});
         
     }
-    static async authStateChangedCB(user, cb, invalidLogin) {
+    static async authStateChangedCB(user, USER_EXISTS, cb, invalidLogin) {
         console.log("onAuthStateChanged()");
-        FB_Login.unsubscribeAuthStateChanged();
-        if (user) {
+        FB_Login.unsubscribeAuthStateChanged(); //Prevent multiple listeners from stacking
+        if (user && USER_EXISTS) {
             console.log("already logged in");
             await parseLoginData(user);
             
