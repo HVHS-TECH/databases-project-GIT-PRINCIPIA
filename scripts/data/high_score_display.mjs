@@ -38,7 +38,7 @@ export class HighScoreDisplay {
                     const SCORE = VAL.score;
                     const IS_USERS_HIGH_SCORE = (USER.key == FB_User.uid); //The key is the id of the user owning the high score
                     const ID = IS_USERS_HIGH_SCORE ? " id='high-score-highlighted'" : ""; //If it is the user's high score, add the correct id tag to highlight it
-                    element.innerHTML += "<tr><td" + ID + ">" + NAME + ":</td><td" + ID + ">" + SCORE + " points</td></tr>";
+                    element.innerHTML += "<tr><td" + ID + "><b>" + NAME + "</b>:</td><td" + ID + "><b>" + SCORE + " points</b></td></tr>";
                 });
                     
                 

@@ -1,6 +1,6 @@
 html {
     height: 100%;
-    /*background-color: rgb(3, 26, 45);*/
+    background-color: rgb(3, 26, 45);
 }
 body {
     background-color: rgb(3, 45, 38);
@@ -155,7 +155,7 @@ input {
     padding: 0px;
 }
 table {
-    width: 30vh;
+    width: 35vh;
 }
 
 td {
@@ -208,4 +208,10 @@ th {
 }
 .has-border {
     border: solid black 5px;
+}
+
+.thin {
+    width: 50%;
+    border-left: black solid 10px;
+    border-right: black solid 10px;
 }
