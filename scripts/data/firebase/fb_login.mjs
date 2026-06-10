@@ -18,12 +18,38 @@ export class FB_Login {
     //----------------------------------------------------------------------//
     //login()
     static unsubscribeAuthStateChanged = null;
+
     static async login(cb = ()=>{}, invalidLogin = ()=>{}) {
         console.log("login");
-        const USER_EXISTS = await FB_Login.userExists(FB_User.uid);
-        console.log("Curr user exists: " + USER_EXISTS);
+        var userExists;
+        if (FB_User.uid == null) {
+            //First time signing in to this page
+            console.log("UID = null");
+            console.log(getAuth());
+            if (getAuth().currentUser != null) {
+                //The user is logged in with a google account, check if it is in the database
+                console.log("LOGGED IN - checking with db");
+                userExists = await FB_Login.userExists(getAuth().currentUser.uid);
+            } else {
+                //The user really isn't signed in to the site 
+                //(but maybe they are to google - the onAuthStateChanged callback will check this)
+                console.log("Really not logged in");
+                userExists = false;
+            }
+        } else {
+            //Not the first time signing in
+            console.log("UID != null");
+
+            //Safe, because UID is cleared on logout.
+            //If it wasn't it might be possible to log in with a google account that does not exist in the db
+            //using the last login's uid
+
+            //but it's safe because the uid is clear on logout
+            userExists = await FB_Login.userExists(FB_User.uid); 
+        }
+        console.log("Curr user exists: " + userExists);
         console.log("UID: " + FB_User.uid);
-        if (FB_Login.loggedIn() && USER_EXISTS) {
+        if (FB_Login.loggedIn() && userExists) {
             //NEED TO HANDLE FB_User.uid being null on page load
             console.log("already logged in");
             cb();
@@ -31,17 +57,19 @@ export class FB_Login {
         }
 
         console.log("not logged in");
-        FB_Login.unsubscribeAuthStateChanged = onAuthStateChanged(getAuth(), (user) =>{FB_Login.authStateChangedCB(user, USER_EXISTS, cb, invalidLogin);});
+        FB_Login.unsubscribeAuthStateChanged = onAuthStateChanged(getAuth(), (user) =>{FB_Login.authStateChangedCB(user, cb, invalidLogin);});
         
     }
-    static async authStateChangedCB(user, USER_EXISTS, cb, invalidLogin) {
+    static async authStateChangedCB(user, cb, invalidLogin) {
         console.log("onAuthStateChanged()");
         FB_Login.unsubscribeAuthStateChanged(); //Prevent multiple listeners from stacking
-        if (user && USER_EXISTS) {
+        if (user && await FB_Login.userExists(user.uid)) {
+            //The user is now signed in automatically
             console.log("already logged in");
             await parseLoginData(user);
             
         } else {
+            //The user is really really not logged in
             console.log("new log in");
             try {
                 console.log("opening popup");
@@ -85,7 +113,7 @@ export class FB_Login {
         FB_User.email = null;
         FB_User.photoURL = null;
         FB_User.username = null;
-        FB_User.uid = null;
+        FB_User.uid = null; //VERY IMPORTANT for safety. See FB_Login.login
         await signOut(getAuth());
     }
     //----------------------------------------------------------------------//
@@ -110,13 +138,6 @@ export class FB_Login {
     }
     //----------------------------------------------------------------------//
     
-
-    //----------------------------------------------------------------------//
-    //getAuth()
-    static getAuth() {
-        return getAuth();
-    }
-    //----------------------------------------------------------------------//
 
 
     //----------------------------------------------------------------------//
