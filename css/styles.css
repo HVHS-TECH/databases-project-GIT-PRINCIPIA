@@ -1,5 +1,8 @@
 html {
     height: 100%;
+    /*background-color: rgb(3, 26, 45);*/
+}
+#dark-blue-html {
     background-color: rgb(3, 26, 45);
 }
 body {
