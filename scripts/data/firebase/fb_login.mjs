@@ -124,7 +124,8 @@ export class FB_Login {
     //does the user with the uid 'uid' exist?
     static async userExists(uid) {
         console.log("checking if user exists with uid " + uid);
-        return (await FB_IO.read('gameSite/users/' + uid)) != null;
+        //Read the username, because other data is not allowed to be read for privacy
+        return (await FB_IO.read('gameSite/users/' + uid + "/username")) != null;
     }
     //----------------------------------------------------------------------//
 

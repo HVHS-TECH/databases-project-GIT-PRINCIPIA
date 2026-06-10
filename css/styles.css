@@ -218,3 +218,33 @@ th {
     border-left: black solid 10px;
     border-right: black solid 10px;
 }
+
+
+.review {
+    display: flex;
+    width: 65vh;
+    background-color: rgb(7, 44, 74);
+    border: solid black 5px;
+}
+.review-username {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    align-items: center;
+    justify-items: center;
+    margin: 0px;
+    margin-left: 5vh;
+    height: 10vh;
+}
+
+.review-paragraph {
+    display: flex;
+}
+
+.profile-picture {
+    display: flex;
+    border-radius: 100%;
+    width: 10vh;
+    height: 10vh;
+    border: solid black 2px;
+}
