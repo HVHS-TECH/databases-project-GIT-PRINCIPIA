@@ -22,6 +22,7 @@ export class FB_Login {
         console.log("login");
         const USER_EXISTS = await FB_Login.userExists(FB_User.uid);
         if (FB_Login.loggedIn() && USER_EXISTS) {
+            console.log("already logged in");
             cb();
             return; //Already logged in
         }
@@ -57,6 +58,7 @@ export class FB_Login {
             
             console.log("Logged in");
             await parseLoginData(user);
+            
         }
         if (!FB_Login.userExists(FB_User.uid)) {
             //The login is invalid
@@ -75,6 +77,12 @@ export class FB_Login {
     static async logout() {
         console.log("logout");
         FB_User.loggedIn = false;
+        FB_User.accountName = null;
+        FB_User.age = null;
+        FB_User.email = null;
+        FB_User.photoURL = null;
+        FB_User.username = null;
+        FB_User.uid = null;
         await signOut(getAuth());
     }
     //----------------------------------------------------------------------//
@@ -133,7 +141,17 @@ async function parseLoginData(result) {
     FB_User.uid = result.uid;
     FB_User.loggedIn = true;
     FB_User.email = result.email;
-    FB_User.username = await FB_IO.read(FB_Data.PATH_TO_USER_LIST + FB_User.uid + "/username");
+    //Since FB_User.username will ONLY be not null when you are trying to sign up
+    if (FB_User.tempUsername == null) {
+        FB_User.username = await FB_IO.read(FB_Data.PATH_TO_USER_LIST + FB_User.uid + "/username");
+    } else {
+        FB_User.username = FB_User.tempUsername;
+    }
+    if (FB_User.tempAge == null) {
+        FB_User.age = await FB_IO.read(FB_Data.PATH_TO_USER_LIST + FB_User.uid + "/age");
+    } else {
+        FB_User.age = FB_User.tempAge;
+    }
     FB_User.photoURL = result.photoURL;
 }
 //----------------------------------------------------------------------//

@@ -71,8 +71,8 @@ export class GameSite {
     //----------------------------------------------------------------------//
     //login()
     static async login(extraCB = ()=>{}, invalidLogin = ()=>{}) {
-        FB_Login.login(()=>{GameSite.handleLogin(); extraCB();}, invalidLogin);
-            
+        FB_Login.login(()=>{extraCB(); GameSite.handleLogin(); }, invalidLogin);
+        
         
     }
     //----------------------------------------------------------------------//
@@ -81,10 +81,11 @@ export class GameSite {
     //----------------------------------------------------------------------//
     //signUp()
     static async signUp() {
+        FB_User.tempUsername = null;
+        FB_User.tempAge = null;
         if (await GameSite.validateAge() && await GameSite.validateName()) {
             
-            await GameSite.logInDiffAccount(GameSite.handleLogin);
-            FB_Login.createUser(); //Write details such as username and age
+            GameSite.logInDiffAccount(()=>{FB_Login.createUser();});
 
         }
     }
@@ -121,7 +122,7 @@ export class GameSite {
         }
         //----------------------------------------//
         GameSite.htmlOageError.innerText = "";
-        FB_User.age = AGE;
+        FB_User.tempAge = AGE;
         return true;
     }
     //----------------------------------------------------------------------//
@@ -146,7 +147,8 @@ export class GameSite {
             return false;
         }
         GameSite.htmlOnameError.innerHTML = "";
-        FB_User.username = NAME;
+        FB_User.tempUsername = NAME;
+        console.log("Name '" + NAME + "' is valid");
         return true;
     }
     //----------------------------------------------------------------------//
@@ -155,6 +157,8 @@ export class GameSite {
     //handleLogin()
     static async handleLogin() {
         console.log("GameSite::handleLogin()");
+        FB_User.tempUsername = null;
+        FB_User.tempAge = null;
         GameSite.htmlIloginWithDiffAccount.disabled = false;
         if (!(await FB_Login.userExists(FB_User.uid))) {
             //User does not exist

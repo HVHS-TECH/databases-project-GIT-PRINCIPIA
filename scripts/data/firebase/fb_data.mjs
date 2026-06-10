@@ -35,7 +35,9 @@ export class FB_User {
 
     static uid = null;
     static age = null;
+    static tempAge = null;
     static username = null;
+    static tempUsername = null;
     static email = null;
 
     static accountName = null;
