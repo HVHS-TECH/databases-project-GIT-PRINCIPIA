@@ -91,7 +91,10 @@ export class FB_Login {
             await parseLoginData(user);
             
         }
-        if (!await FB_Login.userExists(FB_User.uid)) {
+        //If FB_User.tempUsername != null, then the user is trying to sign up
+        //Obviously, the user does not have an account if they are trying to sign up
+        //But, we still want to let the through - they are CREATING an account
+        if (!await FB_Login.userExists(FB_User.uid) && FB_User.tempUsername == null) {
             //The login is invalid
             console.log("Invalid login");
             FB_Login.logout();
