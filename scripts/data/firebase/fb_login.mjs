@@ -21,7 +21,10 @@ export class FB_Login {
     static async login(cb = ()=>{}, invalidLogin = ()=>{}) {
         console.log("login");
         const USER_EXISTS = await FB_Login.userExists(FB_User.uid);
+        console.log("Curr user exists: " + USER_EXISTS);
+        console.log("UID: " + FB_User.uid);
         if (FB_Login.loggedIn() && USER_EXISTS) {
+            //NEED TO HANDLE FB_User.uid being null on page load
             console.log("already logged in");
             cb();
             return; //Already logged in
@@ -60,7 +63,7 @@ export class FB_Login {
             await parseLoginData(user);
             
         }
-        if (!FB_Login.userExists(FB_User.uid)) {
+        if (!await FB_Login.userExists(FB_User.uid)) {
             //The login is invalid
             console.log("Invalid login");
             FB_Login.logout();
