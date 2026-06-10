@@ -114,6 +114,7 @@ export class FB_Login {
         FB_IO.write(FB_Data.PATH_TO_USER_LIST + FB_User.uid + '/age/', '', FB_User.age);
         FB_IO.write(FB_Data.PATH_TO_USER_LIST + FB_User.uid + '/email/', '', FB_User.email);
         FB_IO.write(FB_Data.PATH_TO_USER_LIST + FB_User.uid + '/username', '', FB_User.username);
+        FB_IO.write(FB_Data.PATH_TO_USER_LIST + FB_User.uid + '/photoURL', '', FB_User.photoURL);
     
     }
     //----------------------------------------------------------------------//
@@ -132,6 +133,6 @@ async function parseLoginData(result) {
     FB_User.loggedIn = true;
     FB_User.email = result.email;
     FB_User.username = await FB_IO.read(FB_Data.PATH_TO_USER_LIST + FB_User.uid + "/username");
-
+    FB_User.photoURL = result.photoURL;
 }
 //----------------------------------------------------------------------//

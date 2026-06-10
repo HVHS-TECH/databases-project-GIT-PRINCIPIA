@@ -1,7 +1,7 @@
 //----------------------------------------------------------------------//
 //Written by Alex Curwen                                                //
 //high_score_manager.mjs                                                //
-//handles high score saving, loading and displaying                     //
+//handles high score saving, loading                                    //
 //----------------------------------------------------------------------//
 
 import { FB_IO } from "./firebase/fb_io.mjs";
