@@ -50,7 +50,6 @@ export class FB_Login {
         console.log("Curr user exists: " + userExists);
         console.log("UID: " + FB_User.uid);
         if (FB_Login.loggedIn() && userExists) {
-            //NEED TO HANDLE FB_User.uid being null on page load
             console.log("already logged in");
             cb();
             return; //Already logged in
