@@ -18,11 +18,10 @@ export class HighScoreDisplay {
     //displayHighScores(game)
     //game: which game to get high scores from
     //CANT USE CLIENT SIDE SORT - MUST USE FIREBASE
-    static async displayHighScores(game) {
+    static async displayHighScores(target, game) {
         console.log("HighScoreDisplay::displayHighScores(game): game = '" + game + "'");
-        const ID = "o-" + game + "-high-score-list";
         
-        var element = document.getElementById(ID);
+        var element = target;
 
         //Before we read, display a 'loading' message
         element.innerHTML = "<p>Loading high scores...</p>";
@@ -61,11 +60,16 @@ FB_Init.init();
 
 addEventListener("load", async ()=>{
     FB_Login.login(()=>{console.log("HighScoreDisplay : page has loaded");
-        const ASTRO_EXPLORER = document.getElementById('o-astroExplorer-high-score-list');
-        const GEO_DASH = document.getElementById('o-geoDash-high-score-list');
+
+        const TARGETS = document.getElementsByClassName('o-high-score-list');
+        for (var i = 0; i < TARGETS.length; i++) {
+            const TARGET = TARGETS[i];
+            const GAME_ID = TARGET.id;
+            HighScoreDisplay.displayHighScores(TARGET, GAME_ID);
+        }
         
         //Display relevant high score tables
-        if (ASTRO_EXPLORER) {HighScoreDisplay.displayHighScores("astroExplorer");} 
+        if (ASTRO_EXPLORER) {} 
         if (GEO_DASH) {HighScoreDisplay.displayHighScores("geoDash");}
     });
     
