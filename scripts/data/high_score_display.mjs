@@ -68,9 +68,6 @@ addEventListener("load", async ()=>{
             HighScoreDisplay.displayHighScores(TARGET, GAME_ID);
         }
         
-        //Display relevant high score tables
-        if (ASTRO_EXPLORER) {} 
-        if (GEO_DASH) {HighScoreDisplay.displayHighScores("geoDash");}
     });
     
 });
