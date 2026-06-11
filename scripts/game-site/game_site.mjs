@@ -48,7 +48,6 @@ export class GameSite {
 
         Exposure.expose(GameSite.signUp, "signUp");
         Exposure.expose(GameSite.logInDiffAccount, "logInDiffAccount");
-        FB_Init.init();
 
         GameSite.htmlPlayButtons.push(document.getElementById("astro-explorer"));
         GameSite.htmlPlayButtons.push(document.getElementById("geo-dash"));
@@ -63,7 +62,6 @@ export class GameSite {
         GameSite.htmlIloginWithDiffAccount.disabled = true;
         GameSite.htmlOloginResult.innerHTML = "<b><i>Logging in...</i></b>"
 
-        GameSite.login(()=>{GameSite.htmlIloginWithDiffAccount.disabled = false;}, GameSite.handleLogin);
 
         
     }
@@ -218,8 +216,9 @@ export class GameSite {
 }
 //END OF GameSite
 //----------------------------------------------------------------------//
-
-addEventListener("load", GameSite.init); //Initialize once the page loads (so that html elements are available)
+GameSite.init(); 
+window.onLogin = ()=>{GameSite.handleLogin(); GameSite.htmlIloginWithDiffAccount.disabled = false;};
+window.invalidLogin = ()=>{GameSite.handleLogin();}
 
 
 

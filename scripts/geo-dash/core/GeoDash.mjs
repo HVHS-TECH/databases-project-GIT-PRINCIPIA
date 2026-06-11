@@ -12,7 +12,6 @@ import { HighScoreManager } from "../../data/high_score_manager.mjs";
 import { FB_Login } from "../../data/firebase/fb_login.mjs";
 import { FB_Init } from "../../data/firebase/fb_init.mjs";
 
-FB_Init.init();
 window.setup = setup;
 window.draw = draw;
 
@@ -24,11 +23,7 @@ function endGame(_player, _obstacle){
     screenSelector = "end";
     player.remove();
     obstacles.removeAll();
-    // Put your database writes here:
-    FB_Login.login(()=>{
-
-        const HIGH_SCORE = HighScoreManager.getHighScore(checkHighScore, 'geoDash');
-    });
+    const HIGH_SCORE = HighScoreManager.getHighScore(checkHighScore, 'geoDash');
 }
 
 function checkHighScore(HIGH_SCORE) {
@@ -189,6 +184,8 @@ function resetGame(){
     player.collides(obstacles, endGame);
     score = 0;
 }
+
+
 
 /*******************************************************/
 //  END OF APP

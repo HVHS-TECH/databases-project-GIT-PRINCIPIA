@@ -4,11 +4,22 @@
         <title>Game Site - Reviews</title>
         <link rel="stylesheet" href="../../css/styles.css">
         <script type="module" src="../../scripts/data/review_display.mjs"></script>
+        <script type="module" src="../../scripts/data/review_write_dispatch.mjs"></script>
+        <script type="module" src="../../scripts/utility/requires_fb_and_login.mjs"></script>
     </head>
     <body class="span-screen-height center thin">
         <div class="column center span-height scroll-frame">
             <h1>Game Site</h1>
             <h3>Reviews</h3>
+            <div class="review-input center column">
+                <p><b>Please submit a review!</b></p>
+                <textarea id="i-review" rows="4" columns="50">
+                    asd
+                </textarea>
+                <p id="o-review-character-count"></p>
+                <p id="o-review-submit-result"></p>
+                <button onclick="submitReview()">Submit!</button>
+            </div>
             <div id="reviews-list-target">
 
             </div>

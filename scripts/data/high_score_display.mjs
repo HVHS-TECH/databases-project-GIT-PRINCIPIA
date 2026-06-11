@@ -55,19 +55,16 @@ export class HighScoreDisplay {
 //END OF HighScoreDisplay
 //----------------------------------------------------------------------//
 
-FB_Init.init();
 
 
-addEventListener("load", async ()=>{
-    FB_Login.login(()=>{console.log("HighScoreDisplay : page has loaded");
-
-        const TARGETS = document.getElementsByClassName('o-high-score-list');
-        for (var i = 0; i < TARGETS.length; i++) {
-            const TARGET = TARGETS[i];
-            const GAME_ID = TARGET.id;
-            HighScoreDisplay.displayHighScores(TARGET, GAME_ID);
-        }
-        
-    });
+window.onLogin = ()=>{console.log("HighScoreDisplay : page has loaded");
+    const TARGETS = document.getElementsByClassName('o-high-score-list');
+    for (var i = 0; i < TARGETS.length; i++) {
+        const TARGET = TARGETS[i];
+        const GAME_ID = TARGET.id;
+        HighScoreDisplay.displayHighScores(TARGET, GAME_ID);
+    }
     
-});
+}
+
+    

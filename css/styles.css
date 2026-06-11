@@ -112,7 +112,7 @@ input {
     height: 5vh;
     background-color: rgb(9, 80, 68);
     color: rgb(203, 189, 131);
-    font-size: 30px;
+    font-size: 3vh;
 }
 
 .center {
@@ -219,6 +219,13 @@ th {
     border-right: black solid 10px;
 }
 
+.review-input {
+    display: flex;
+    width: 65vh;
+    background-color: rgb(7, 44, 74);
+    border: solid black 5px;
+}
+
 
 .review {
     display: flex;
@@ -247,4 +254,15 @@ th {
     width: 10vh;
     height: 10vh;
     border: solid black 2px;
+}
+
+#i-review {
+    display: flex;
+    width: 70%;
+    height: 30vh;
+    resize: none;
+    background-color: rgb(9, 80, 68);
+    color: rgb(203, 189, 131);
+    font-size: 3vh
+
 }

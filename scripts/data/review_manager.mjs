@@ -22,6 +22,7 @@ export class Review {
 //----------------------------------------------------------------------//
 //ReviewManager class - handles saving a loading reviews
 export class ReviewManager {
+    static MAX_REVIEW_LENGTH = 1000;
     //----------------------------------------------------------------------//
     //readReviews()
     static async readReviews() {
@@ -44,17 +45,24 @@ export class ReviewManager {
 
     //----------------------------------------------------------------------//
     //submitReview(review)
+    //returns a result string:
+    //length - review is too long
+    //malicious - review may be malicious
+    //success - review write succeeded
     static submitReview(review) {
-        const MAX_REVIEW_LENGTH = 1000;
-        review = review.slice(0, MAX_REVIEW_LENGTH);
-        if (!Security.handleSecurity(review)) {
+        const IS_TOO_LONG = (review.length > ReviewManager.MAX_REVIEW_LENGTH);
+        if (IS_TOO_LONG) {
+            return "length";
+        }
+        if (Security.detectMaliciousText(review)) {
             //Review is insecure
             console.warn("Attempted to submit a malicious review!");
-            return; 
+            return "malicious"; 
         }
         FB_IO.write('gameSite/reviews/' + FB_User.uid + "/review", '', review);
         FB_IO.write('gameSite/reviews/' + FB_User.uid + "/username", '', FB_User.username);
         FB_IO.write('gameSite/reviews/' + FB_User.uid + "/photoURL", '', FB_User.photoURL);
+        return "success";
     }
     //----------------------------------------------------------------------//
     
