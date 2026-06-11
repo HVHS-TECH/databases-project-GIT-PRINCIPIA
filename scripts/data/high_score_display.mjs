@@ -30,7 +30,7 @@ export class HighScoreDisplay {
 
                 element.innerHTML = "<tr><th>Name</th><th>Score</th></tr>"; //Start of the table
                 
-                READ.forEach(async (USER) => {
+                READ.forEach((USER) => {
                     //Read the name from the database using the UID
                     const VAL = USER.val();
                     const NAME = VAL.username;
