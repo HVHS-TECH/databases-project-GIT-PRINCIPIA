@@ -47,6 +47,8 @@ export class ReviewWriteDispatch {
             case 'success':
                 //Review submit succeeded
                 ReviewWriteDispatch.htmlReviewSubmitResult.innerHTML = "<i>Successfully submitted review!</i>";
+                //Remove the message after a while
+                setTimeout(()=>{ReviewWriteDispatch.htmlReviewSubmitResult.innerHTML = "";}, 5000);
                 break;
             case 'length':
                 ReviewWriteDispatch.htmlReviewSubmitResult.innerHTML = "<i>Review is too long! Please shorten it to be at or below " + ReviewManager.MAX_REVIEW_LENGTH + " characters.</i>";
