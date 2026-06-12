@@ -191,10 +191,34 @@ th {
 }
 
 .scroll-frame {
-    overflow-y: auto;
+    overflow-y:scroll;
     overflow-x: hidden;
     height: 100%;
     justify-content: flex-start;
+
+    scrollbar-color: rgb(203,189,131) rgb(7, 44, 61);
+    scrollbar-width: thin;
+    
+}
+
+
+.reviews-container {
+    display: flex;
+    width: 90%;
+    height: 50vh;
+    justify-self: center;
+    align-self: center;
+    justify-content: center; 
+    align-items: center;
+}
+
+.bold-br {
+    width: 70%;
+    height: 2vh;
+    padding: 0px;
+    margin: 0px;
+    background-color: rgb(4, 22, 36);
+
 }
 
 #q5Canvas0 {
@@ -221,15 +245,19 @@ th {
 
 .review-input {
     display: flex;
-    width: 65vh;
+    width: 90%;
     background-color: rgb(7, 44, 74);
     border: solid black 5px;
+}
+
+.reviews-list {
+    width: 90%;
 }
 
 
 .review {
     display: flex;
-    width: 65vh;
+    width: 100%;
     background-color: rgb(7, 44, 74);
     border: solid black 5px;
 }
@@ -258,7 +286,7 @@ th {
 
 #i-review {
     display: flex;
-    width: 70%;
+    width: 90%;
     height: 30vh;
     resize: none;
     background-color: rgb(9, 80, 68);
