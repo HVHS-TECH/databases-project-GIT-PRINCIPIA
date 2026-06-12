@@ -29,9 +29,13 @@ export class HighScoreDisplay {
         FB_IO.readOrderedByValue('gameSite/' + game + "HighScores/", "score/", async (READ)=>{
 
                 element.innerHTML = "<tr><th>Name</th><th>Score</th></tr>"; //Start of the table
-                
+                var data = [];
                 READ.forEach((USER) => {
                     //Read the name from the database using the UID
+                    data.unshift(USER); //Add to the fron of the array, reversing the order (this is correct)
+                });
+                for (var i = 0; i < data.length; i++) {
+                    const USER = data[i];
                     const VAL = USER.val();
                     const NAME = VAL.username;
                     const SCORE = VAL.score;
@@ -42,7 +46,7 @@ export class HighScoreDisplay {
                     } else {
                         element.innerHTML += "<tr><td>" + NAME + "</td><td>" + SCORE + " points</td></tr>";
                     }
-                });
+                }
                     
                 
             },  
