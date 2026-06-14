@@ -217,7 +217,7 @@ export class GameSite {
 //END OF GameSite
 //----------------------------------------------------------------------//
 GameSite.init(); 
-window.onLogin = ()=>{GameSite.handleLogin(); GameSite.htmlIloginWithDiffAccount.disabled = false;};
+window.onLogin = ()=>{GameSite.handleLogin();};
 window.invalidLogin = ()=>{GameSite.handleLogin();}
 
 
