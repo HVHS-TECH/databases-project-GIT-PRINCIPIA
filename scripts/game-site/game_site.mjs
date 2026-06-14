@@ -173,7 +173,7 @@ export class GameSite {
             return;
         }
         //Inform user of which account they are logged in with
-        //                                                                                  <br> acts as \n for html
+        //                                                            <br> acts as \n for html, since we are setting innerHTML not innerText
         //                                                                                           \/
         GameSite.htmlOloginResult.innerHTML = "<b>Logged in with email: '" + FB_User.email + "' </b><br><b>Username: '" + FB_User.username + "'</b>";
         GameSite.unlockGames();
