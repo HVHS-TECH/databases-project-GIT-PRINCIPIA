@@ -47,7 +47,7 @@ export class GameSite {
         
 
         Exposure.expose(GameSite.signUp, "signUp");
-        Exposure.expose(GameSite.logInDiffAccount, "logInDiffAccount");
+        Exposure.expose(()=>{GameSite.logInDiffAccount(()=>{}, GameSite.handleLogin);}, "logInDiffAccount");
 
         GameSite.htmlPlayButtons.push(document.getElementById("astro-explorer"));
         GameSite.htmlPlayButtons.push(document.getElementById("geo-dash"));
@@ -162,6 +162,7 @@ export class GameSite {
         if (!(await FB_Login.userExists(FB_User.uid))) {
             //User does not exist
             console.log("User does not exist! They will need to register an account");
+            GameSite.lockGames();
             if (FB_User.email != null) {
 
                 GameSite.htmlOloginResult.innerHTML = "<b>There is no user registered under this Google Account.\n (email: " + FB_User.email + ")\nPlease use the 'Sign Up' button to create an account under this Google Account</b>"
@@ -193,10 +194,6 @@ export class GameSite {
         //----------------------------------------//
 
 
-        
-
-
-
         for (var i = 0; i < GameSite.htmlPlayButtons.length; i++) {
             GameSite.htmlPlayButtons[i].disabled = false;
         }
@@ -204,13 +201,24 @@ export class GameSite {
     }
     //----------------------------------------------------------------------//
 
+    //----------------------------------------------------------------------//
+    //lockGames()
+    static lockGames() {
+        console.log("GameSite::lockGames()");
+        for (var i = 0; i < GameSite.htmlPlayButtons.length; i++) {
+            GameSite.htmlPlayButtons[i].disabled = true;
+        }
+        GameSite.htmlReviewsRedirect.disabled = true;
+    }
+    //----------------------------------------------------------------------//
+
 
     //----------------------------------------------------------------------//
     //logInDiffAccount()
     //Log in with a different account
-    static async logInDiffAccount(cb = ()=>{}) {
+    static async logInDiffAccount(cb = ()=>{}, invalidLogin = ()=>{}) {
         await FB_Login.logout();
-        GameSite.login(cb);
+        GameSite.login(cb, invalidLogin);
     }
     //----------------------------------------------------------------------//
 }
