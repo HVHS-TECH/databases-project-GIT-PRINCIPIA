@@ -56,7 +56,7 @@ export class FB_Login {
         }
 
         console.log("not logged in");
-        FB_Login.unsubscribeAuthStateChanged = onAuthStateChanged(getAuth(), (user) =>{FB_Login.authStateChangedCB(user, cb, invalidLogin);});
+        FB_Login.unsubscribeAuthStateChanged = FB_Login.addAuthStateChangedCB((user) =>{FB_Login.authStateChangedCB(user, cb, invalidLogin);});
         
     }
     static async authStateChangedCB(user, cb, invalidLogin) {
@@ -102,6 +102,14 @@ export class FB_Login {
         }
         console.log("login done");
         cb(); //Call the callback once the user is logged in
+    }
+    //----------------------------------------------------------------------//
+
+    //----------------------------------------------------------------------//
+    //addAuthStateChangedCB(cb, invalidLogin)
+    //optionally returns a callback to unsubscribe cb
+    static addAuthStateChangedCB(cb, ) {
+        return onAuthStateChanged(getAuth(), (user) =>{cb(user);});
     }
     //----------------------------------------------------------------------//
 

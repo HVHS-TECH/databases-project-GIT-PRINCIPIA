@@ -61,7 +61,7 @@ export class HighScoreDisplay {
 
 
 
-window.onLogin = ()=>{console.log("HighScoreDisplay : page has loaded");
+window.onLogin.subscribe(()=>{console.log("HighScoreDisplay : page has loaded");
     const TARGETS = document.getElementsByClassName('o-high-score-list');
     for (var i = 0; i < TARGETS.length; i++) {
         const TARGET = TARGETS[i];
@@ -69,6 +69,6 @@ window.onLogin = ()=>{console.log("HighScoreDisplay : page has loaded");
         HighScoreDisplay.displayHighScores(TARGET, GAME_ID);
     }
     
-}
+});
 
     

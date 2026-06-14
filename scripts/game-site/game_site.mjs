@@ -1,6 +1,4 @@
 //----------------------------------------------------------------------//
-//                         ---Astro Explorer---                         //
-//----------------------------------------------------------------------//
 //Written by Alex Curwen                                                //
 //Game_site                                                             //
 //Handles game site functions and logic                                 //
@@ -12,7 +10,7 @@ import { FB_User } from "../data/firebase/fb_data.mjs";
 import { FB_Init } from "../data/firebase/fb_init.mjs";
 import { Game } from "../astro-explorer/core/game.mjs";
 import { FB_IO } from "../data/firebase/fb_io.mjs";
-
+import { CustomEvent } from "../utility/event.mjs";
 
 //----------------------------------------------------------------------//
 //GameSite class - handles registration and login, as well as unlocking games
@@ -225,8 +223,8 @@ export class GameSite {
 //END OF GameSite
 //----------------------------------------------------------------------//
 GameSite.init(); 
-window.onLogin = ()=>{GameSite.handleLogin();};
-window.invalidLogin = ()=>{GameSite.handleLogin();}
+window.onlogin.subscribe(()=>{GameSite.handleLogin();});
+window.invalidLogin.subscribe(()=>{GameSite.handleLogin();});
 
 
 
