@@ -13,7 +13,7 @@ export class CustomEvent {
 
     //----------------------------------------------------------------------//
     //subscribe(cb)
-    static subscribe(cb) {
+    subscribe(cb) {
         this.callbacks.push(cb);
         return cb;
     }
@@ -22,7 +22,7 @@ export class CustomEvent {
     //----------------------------------------------------------------------//
     //unsubscribe(id)
     //Where id is returned from 'subscribe' - and is actually the cb!
-    static unsubscribe(id) {
+    unsubscribe(id) {
         this.callbacks[id] = ()=>{}; //I don't really want to remove it from the array... this works fine
     }
     //----------------------------------------------------------------------//
@@ -30,7 +30,7 @@ export class CustomEvent {
     //----------------------------------------------------------------------//
     //_()
     //runs the event
-    static _() {
+    _() {
         for (var i = 0; i < this.callbacks.length; i++) {
             this.callbacks[i]();
         }
