@@ -19,5 +19,5 @@ addEventListener('load', ()=>{
     console.log(window.onlogin);
     console.log(window.invalidLogin);
     FB_Init.init();
-    FB_Login.login(window.onlogin._, window.invalidLogin._);
+    FB_Login.login(window.onlogin.run, window.invalidLogin.run);
 });
