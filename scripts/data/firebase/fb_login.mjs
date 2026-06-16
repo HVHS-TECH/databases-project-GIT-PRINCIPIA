@@ -9,6 +9,7 @@ import {getDatabase, ref, set} from 'https://cdn.skypack.dev/@firebase/database'
 import {getAuth, onAuthStateChanged, GoogleAuthProvider, signInWithPopup, signOut, setPersistence, browserSessionPersistence} from 'https://cdn.skypack.dev/@firebase/auth';
 import { FB_Data, FB_User } from './fb_data.mjs';
 import { FB_IO } from './fb_io.mjs';
+import { CustomEvent } from '../../utility/event.mjs';
 
 //----------------------------------------------------------------------//
 //FB_Login class - handles login logic
@@ -19,7 +20,7 @@ export class FB_Login {
     //login()
     static unsubscribeAuthStateChanged = null;
 
-    static async login(cb = ()=>{}, invalidLogin = ()=>{}) {
+    static async login(cb = CustomEvent.empty, invalidLogin = CustomEvent.empty) {
         console.log("login");
         var userExists;
         if (FB_User.uid == null) {
@@ -51,7 +52,7 @@ export class FB_Login {
         console.log("UID: " + FB_User.uid);
         if (FB_Login.loggedIn() && userExists) {
             console.log("already logged in");
-            cb();
+            cb.run();
             return; //Already logged in
         }
 
@@ -82,7 +83,7 @@ export class FB_Login {
                 console.error("Error " + CODE + " in login::authStateChangedCB, message: \n'" + MSG + "'");
 
                 FB_Login.logout();
-                invalidLogin();
+                invalidLogin.run();
                 return;
             }
             
@@ -101,7 +102,7 @@ export class FB_Login {
             return;
         }
         console.log("login done");
-        cb(); //Call the callback once the user is logged in
+        cb.run(); //Call the callback once the user is logged in
     }
     //----------------------------------------------------------------------//
 

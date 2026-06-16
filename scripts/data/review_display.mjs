@@ -97,9 +97,7 @@ export class ReviewDisplay {
 //END OF ReviewDisplay
 //----------------------------------------------------------------------//
 
-
-addEventListener('load', ()=>{
-    FB_Init.init();
+window.fb_onlogin.subscribe(()=>{
     const TARGET = document.getElementById('reviews-list-target');
     FB_IO.addWriteListener('gameSite/reviews/', ()=>{ReviewDisplay.displayReviews(TARGET);});
 });

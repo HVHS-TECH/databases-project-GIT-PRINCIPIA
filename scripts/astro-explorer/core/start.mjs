@@ -8,17 +8,16 @@
 import {Game} from './game.mjs';
 import { FB_Init } from '../../data/firebase/fb_init.mjs';
 import { FB_Login } from '../../data/firebase/fb_login.mjs';
+import { CustomEvent } from '../../utility/event.mjs';
 
 
-const ON_LOGIN = ()=> {
-    Game.Start();
-}
-window.fb_onlogin = ON_LOGIN;
+const ON_LOGIN = Game.Start;
+window.fb_onlogin.subscribe(ON_LOGIN);
 
 const INVALID_LOGIN = ()=> {
     window.location.href = "../../index.html";
-}
-window.fb_invalidLogin = INVALID_LOGIN;
+};
+window.fb_invalidLogin.subscribe(INVALID_LOGIN);
 
 
 

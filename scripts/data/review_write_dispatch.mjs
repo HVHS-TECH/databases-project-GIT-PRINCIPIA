@@ -65,7 +65,7 @@ export class ReviewWriteDispatch {
 //END OF ReviewWriteDispatch
 //----------------------------------------------------------------------//
 
-window.onLogin.subscribe(()=>{
+window.fb_onlogin.subscribe(()=>{
     ReviewWriteDispatch.init();
     Exposure.expose(ReviewWriteDispatch.submit, 'submitReview'); //Expose submit function to the window
 });

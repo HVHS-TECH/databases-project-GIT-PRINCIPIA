@@ -67,8 +67,8 @@ export class GameSite {
 
     //----------------------------------------------------------------------//
     //login()
-    static async login(extraCB = ()=>{}, invalidLogin = ()=>{}) {
-        FB_Login.login(()=>{extraCB(); GameSite.handleLogin(); }, invalidLogin);
+    static async login(extraCB = CustomEvent.empty, invalidLogin = CustomEvent.empty) {
+        FB_Login.login(new CustomEvent(extraCB.run, GameSite.handleLogin), invalidLogin);
         
         
     }
@@ -82,7 +82,7 @@ export class GameSite {
         FB_User.tempAge = null;
         if (await GameSite.validateAge() && await GameSite.validateName()) {
             
-            GameSite.logInDiffAccount(()=>{FB_Login.createUser();});
+            GameSite.logInDiffAccount(new CustomEvent(FB_Login.createUser));
 
         }
     }
@@ -214,7 +214,7 @@ export class GameSite {
     //----------------------------------------------------------------------//
     //logInDiffAccount()
     //Log in with a different account
-    static async logInDiffAccount(cb = ()=>{}, invalidLogin = ()=>{}) {
+    static async logInDiffAccount(cb = CustomEvent.empty, invalidLogin = CustomEvent.empty) {
         await FB_Login.logout();
         GameSite.login(cb, invalidLogin);
     }

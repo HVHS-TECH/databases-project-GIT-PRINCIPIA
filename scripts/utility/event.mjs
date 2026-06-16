@@ -7,8 +7,9 @@
 //----------------------------------------------------------------------//
 //Event class - handles multiple callbacks per event
 export class CustomEvent {
-    constructor(cbs = []) {
-        this.callbacks = cbs;
+    static empty = new CustomEvent();
+    constructor(...callbacks) {
+        this.callbacks = callbacks;
     }
 
     //----------------------------------------------------------------------//
@@ -32,7 +33,7 @@ export class CustomEvent {
     //runs the event
     run() {
         for (var i = 0; i < this.callbacks.length; i++) {
-            this.callbacks[i]();
+            (this.callbacks[i])();
         }
     }
     //----------------------------------------------------------------------//
@@ -40,3 +41,5 @@ export class CustomEvent {
 }
 //END OF Event
 //----------------------------------------------------------------------//
+
+
