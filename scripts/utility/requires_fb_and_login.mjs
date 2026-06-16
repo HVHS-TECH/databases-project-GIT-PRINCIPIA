@@ -11,13 +11,13 @@
 import { FB_Init } from "../data/firebase/fb_init.mjs";
 import { FB_Login } from "../data/firebase/fb_login.mjs";
 import { CustomEvent } from "./event.mjs";
-window.onlogin = new CustomEvent();
-window.invalidLogin = new CustomEvent();
+window.fb_onlogin = new CustomEvent();
+window.fb_invalidLogin = new CustomEvent();
 console.log("added events");
 addEventListener('load', ()=>{
     console.log("load");
-    console.log(window.onlogin);
-    console.log(window.invalidLogin);
+    console.log(window.fb_onlogin);
+    console.log(window.fb_invalidLogin);
     FB_Init.init();
-    FB_Login.login(window.onlogin.run, window.invalidLogin.run);
+    FB_Login.login(window.fb_onlogin.run, window.fb_invalidLogin.run);
 });

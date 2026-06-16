@@ -52,4 +52,4 @@ export class BlockContent {
 
 
 
-window.onlogin.subscribe(BlockContent.init);
+window.fb_onlogin.subscribe(BlockContent.init);

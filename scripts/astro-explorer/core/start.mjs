@@ -13,12 +13,12 @@ import { FB_Login } from '../../data/firebase/fb_login.mjs';
 const ON_LOGIN = ()=> {
     Game.Start();
 }
-window.onLogin = ON_LOGIN;
+window.fb_onlogin = ON_LOGIN;
 
 const INVALID_LOGIN = ()=> {
     window.location.href = "../../index.html";
 }
-window.invalidLogin = INVALID_LOGIN;
+window.fb_invalidLogin = INVALID_LOGIN;
 
 
 

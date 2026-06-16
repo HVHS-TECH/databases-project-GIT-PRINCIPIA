@@ -223,8 +223,8 @@ export class GameSite {
 //END OF GameSite
 //----------------------------------------------------------------------//
 GameSite.init(); 
-window.onlogin.subscribe(()=>{GameSite.handleLogin();});
-window.invalidLogin.subscribe(()=>{GameSite.handleLogin();});
+window.fb_onlogin.subscribe(()=>{GameSite.handleLogin();});
+window.fb_invalidLogin.subscribe(()=>{GameSite.handleLogin();});
 
 
 
