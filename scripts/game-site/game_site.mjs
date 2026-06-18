@@ -68,7 +68,7 @@ export class GameSite {
     //----------------------------------------------------------------------//
     //login()
     static async login(extraCB = CustomEvent.empty, invalidLogin = CustomEvent.empty) {
-        FB_Login.login(new CustomEvent(extraCB.run, GameSite.handleLogin), invalidLogin);
+        FB_Login.login(new CustomEvent(()=>{extraCB.run();}, GameSite.handleLogin), invalidLogin);
         
         
     }
@@ -171,7 +171,7 @@ export class GameSite {
             GameSite.lockGames();
             if (FB_User.email != null) {
 
-                GameSite.htmlOloginResult.innerHTML = "<b>There is no user registered under this Google Account.\n (email: " + FB_User.email + ")\nPlease use the 'Sign Up' button to create an account under this Google Account</b>"
+                GameSite.htmlOloginResult.innerHTML = "<b>There is no user registered under this Google Account.<br> (email: " + FB_User.email + ")<br>Please use the 'Sign Up' button to create an account under this Google Account</b>"
             } else {
                 GameSite.htmlOloginResult.innerHTML = "<b>Please login using the button below</b>";
 

@@ -93,7 +93,7 @@ export class FB_Login {
         }
         //If FB_User.tempUsername != null, then the user is trying to sign up
         //Obviously, the user does not have an account if they are trying to sign up
-        //But, we still want to let them through - they are CREATING an account
+        //But, we still want to let them through if there is a tempUsername setup - they are CREATING an account
         if (!await FB_Login.userExists(FB_User.uid) && FB_User.tempUsername == null) {
             //The login is invalid
             console.log("Invalid login");
@@ -102,6 +102,7 @@ export class FB_Login {
             return;
         }
         console.log("login done");
+        console.log(cb);
         cb.run(); //Call the callback once the user is logged in
     }
     //----------------------------------------------------------------------//
@@ -121,7 +122,7 @@ export class FB_Login {
         FB_User.loggedIn = false;
         FB_User.accountName = null;
         FB_User.age = null;
-        FB_User.email = null;
+        //FB_User.email = null; <- don't remove email - it is used to check if the user tried to login (e.g didn't close the popup) in gamesite.mjs's handlelogin()
         FB_User.photoURL = null;
         FB_User.username = null;
         FB_User.uid = null; //VERY IMPORTANT for safety. See FB_Login.login

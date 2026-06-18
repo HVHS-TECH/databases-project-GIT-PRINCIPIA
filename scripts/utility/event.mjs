@@ -7,7 +7,7 @@
 //----------------------------------------------------------------------//
 //Event class - handles multiple callbacks per event
 export class CustomEvent {
-    static empty = new CustomEvent();
+    static empty = new CustomEvent(()=>{});
     constructor(...callbacks) {
         this.callbacks = callbacks;
     }

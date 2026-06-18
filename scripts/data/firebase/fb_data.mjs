@@ -43,6 +43,7 @@ export class FB_User {
     static accountName = null;
 
     static photoURL = null;
+
 }
 //END OF FB_User
 //----------------------------------------------------------------------//
