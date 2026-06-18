@@ -98,7 +98,7 @@ export class FB_Login {
             //The login is invalid
             console.log("Invalid login");
             FB_Login.logout();
-            invalidLogin();
+            invalidLogin.run();
             return;
         }
         console.log("login done");
