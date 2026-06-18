@@ -14,19 +14,22 @@ export class Security {
     static detectMaliciousText(txt) {
         if (typeof txt != 'string') return false;
         const LOWERCASE = txt.toLocaleLowerCase();
-        const MIGHT_HAVE_TAG = LOWERCASE.indexOf('<') != -1 && LOWERCASE.indexOf('>') != -1;
+        const INDEXOF_LESSTHAN = LOWERCASE.indexOf('<');
+        const INDEXOF_MORETHAN = LOWERCASE.indexOf('>');
+
+        const MIGHT_HAVE_TAG = (INDEXOF_LESSTHAN != -1);
 
         //run when loaded
-        const MIGHT_HAVE_ONERROR = LOWERCASE.indexOf('onerror') != -1;
-        const MIGHT_HAVE_ONLOAD = LOWERCASE.indexOf('onload') != -1;
+        const MIGHT_HAVE_ONERROR = LOWERCASE.indexOf('onerror') != -1 && (LOWERCASE.indexOf('onerror') > INDEXOF_LESSTHAN);
+        const MIGHT_HAVE_ONLOAD = LOWERCASE.indexOf('onload') != -1 && (LOWERCASE.indexOf('onload') > INDEXOF_LESSTHAN);
 
         //e.g buttons
-        const MIGHT_HAVE_ONCLICK = LOWERCASE.indexOf('onclick') != -1;
+        const MIGHT_HAVE_ONCLICK = LOWERCASE.indexOf('onclick') != -1 && (LOWERCASE.indexOf('onclick') > INDEXOF_LESSTHAN);
 
         //inputs
-        const MIGHT_HAVE_ONCHANGE = LOWERCASE.indexOf('onchange') != -1;
-        const MIGHT_HAVE_ONINPUT = LOWERCASE.indexOf('oninput') != -1;
-        const MIGHT_HAVE_ONSUBMIT = LOWERCASE.indexOf('onsubmit') != -1;
+        const MIGHT_HAVE_ONCHANGE = LOWERCASE.indexOf('onchange') != -1 && (LOWERCASE.indexOf('onchange') > INDEXOF_LESSTHAN);
+        const MIGHT_HAVE_ONINPUT = LOWERCASE.indexOf('oninput') != -1 && (LOWERCASE.indexOf('oninput') > INDEXOF_LESSTHAN);
+        const MIGHT_HAVE_ONSUBMIT = LOWERCASE.indexOf('onsubmit') != -1 && (LOWERCASE.indexOf('onsubmit') > INDEXOF_LESSTHAN);
 
         //script
         const MIGHT_HAVE_SCRIPT = LOWERCASE.indexOf('script') != -1;
@@ -41,7 +44,7 @@ export class Security {
         MIGHT_HAVE_ONSUBMIT || 
         MIGHT_HAVE_SCRIPT;
 
-        const MIGHT_HAVE_MALICIOUS_TAG = MIGHT_HAVE_MALICIOUS_TAG_TEXT && MIGHT_HAVE_TAG;
+        const MIGHT_HAVE_MALICIOUS_TAG = MIGHT_HAVE_MALICIOUS_TAG_TEXT && (MIGHT_HAVE_TAG);
 
         if (MIGHT_HAVE_MALICIOUS_TAG) {
             return true;
