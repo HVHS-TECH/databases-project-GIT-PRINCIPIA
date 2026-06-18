@@ -93,10 +93,18 @@ export class GameSite {
     //validateAge()
     static async validateAge() {
         //----------------------------------------//
-        const AGE = GameSite.htmlIage.value;
+        const VAL = GameSite.htmlIage.value;
+        if (typeof VAL == "number") {
+            //Not a number
+            console.warn("GameSite::validateAge() user has inputted a non-number age.");
+            GameSite.htmlOageError.innerHTML = "<b>Please input a number</b>";
+            await FB_Login.logout();
+            return false;
+        }
+        const AGE = Math.round(VAL);
         if (AGE <= GameSite.UNREASONABLE_SMALL_AGE) {
             //user has inputted an unreasonably small age
-            console.warn("GameSite::validateAge() user has inputted an unreasonably small age.")
+            console.warn("GameSite::validateAge() user has inputted an unreasonably small age.");
             GameSite.htmlOageError.innerHTML = "<b>Please input an age above " + GameSite.UNREASONABLE_SMALL_AGE + " and below " + GameSite.UNREASONABLE_LARGE_AGE + "</b>";
             await FB_Login.logout();
             return false;
@@ -104,7 +112,7 @@ export class GameSite {
 
         if (AGE >= GameSite.UNREASONABLE_LARGE_AGE) {
             //user has inputted an unreasonably large age
-            console.warn("GameSite::validateAge() user has inputted an unreasonably large age.")
+            console.warn("GameSite::validateAge() user has inputted an unreasonably large age.");
             GameSite.htmlOageError.innerHTML = "<b>Please input an age above " + GameSite.UNREASONABLE_SMALL_AGE + " and below " + GameSite.UNREASONABLE_LARGE_AGE + "</b>";
             await FB_Login.logout();
             return false;
