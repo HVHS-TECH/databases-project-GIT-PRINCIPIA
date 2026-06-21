@@ -47,12 +47,17 @@ export class ReviewManager {
     //submitReview(review)
     //returns a result string:
     //length - review is too long
+    //empty - review is empty
     //malicious - review may be malicious
     //success - review write succeeded
     static submitReview(review) {
         const IS_TOO_LONG = (review.length > ReviewManager.MAX_REVIEW_LENGTH);
         if (IS_TOO_LONG) {
             return "length";
+        }
+        const IS_EMPTY = (review.length == 0);
+        if (IS_EMPTY) {
+            return "empty";
         }
         if (Security.detectMaliciousText(review)) {
             //Review is insecure

@@ -46,15 +46,18 @@ export class ReviewWriteDispatch {
         switch (RESULT) {
             case 'success':
                 //Review submit succeeded
-                ReviewWriteDispatch.htmlReviewSubmitResult.innerHTML = "<i>Successfully submitted review!</i>";
+                ReviewWriteDispatch.htmlReviewSubmitResult.innerHTML = "<b><i>Successfully submitted review!</i></b>";
                 //Remove the message after a while
                 setTimeout(()=>{ReviewWriteDispatch.htmlReviewSubmitResult.innerHTML = "";}, 5000);
                 break;
             case 'length':
-                ReviewWriteDispatch.htmlReviewSubmitResult.innerHTML = "<i>Review is too long! Please shorten it to be at or below " + ReviewManager.MAX_REVIEW_LENGTH + " characters.</i>";
+                ReviewWriteDispatch.htmlReviewSubmitResult.innerHTML = "<b><i>Review is too long! Please shorten it to be at or below " + ReviewManager.MAX_REVIEW_LENGTH + " characters.</i></b>";
+                break;
+            case 'empty': 
+                ReviewWriteDispatch.htmlReviewSubmitResult.innerHTML = "<b><i>Review is empty! Please submit a review.</i></b>";
                 break;
             case 'malicious':
-                ReviewWriteDispatch.htmlReviewSubmitResult.innerHTML = "<i>Potentially malicious text detected! Please remove any HTML tags such as 'onerror' or 'onload'.</i>";
+                ReviewWriteDispatch.htmlReviewSubmitResult.innerHTML = "<b><i>Potentially malicious text detected! Please remove any HTML tags such as 'onerror' or 'onload'.</i></b>";
                 break;
             default:
                 break;
