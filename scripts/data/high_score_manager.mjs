@@ -45,10 +45,20 @@ export class HighScoreManager {
     //game: the name of the game to set the high score for
     static setHighScore(score, game) {
         console.log("setHighScore()");
+        score = Number(score);
+        
         //----------------------------------------//
         //Ensure the user is logged in
         if (!FB_User.loggedIn) {
             console.warn("setHighScore(): user is not logged in!");
+            return;
+        }
+        //----------------------------------------//
+
+        //----------------------------------------//
+        if (score == null || score == undefined || score == NaN) {
+            console.warn("setHighScore(): score is not a number!");
+            console.log("Score: " + score);
             return;
         }
         //----------------------------------------//
