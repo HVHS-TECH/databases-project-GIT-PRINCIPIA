@@ -11,7 +11,6 @@ import { FB_Init } from "../data/firebase/fb_init.mjs";
 import { Game } from "../astro-explorer/core/game.mjs";
 import { FB_IO } from "../data/firebase/fb_io.mjs";
 import { CustomEvent } from "../utility/event.mjs";
-
 //----------------------------------------------------------------------//
 //GameSite class - handles registration and login, as well as unlocking games
 export class GameSite {
@@ -45,7 +44,7 @@ export class GameSite {
         
 
         Exposure.expose(GameSite.signUp, "signUp");
-        Exposure.expose(()=>{GameSite.logInDiffAccount(()=>{}, GameSite.handleLogin);}, "logInDiffAccount");
+        Exposure.expose(()=>{GameSite.logInDiffAccount(CustomEvent.empty, GameSite.handleLogin);}, "logInDiffAccount");
 
         GameSite.htmlPlayButtons.push(document.getElementById("astro-explorer"));
         GameSite.htmlPlayButtons.push(document.getElementById("geo-dash"));
