@@ -158,24 +158,42 @@ input {
     padding: 0px;
 }
 table {
-    width: 40vh;
+    width: 47vh;
 }
 
 td {
-    color: rgb(203, 189, 131);
-    border: solid black 2px;
-    font-size: 3vh;
-    background-color: rgb(7, 44, 61);
+    color: rgb(179, 163, 102);
+    border: solid rgb(0, 0, 0) 3px;
+    font-size: 2.5vh;
+    background-color: rgb(4, 30, 43);
     margin: 0px;
     padding: 5px;
 }
 th {
     color: rgb(203, 189, 131);
-    border: solid black 2px;
-    font-size: 4vh;
+    border: solid black 6px;
+    font-size: 5vh;
     background-color: rgb(7, 44, 61);
     margin: 0px;
     padding: 5px;
+}
+.first-place {
+    background-color: rgb(4, 30, 43);
+    border-color: rgb(94, 83, 37);
+    border-width: 5px;
+    font-size: 3.6vh;
+}
+.second-place {
+    background-color: rgb(4, 30, 43);
+    border-color: rgb(169, 193, 199);
+    border-width: 3.3px;
+    font-size: 3vh;
+}
+.third-place {
+    background-color: rgb(4, 30, 43);
+    border-color: rgb(49, 23, 6);
+    border-width: 3.15px;
+    font-size: 2.6vh;
 }
 
 /*br class, NOT br element*/

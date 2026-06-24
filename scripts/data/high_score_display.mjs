@@ -35,6 +35,19 @@ export class HighScoreDisplay {
                     data.unshift(USER); //Add to the fron of the array, reversing the order (this is correct)
                 });
                 for (var i = 0; i < data.length; i++) {
+                    var placeClass = "";
+                    if (i == 0) {
+                        //First place
+                        placeClass = "class='first-place'";
+                    }else if (i == 1) {
+                        //Second place
+                        placeClass = "class='second-place'";
+                    } else if (i == 2) {
+                        //Third place
+                        placeClass = "class='third-place'";
+                    }
+
+                    
                     const USER = data[i];
                     const VAL = USER.val();
                     const NAME = VAL.username;
@@ -42,9 +55,9 @@ export class HighScoreDisplay {
                     const IS_USERS_HIGH_SCORE = (USER.key == FB_User.uid); //The key is the id of the user owning the high score
                     if (IS_USERS_HIGH_SCORE) {
                         //Make the high score highlighted and bold
-                        element.innerHTML += "<tr><td id='high-score-highlighted'><b>" + NAME + "</b></td><td id='high-score-highlighted'><b>" + SCORE + " points</b></td></tr>";
+                        element.innerHTML += "<tr><td " + placeClass + "id='high-score-highlighted'><b>#" + (i + 1) + ": " + NAME + "</b></td><td " + placeClass + " id='high-score-highlighted'><b>" + SCORE + " points</b></td></tr>";
                     } else {
-                        element.innerHTML += "<tr><td>" + NAME + "</td><td>" + SCORE + " points</td></tr>";
+                        element.innerHTML += "<tr><td " + placeClass + ">#" + (i + 1) + ": " + NAME + "</td><td " + placeClass + ">" + SCORE + " points</td></tr>";
                     }
                 }
                     
