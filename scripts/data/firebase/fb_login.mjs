@@ -77,6 +77,7 @@ export class FB_Login {
                 console.log("popup ended");
             }
             catch (error) {
+                //E.g the popup was closed
                 const CODE = error.code;
                 const MSG = error.message;
 
