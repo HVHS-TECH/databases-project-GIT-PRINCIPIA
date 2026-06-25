@@ -11,7 +11,10 @@
 import { HighScoreManager } from "../../data/high_score_manager.mjs";
 import { FB_Login } from "../../data/firebase/fb_login.mjs";
 import { FB_Init } from "../../data/firebase/fb_init.mjs";
-
+const INVALID_LOGIN = ()=> {
+    window.location.href = "../../index.html";
+};
+window.fb_invalidLogin.subscribe(INVALID_LOGIN);
 window.setup = setup;
 window.draw = draw;
 
