@@ -25,7 +25,7 @@ export class GameSite {
 
     //----------------------------------------//
     //Prevent incorrect ages
-    static UNREASONABLE_SMALL_AGE = 0;
+    static UNREASONABLE_SMALL_AGE = 5;
     static UNREASONABLE_LARGE_AGE = 130;
     //----------------------------------------//
 
@@ -112,7 +112,7 @@ export class GameSite {
         if (AGE >= GameSite.UNREASONABLE_LARGE_AGE) {
             //user has inputted an unreasonably large age
             console.warn("GameSite::validateAge() user has inputted an unreasonably large age.");
-            GameSite.htmlOageError.innerHTML = "<b>Please input an age above " + GameSite.UNREASONABLE_SMALL_AGE + " and below " + GameSite.UNREASONABLE_LARGE_AGE + "</b>";
+            GameSite.htmlOageError.innerHTML = "<b>Please input a real age above " + GameSite.UNREASONABLE_SMALL_AGE + " and below " + GameSite.UNREASONABLE_LARGE_AGE + "</b>";
             await FB_Login.logout();
             return false;
         }
