@@ -6,7 +6,7 @@
 
 import { Exposure } from "../utility/exposure.mjs";
 import { FB_Login } from "../data/firebase/fb_login.mjs";
-import { FB_User } from "../data/firebase/fb_data.mjs";
+import { FB_Data, FB_User } from "../data/firebase/fb_data.mjs";
 import { FB_Init } from "../data/firebase/fb_init.mjs";
 import { Game } from "../astro-explorer/core/game.mjs";
 import { FB_IO } from "../data/firebase/fb_io.mjs";
@@ -81,7 +81,7 @@ export class GameSite {
         FB_User.tempAge = null;
         if (await GameSite.validateAge() && await GameSite.validateName()) {
             
-            GameSite.logInDiffAccount(new CustomEvent(FB_Login.createUser));
+            GameSite.logInDiffAccount(new CustomEvent(FB_Login.createUser), new CustomEvent(()=>{FB_User.email = null; }, GameSite.handleLogin));
 
         }
     }
