@@ -8,6 +8,7 @@ import { Review, ReviewManager } from "./review_manager.mjs";
 import { Security } from "./security.mjs";
 import { FB_IO } from "./firebase/fb_io.mjs";
 import { FB_Init } from "./firebase/fb_init.mjs";
+import { HighScoreDisplay } from "./high_score_display.mjs";
 //----------------------------------------------------------------------//
 //ReviewDisplay class - handles displaying reviews
 export class ReviewDisplay {
@@ -32,6 +33,8 @@ export class ReviewDisplay {
 
             target.innerHTML += "<div class='review-br'></div>";
         }
+        //Update high score tables in review
+        HighScoreDisplay.bindToHTML();
 
         console.log("ReviewDisplay::displayReviews(target): reviews loaded!");
     }
