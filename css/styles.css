@@ -158,13 +158,13 @@ input {
     padding: 0px;
 }
 table {
-    width: 47vh;
+    width: 48vh;
 }
 
 td {
     color: rgb(179, 163, 102);
     border: solid rgb(0, 0, 0) 3px;
-    font-size: 2.5vh;
+    font-size: 2.4vh;
     background-color: rgb(4, 30, 43);
     margin: 0px;
     padding: 5px;
@@ -181,13 +181,13 @@ th {
     background-color: rgb(4, 30, 43);
     border-color: rgb(94, 83, 37);
     border-width: 5px;
-    font-size: 3.4vh;
+    font-size: 3.1vh;
 }
 .second-place {
     background-color: rgb(4, 30, 43);
     border-color: rgb(169, 193, 199);
     border-width: 3.3px;
-    font-size: 3vh;
+    font-size: 2.8vh;
 }
 .third-place {
     background-color: rgb(4, 30, 43);
