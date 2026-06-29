@@ -6,7 +6,8 @@
 
 import { Exposure } from "../utility/exposure.mjs";
 import { ReviewManager } from "./review_manager.mjs";
-
+import { FB_IO } from "./firebase/fb_io.mjs";
+import { FB_User } from "./firebase/fb_data.mjs";
 //----------------------------------------------------------------------//
 //ReviewWriteDispatch class - handles review posting interface
 export class ReviewWriteDispatch {
@@ -15,13 +16,17 @@ export class ReviewWriteDispatch {
     static htmlReviewSubmitResult = null;
     //----------------------------------------------------------------------//
     //init()
-    static init() {
+    static async init() {
         console.log("Initializing ReviewWriteDispatch");
         ReviewWriteDispatch.htmlReviewInput = document.getElementById('i-review');
         ReviewWriteDispatch.htmlCharacterCountOutput = document.getElementById('o-review-character-count');
         ReviewWriteDispatch.htmlReviewSubmitResult = document.getElementById('o-review-submit-result');
 
         ReviewWriteDispatch.htmlReviewInput.oninput = ReviewWriteDispatch.onEditReview;
+        const REV = await FB_IO.read('gameSite/reviews/' + FB_User.uid);
+        if (REV != null) {
+            ReviewWriteDispatch.htmlReviewInput.value = REV.review;
+        }
 
     }
     //----------------------------------------------------------------------//
