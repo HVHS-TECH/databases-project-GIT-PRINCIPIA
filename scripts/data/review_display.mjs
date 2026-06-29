@@ -36,6 +36,21 @@ export class ReviewDisplay {
         //Update high score tables in review
         HighScoreDisplay.bindToHTML();
 
+        //Update accordions
+        var accs = document.getElementsByClassName('review-accordion');
+        for (var i = 0; i < accs.length; i++) {
+            accs[i].addEventListener('click', 
+                function(){
+                    var review = this.nextElementSibling;
+                    if (review.style.display == "flex") {
+                        review.style.display = "none";
+                    } else {
+                        review.style.display = "flex";
+                    }
+                }
+            );
+        }
+
         console.log("ReviewDisplay::displayReviews(target): reviews loaded!");
     }
     //----------------------------------------------------------------------//
@@ -83,9 +98,9 @@ export class ReviewDisplay {
 
         //----------------------------------------//
         //Review
-        html += "<p class='review-paragraph'>";
+        html += "<button class='review-accordion'>-</button><div class='column center span-width' style='display: none;'><p class='review-paragraph'>";
         html += reviewObj.txt
-        html += "</p>";
+        html += "</p></div>";
         //----------------------------------------//
 
         //----------------------------------------//

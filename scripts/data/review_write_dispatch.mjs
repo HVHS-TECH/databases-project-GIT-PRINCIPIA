@@ -39,6 +39,7 @@ export class ReviewWriteDispatch {
     static onEditReview() {
         const CURR_TEXT = ReviewWriteDispatch.htmlReviewInput.value;
         ReviewWriteDispatch.htmlCharacterCountOutput.innerHTML = "<i>" + CURR_TEXT.length + " / " + ReviewManager.MAX_REVIEW_LENGTH + " characters</i>";
+        
     }
     //----------------------------------------------------------------------//
 

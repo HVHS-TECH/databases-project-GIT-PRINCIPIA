@@ -312,3 +312,30 @@ th {
     font-size: 3vh
 
 }
+
+.review-accordion {
+    display: flex;
+    width: 90%;
+    height: 5vh;
+    margin: 5vh;
+    padding: 0px;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    justify-content: center;
+    background-color: rgb(3, 45, 38);
+}
+.review-accordion:active {
+    background-color: rgb(3, 45, 38);
+    width: 90%;
+    height: 5vh;
+    margin: 5vh;
+    padding: 0px;
+}
+.review-accordion:hover {
+    background-color: rgb(3, 45, 38);
+    width: 90%;
+    height: 5vh;
+    margin: 5vh;
+    padding: 0px;
+}
