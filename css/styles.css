@@ -324,6 +324,7 @@ th {
     align-content: center;
     justify-content: center;
     background-color: rgb(3, 45, 38);
+    color: rgb(203,189,131);
 }
 .review-accordion:active {
     background-color: rgb(3, 45, 38);
