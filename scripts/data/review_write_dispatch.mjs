@@ -5,6 +5,8 @@
 //----------------------------------------------------------------------//
 
 import { Exposure } from "../utility/exposure.mjs";
+import { HighScoreDisplay } from "./high_score_display.mjs";
+import { HighScoreManager } from "./high_score_manager.mjs";
 import { ReviewManager } from "./review_manager.mjs";
 import { FB_IO } from "./firebase/fb_io.mjs";
 import { FB_User } from "./firebase/fb_data.mjs";
@@ -52,6 +54,7 @@ export class ReviewWriteDispatch {
             case 'success':
                 //Review submit succeeded
                 ReviewWriteDispatch.htmlReviewSubmitResult.innerHTML = "<b><i>Successfully submitted review!</i></b>";
+                
                 //Remove the message after a while
                 setTimeout(()=>{ReviewWriteDispatch.htmlReviewSubmitResult.innerHTML = "";}, 5000);
                 break;

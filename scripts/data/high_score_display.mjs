@@ -22,6 +22,8 @@ export class HighScoreDisplay {
         console.log("HighScoreDisplay::displayHighScores(game): game = '" + game + "'");
         
         var element = target;
+        var classList = element.classList;
+
 
         //Before we read, display a 'loading' message
         element.innerHTML = "<p>Loading high scores...</p>";
@@ -56,7 +58,10 @@ export class HighScoreDisplay {
                     if (IS_USERS_HIGH_SCORE) {
                         //Make the high score highlighted and bold
                         element.innerHTML += "<tr><td " + placeClass + "id='high-score-highlighted'><b>#" + (i + 1) + ": " + NAME + "</b></td><td " + placeClass + " id='high-score-highlighted'><b>" + SCORE + " points</b></td></tr>";
-                    } else {
+                    } else if(classList.contains('#' + (i + 1))) {
+                        //Make this high score bold
+                        element.innerHTML += "<tr><td " + placeClass + "><b>#" + (i + 1) + ": " + NAME + "</b></td><td " + placeClass + "><b>" + SCORE + " points</b></td></tr>";
+                    }else {
                         element.innerHTML += "<tr><td " + placeClass + ">#" + (i + 1) + ": " + NAME + "</td><td " + placeClass + ">" + SCORE + " points</td></tr>";
                     }
                 }
@@ -68,6 +73,18 @@ export class HighScoreDisplay {
 
     }
     //----------------------------------------------------------------------//
+
+    //----------------------------------------------------------------------//
+    //bindToHTML()
+    static bindToHTML() {
+        const TARGETS = document.getElementsByClassName('o-high-score-list');
+        for (var i = 0; i < TARGETS.length; i++) {
+            const TARGET = TARGETS[i];
+            const GAME_ID = TARGET.id;
+            HighScoreDisplay.displayHighScores(TARGET, GAME_ID);
+        }
+    }
+    //----------------------------------------------------------------------//
 }
 //END OF HighScoreDisplay
 //----------------------------------------------------------------------//
@@ -75,12 +92,7 @@ export class HighScoreDisplay {
 
 
 window.fb_onlogin.subscribe(()=>{console.log("HighScoreDisplay : page has loaded");
-    const TARGETS = document.getElementsByClassName('o-high-score-list');
-    for (var i = 0; i < TARGETS.length; i++) {
-        const TARGET = TARGETS[i];
-        const GAME_ID = TARGET.id;
-        HighScoreDisplay.displayHighScores(TARGET, GAME_ID);
-    }
+    HighScoreDisplay.bindToHTML();
     
 });
 
