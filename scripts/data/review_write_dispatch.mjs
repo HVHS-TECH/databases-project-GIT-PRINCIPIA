@@ -81,3 +81,4 @@ window.fb_onlogin.subscribe(()=>{
     ReviewWriteDispatch.init();
     Exposure.expose(ReviewWriteDispatch.submit, 'submitReview'); //Expose submit function to the window
 });
+window.fb_invalidLogin.subscribe(()=>{window.location.href = '../index.html';});
