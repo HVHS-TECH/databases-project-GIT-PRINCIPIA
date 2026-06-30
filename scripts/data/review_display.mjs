@@ -37,18 +37,18 @@ export class ReviewDisplay {
         HighScoreDisplay.bindToHTML();
 
         //Init accordions
-        var accs = document.getElementsByClassName('review-accordion');
+        var accs = document.getElementsByClassName('accordion');
         for (var i = 0; i < accs.length; i++) {
             accs[i].addEventListener('click', 
                 function(){
                     
-                    var review = this.nextElementSibling;
-                    if (review.style.display == "flex") {
-                        review.style.display = "none";
-                        this.innerHTML = "- SEE REVIEW -";
+                    var panel = this.nextElementSibling;
+                    if (panel.style.display == "flex" || panel.style.display == "block") {
+                        panel.style.display = "none";
+                        this.innerHTML = "- SHOW -";
                     } else {
-                        review.style.display = "flex";
-                        this.innerHTML = "- HIDE REVIEW -";
+                        panel.style.display = (this.classList.contains('#block')) ? "block" : "flex";
+                        this.innerHTML = "- HIDE -";
                     }
                 }
             );
@@ -101,7 +101,7 @@ export class ReviewDisplay {
 
         //----------------------------------------//
         //Review
-        html += "<button class='review-accordion'>- SEE REVIEW -</button><div class='column center span-width' style='display: none;'><p class='review-paragraph'>";
+        html += "<button class='review-accordion accordion'>- SEE REVIEW -</button><div class='column center span-width' style='display: none;'><p class='review-paragraph'>";
         html += reviewObj.txt
         html += "</p></div>";
         //----------------------------------------//

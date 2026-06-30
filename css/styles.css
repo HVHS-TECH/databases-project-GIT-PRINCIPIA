@@ -305,11 +305,12 @@ th {
 #i-review {
     display: flex;
     width: 90%;
-    height: 30vh;
+    height: 40vh;
     resize: none;
     background-color: rgb(9, 80, 68);
     color: rgb(203, 189, 131);
-    font-size: 3vh
+    font-size: 2vh;
+    text-align: center;
 
 }
 
