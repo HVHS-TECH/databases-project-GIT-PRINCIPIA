@@ -117,7 +117,7 @@ export class GameSite {
             return false;
         }
 
-        if (AGE < GameSite.MIN_AGE) {
+        if (AGE <= GameSite.MIN_AGE) {
             //user is too young to play
             console.warn("GameSite::validateAge() user is too young to play (age < " + GameSite.MIN_AGE + ")");
             GameSite.htmlOageError.innerHTML = "<b>You must be older than " + GameSite.MIN_AGE + " to play</b>";
