@@ -101,7 +101,7 @@ export class ReviewDisplay {
 
         //----------------------------------------//
         //Review
-        html += "<button class='review-accordion accordion'>- SEE REVIEW -</button><div class='column center span-width' style='display: none;'><p class='review-paragraph'>";
+        html += "<button class='review-accordion accordion'>- SHOW -</button><div class='column center span-width' style='display: none;'><p class='review-paragraph'>";
         html += reviewObj.txt
         html += "</p></div>";
         //----------------------------------------//
