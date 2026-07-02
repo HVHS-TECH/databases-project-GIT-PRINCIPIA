@@ -55,6 +55,7 @@ export class HighScoreDisplay {
                     const VAL = USER.val();
                     const NAME = VAL.username;
                     const SCORE = VAL.score;
+                    //Check security
                     if (Security.detectMaliciousText(NAME)) {
                         console.warn('malicious text in username');
                         continue;
