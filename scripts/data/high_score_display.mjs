@@ -37,6 +37,7 @@ export class HighScoreDisplay {
                     //Read the name from the database using the UID
                     data.unshift(USER); //Add to the fron of the array, reversing the order (this is correct)
                 });
+                var idx = 0;
                 for (var i = 0; i < data.length; i++) {
                     var placeClass = "";
                     if (i == 0) {
@@ -67,13 +68,14 @@ export class HighScoreDisplay {
                     const IS_USERS_HIGH_SCORE = (USER.key == FB_User.uid); //The key is the id of the user owning the high score
                     if (IS_USERS_HIGH_SCORE) {
                         //Make the high score highlighted and bold
-                        element.innerHTML += "<tr><td " + placeClass + "id='high-score-highlighted'><b>#" + (i + 1) + ": " + NAME + "</b></td><td " + placeClass + " id='high-score-highlighted'><b>" + SCORE + " points</b></td></tr>";
-                    } else if(classList.contains('#' + (i + 1))) {
+                        element.innerHTML += "<tr><td " + placeClass + "id='high-score-highlighted'><b>#" + (idx + 1) + ": " + NAME + "</b></td><td " + placeClass + " id='high-score-highlighted'><b>" + SCORE + " points</b></td></tr>";
+                    } else if(classList.contains('#' + (idx + 1))) {
                         //Make this high score bold
-                        element.innerHTML += "<tr><td " + placeClass + "><b>#" + (i + 1) + ": " + NAME + "</b></td><td " + placeClass + "><b>" + SCORE + " points</b></td></tr>";
+                        element.innerHTML += "<tr><td " + placeClass + "><b>#" + (idx + 1) + ": " + NAME + "</b></td><td " + placeClass + "><b>" + SCORE + " points</b></td></tr>";
                     }else {
-                        element.innerHTML += "<tr><td " + placeClass + ">#" + (i + 1) + ": " + NAME + "</td><td " + placeClass + ">" + SCORE + " points</td></tr>";
+                        element.innerHTML += "<tr><td " + placeClass + ">#" + (idx + 1) + ": " + NAME + "</td><td " + placeClass + ">" + SCORE + " points</td></tr>";
                     }
+                    idx++;
                 }
                     
                 
