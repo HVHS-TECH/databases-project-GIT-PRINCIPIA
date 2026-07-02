@@ -59,11 +59,12 @@ export class ReviewManager {
         if (IS_EMPTY) {
             return "empty";
         }
-        if (Security.detectMaliciousText(review)) {
+        if (Security.detectMaliciousText(review, true)) {
             //Review is insecure
             console.warn("Attempted to submit a malicious review!");
             return "malicious"; 
         }
+        
         FB_IO.write('gameSite/reviews/' + FB_User.uid + "/review", '', review);
         FB_IO.write('gameSite/reviews/' + FB_User.uid + "/username", '', FB_User.username);
         FB_IO.write('gameSite/reviews/' + FB_User.uid + "/photoURL", '', FB_User.photoURL);

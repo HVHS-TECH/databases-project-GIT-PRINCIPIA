@@ -11,7 +11,7 @@ export class Security {
     //detectMaliciousText(txt)
     //returns false if it is safe
     //Adapted from my Sals Strawberries mini task function 'handleSecurity'
-    static detectMaliciousText(txt) {
+    static detectMaliciousText(txt, allowOnclick = false) {
         if (typeof txt != 'string') return false;
         const LOWERCASE = txt.toLocaleLowerCase();
         const INDEXOF_LESSTHAN = LOWERCASE.indexOf('<');
@@ -38,7 +38,7 @@ export class Security {
         const MIGHT_HAVE_MALICIOUS_TAG_TEXT = 
         MIGHT_HAVE_ONERROR || 
         MIGHT_HAVE_ONLOAD || 
-        MIGHT_HAVE_ONCLICK || 
+        (allowOnclick ? false : MIGHT_HAVE_ONCLICK) || 
         MIGHT_HAVE_ONCHANGE || 
         MIGHT_HAVE_ONINPUT || 
         MIGHT_HAVE_ONSUBMIT || 

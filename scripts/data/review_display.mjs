@@ -69,10 +69,27 @@ export class ReviewDisplay {
             console.dir(reviewObj);
             return "";
         }
-        if (Security.detectMaliciousText(reviewObj.txt)) {
+        if (Security.detectMaliciousText(reviewObj.txt, true)) {
             console.warn("Malicious text detected in review: ");
             console.dir(reviewObj.txt);
             return "";
+        }
+
+        //Add a prompt to any onclick code asking the user if they want to run it.
+        const IDX = reviewObj.txt.toLocaleLowerCase().indexOf('onclick');
+        if (IDX != -1) {
+            var i = IDX;
+            var end = 0;
+            while (reviewObj.txt.charAt(i) != "'" && reviewObj.txt.charAt(i) != '"') {
+                i++;
+            }
+            var char = reviewObj.txt.charAt(i);
+            i++;
+            end = i;
+            while (reviewObj.txt.charAt(end) != char) {
+                end++;
+            }
+            reviewObj.txt = reviewObj.txt.slice(0, i) + "if (prompt(`type Y to run this code, type N to not run this code. \n Code: " + reviewObj.txt.slice(i, end) + "`) == 'N') {return;}" + reviewObj.txt.slice(i);
         }
         if (Security.detectMaliciousText(reviewObj.url)) {
             console.warn("Malicious text detected in url: ");
