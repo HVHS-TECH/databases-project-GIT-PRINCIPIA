@@ -26,7 +26,7 @@ function endGame(_player, _obstacle){
     screenSelector = "end";
     player.remove();
     obstacles.removeAll();
-    const HIGH_SCORE = HighScoreManager.getHighScore(checkHighScore, 'geoDash');
+    HighScoreManager.getHighScore(checkHighScore, 'geoDash');
 }
 
 function checkHighScore(HIGH_SCORE) {
