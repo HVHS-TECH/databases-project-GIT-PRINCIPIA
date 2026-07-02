@@ -9,6 +9,7 @@ import { FB_IO } from "./firebase/fb_io.mjs";
 import { FB_Init } from "./firebase/fb_init.mjs";
 import { FB_Data, FB_User } from "./firebase/fb_data.mjs";
 import { FB_Login } from "./firebase/fb_login.mjs";
+import { Security } from "./security.mjs";
 
 
 //----------------------------------------------------------------------//
@@ -54,6 +55,14 @@ export class HighScoreDisplay {
                     const VAL = USER.val();
                     const NAME = VAL.username;
                     const SCORE = VAL.score;
+                    if (Security.detectMaliciousText(NAME)) {
+                        console.warn('malicious text in username');
+                        return;
+                    }
+                    if (Security.detectMaliciousText(SCORE)) {
+                        console.warn('malicious text in score');
+                        return;
+                    }
                     const IS_USERS_HIGH_SCORE = (USER.key == FB_User.uid); //The key is the id of the user owning the high score
                     if (IS_USERS_HIGH_SCORE) {
                         //Make the high score highlighted and bold
