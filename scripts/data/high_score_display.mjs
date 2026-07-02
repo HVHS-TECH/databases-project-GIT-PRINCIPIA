@@ -57,11 +57,11 @@ export class HighScoreDisplay {
                     const SCORE = VAL.score;
                     if (Security.detectMaliciousText(NAME)) {
                         console.warn('malicious text in username');
-                        return;
+                        continue;
                     }
                     if (Security.detectMaliciousText(SCORE)) {
                         console.warn('malicious text in score');
-                        return;
+                        continue;
                     }
                     const IS_USERS_HIGH_SCORE = (USER.key == FB_User.uid); //The key is the id of the user owning the high score
                     if (IS_USERS_HIGH_SCORE) {
