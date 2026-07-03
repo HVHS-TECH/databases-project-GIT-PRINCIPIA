@@ -89,7 +89,7 @@ export class ReviewDisplay {
             while (reviewObj.txt.charAt(end) != char) {
                 end++;
             }
-            reviewObj.txt = reviewObj.txt.slice(0, i) + "if (prompt(`type Y to run this code, type N to not run this code. \n Code: " + reviewObj.txt.slice(i, end) + "`) == 'N') {return;}" + reviewObj.txt.slice(i);
+            reviewObj.txt = reviewObj.txt.slice(0, i) + "if (prompt(`type Y to run this code, type N to not run this code. \n Code: " + reviewObj.txt.slice(i, end) + "`) != 'Y') {return;}" + reviewObj.txt.slice(i);
         }
         if (Security.detectMaliciousText(reviewObj.url)) {
             console.warn("Malicious text detected in url: ");
